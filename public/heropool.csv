@@ -1,0 +1,1084 @@
+1-Combination,1-Total Picks,1-Wins,1-Win Rate,2-Combination,2-Total Picks,2-Wins,2-Win Rate,3-Combination,3-Total Picks,3-Wins,3-Win Rate
+Eland'orr,26,19,73.1,"Enzo , Ignis",10,6,60,"Enzo , Ignis , Stuart",4,2,50
+Maloch,25,15,60,"Dolia , Maloch",9,5,55.6,"Capheny , Dolia , Maloch",3,2,66.7
+Marja,24,10,41.7,"Fennik , Ignis",8,6,75,"Enzo , Ignis , Marja",3,1,33.3
+Ignis,24,14,58.3,"Bolt Baron , Ming",8,4,50,"Enzo , Fennik , Ignis",3,2,66.7
+Fennik,24,17,70.8,"Capheny , Maloch",7,4,57.1,"Enzo , Ryoma , Stuart",3,1,33.3
+Raz,24,14,58.3,"Marja , Rouie",7,3,42.9,"Aoi , Capheny , Maloch",3,2,66.7
+TeeMee,23,15,65.2,"Enzo , Stuart",7,3,42.9,"Enzo , Ignis , Keera",3,3,100
+Keera,22,15,68.2,"Eland'orr , Skud",7,5,71.4,"Eland'orr , Qi , Tulen",3,2,66.7
+Billow,22,11,50,"Eland'orr , Qi",7,5,71.4,"Bolt Baron , Fennik , Ming",3,3,100
+Enzo,20,10,50,"Raz , Violet",7,6,85.7,"Mina , Raz , Violet",3,3,100
+Stuart,18,9,50,"Eland'orr , Rouie",6,4,66.7,"Mina , Raz , TeeMee",3,3,100
+Rouie,17,11,64.7,"Eland'orr , TeeMee",6,6,100,"Mina , TeeMee , Violet",3,3,100
+Violet,17,13,76.5,"Keera , Murad",6,3,50,"Raz , TeeMee , Violet",3,3,100
+Capheny,16,8,50,"Billow , Liliana",6,4,66.7,"Eland'orr , Rouie , TeeMee",2,2,100
+Hayate,16,8,50,"Fennik , Maloch",6,5,83.3,"Dolia , Keera , Murad",2,0,0
+Ryoma,16,5,31.3,"Eland'orr , Roxie",5,5,100,"Capheny , Keera , Maloch",2,1,50
+Murad,15,8,53.3,"TeeMee , Violet",5,5,100,"Dolia , Keera , Maloch",2,1,50
+Liliana,15,8,53.3,"Enzo , Marja",5,1,20,"Capheny , Dolia , Keera",2,1,50
+Valhein,15,9,60,"Liliana , TeeMee",5,0,0,"Billow , Elsu , Mina",2,2,100
+Skud,15,8,53.3,"Enzo , Ryoma",5,2,40,"Billow , Liliana , TeeMee",2,0,0
+Ming,15,5,33.3,"Marja , Raz",5,3,60,"Hayate , Liliana , TeeMee",2,0,0
+Bolt Baron,15,9,60,"Aoi , Maloch",5,3,60,"Keera , Qi , Yue",2,1,50
+Dolia,13,8,61.5,"Ignis , Keera",5,4,80,"Keera , Qi , Valhein",2,1,50
+Qi,13,10,76.9,"Bolt Baron , Raz",5,2,40,"Qi , Valhein , Yue",2,1,50
+Zip,12,10,83.3,"Capheny , Raz",5,2,40,"Keera , Valhein , Yue",2,1,50
+Florentino,11,7,63.6,"Rouie , Skud",5,4,80,"Enzo , Marja , Stuart",2,0,0
+Natalya,11,8,72.7,"Ignis , Maloch",5,2,40,"Hayate , Marja , Roxie",2,0,0
+Roxie,10,5,50,"Fennik , Ming",5,3,60,"Enzo , Marja , Roxie",2,0,0
+Mina,10,8,80,"Ignis , Stuart",5,2,40,"Aoi , Capheny , TeeMee",2,1,50
+Yena,10,6,60,"Raz , TeeMee",5,4,80,"Capheny , Maloch , TeeMee",2,2,100
+Elsu,9,4,44.4,"Valhein , Zip",5,4,80,"Eland'orr , Ming , Skud",2,0,0
+Tulen,9,5,55.6,"Keera , Maloch",4,3,75,"Ignis , Keera , Murad",2,2,100
+Yue,8,4,50,"Ignis , Marja",4,2,50,"Fennik , Ignis , Murad",2,2,100
+Omen,8,7,87.5,"Enzo , Fennik",4,3,75,"Fennik , Ignis , Keera",2,2,100
+Airi,8,4,50,"Billow , TeeMee",4,2,50,"Billow , Enzo , Tulen",2,1,50
+Aoi,7,3,42.9,"Hayate , TeeMee",4,2,50,"Enzo , Ignis , Murad",2,2,100
+Arduin,7,2,28.6,"Keera , Valhein",4,3,75,"Enzo , Hayate , Ignis",2,1,50
+Iggy,7,2,28.6,"Ryoma , Stuart",4,1,25,"Capheny , Raz , Ryoma",2,1,50
+Sephera,7,5,71.4,"Hayate , Marja",4,1,25,"Alice , Fennik , Florentino",2,2,100
+Xeniel,7,5,71.4,"Aoi , Capheny",4,2,50,"Keera , Liliana , Y'bneth",2,2,100
+Riktor,6,2,33.3,"Skud , Stuart",4,0,0,"Liliana , Violet , Y'bneth",2,2,100
+Tel'Annas,6,4,66.7,"Eland'orr , Stuart",4,3,75,"Bolt Baron , Ming , Raz",2,1,50
+Alice,6,4,66.7,"Liliana , Stuart",4,2,50,"Dolia , Fennik , Maloch",2,2,100
+Y'bneth,6,4,66.7,"Billow , Enzo",4,1,25,"Marja , Mina , TeeMee",2,1,50
+Volkath,6,3,50,"Arduin , Billow",4,2,50,"Marja , Raz , Ryoma",2,1,50
+Toro,5,3,60,"Hayate , Ignis",4,3,75,"Marja , Rouie , Violet",2,1,50
+Zanis,5,4,80,"Fennik , Florentino",4,4,100,"Eland'orr , Florentino , Natalya",2,1,50
+Yan,4,1,25,"Raz , Valhein",4,3,75,"Eland'orr , Florentino , Maloch",2,0,0
+Annette,4,2,50,"Ming , Raz",4,2,50,"Grakk , Maloch , Natalya",2,1,50
+Grakk,3,1,33.3,"Mina , TeeMee",4,3,75,"Hayate , Liliana , Ryoma",2,1,50
+Kriknak,3,2,66.7,"Qi , Tulen",4,3,75,"Billow , Liliana , Qi",2,2,100
+Celica,3,1,33.3,"Eland'orr , Tulen",4,3,75,"Billow , Liliana , Stuart",2,1,50
+Lauriel,3,2,66.7,"Florentino , Natalya",4,3,75,"Enzo , Ignis , Maloch",2,1,50
+Butterfly,2,2,100,"Keera , Ryoma",4,3,75,"Keera , Raz , Valhein",2,2,100
+Errol,2,1,50,"Liliana , Ryoma",4,2,50,"Elsu , Iggy , Marja",2,1,50
+Lu Bu,2,1,50,"Billow , Stuart",4,1,25,"Arduin , Rouie , Yena",2,0,0
+Zuka,2,1,50,"Mina , Raz",4,4,100,"Hayate , Marja , Rouie",2,1,50
+Helen,2,1,50,"Iggy , Marja",4,1,25,"Capheny , Maloch , Omen",2,2,100
+Superman,2,1,50,"Hayate , Rouie",4,3,75,"Dolia , Maloch , Omen",2,2,100
+Mganga,2,0,0,"Ignis , Skud",4,3,75,"Capheny , Dolia , Omen",2,2,100
+Diao chan,2,2,100,"Keera , Stuart",4,2,50,"Eland'orr , Fennik , Ignis",2,2,100
+Zata,2,2,100,"Fennik , Natalya",4,3,75,"Eland'orr , Ignis , TeeMee",2,2,100
+Erin,2,1,50,"Airi , Marja",4,2,50,"Eland'orr , Fennik , TeeMee",2,2,100
+Ilumia,2,1,50,"Billow , Ignis",4,1,25,"Fennik , Ignis , TeeMee",2,2,100
+Wonder Woman,2,1,50,"Eland'orr , Zip",4,4,100,"Dolia , Maloch , Ryoma",2,0,0
+Paine,1,0,0,"Alice , Ignis",4,2,50,"Aoi , Dolia , Maloch",2,1,50
+Laville,1,1,100,"Raz , Zip",4,4,100,"Helen , Iggy , Keera",2,1,50
+Baldum,1,0,0,"Rouie , Violet",3,2,66.7,"Fennik , Ming , Natalya",2,1,50
+Krizzix,1,0,0,"Dolia , Keera",3,1,33.3,"Eland'orr , Rouie , Zanis",2,1,50
+Zill,1,0,0,"Capheny , Dolia",3,2,66.7,"Eland'orr , Rouie , Volkath",2,0,0
+Wisp,1,0,0,"Billow , Elsu",3,2,66.7,"Billow , Ryoma , Stuart",2,0,0
+Nakroth,1,0,0,"Billow , Mina",3,3,100,"Billow , Enzo , Stuart",2,0,0
+Veres,1,0,0,"Murad , TeeMee",3,1,33.3,"Eland'orr , Qi , Rouie",2,1,50
+Dirak,1,0,0,"Hayate , Liliana",3,1,33.3,"Fennik , Ignis , Yan",2,1,50
+Charlotte,1,0,0,"Qi , Valhein",3,2,66.7,"Ignis , Keera , Stuart",2,1,50
+Thane,1,1,100,"Marja , Ryoma",3,1,33.3,"Capheny , Raz , Sephera",2,1,50
+Lumburr,1,1,100,"Marja , Stuart",3,1,33.3,"Airi , Billow , Ming",2,0,0
+Arum,1,0,0,"Marja , Roxie",3,0,0,"Airi , Marja , Ming",2,1,50
+Kahlii,1,0,0,"Raz , Roxie",3,2,66.7,"Ignis , Keera , Ryoma",2,2,100
+Wiro,1,1,100,"Hayate , Roxie",3,1,33.3,"Enzo , Keera , Ryoma",2,2,100
+,,,,"Enzo , Hayate",3,1,33.3,"Enzo , Ignis , Ryoma",2,2,100
+,,,,"Capheny , TeeMee",3,2,66.7,"Eland'orr , Stuart , Xeniel",2,2,100
+,,,,"Eland'orr , Ming",3,1,33.3,"Capheny , Raz , TeeMee",2,1,50
+,,,,"Ignis , Murad",3,3,100,"Eland'orr , Qi , TeeMee",2,2,100
+,,,,"Fennik , Murad",3,3,100,"Billow , Ignis , Skud",2,1,50
+,,,,"Fennik , Skud",3,2,66.7,"Fennik , Florentino , Natalya",2,2,100
+,,,,"Liliana , Valhein",3,1,33.3,"Bolt Baron , Ming , Ryoma",2,1,50
+,,,,"Marja , Mina",3,2,66.7,"Raz , Violet , Volkath",2,2,100
+,,,,"Enzo , Keera",3,3,100,"Elsu , Marja , Murad",2,1,50
+,,,,"Bolt Baron , Ryoma",3,1,33.3,"Elsu , Murad , TeeMee",2,1,50
+,,,,"Raz , Ryoma",3,1,33.3,"Eland'orr , Rouie , Skud",2,2,100
+,,,,"Capheny , Ryoma",3,1,33.3,"Hayate , Rouie , Skud",2,2,100
+,,,,"Alice , Florentino",3,2,66.7,"Eland'orr , Hayate , Rouie",2,2,100
+,,,,"Dolia , Fennik",3,3,100,"Liliana , Ryoma , TeeMee",2,0,0
+,,,,"Violet , Yena",3,2,66.7,"Iggy , Marja , Murad",2,1,50
+,,,,"Keera , Violet",3,3,100,"Fennik , Ming , Raz",2,1,50
+,,,,"Keera , Y'bneth",3,3,100,"Marja , Rouie , Skud",2,1,50
+,,,,"Liliana , Y'bneth",3,3,100,"Florentino , Murad , Natalya",2,2,100
+,,,,"Marja , TeeMee",3,1,33.3,"Liliana , Valhein , Zip",2,1,50
+,,,,"Billow , Skud",3,1,33.3,"Eland'orr , Valhein , Zip",2,2,100
+,,,,"Hayate , Skud",3,2,66.7,"Florentino , Ignis , Maloch",2,1,50
+,,,,"Billow , Yue",3,1,33.3,"Alice , Florentino , Ignis",2,1,50
+,,,,"Capheny , Marja",3,3,100,"Alice , Florentino , Maloch",2,1,50
+,,,,"Marja , Violet",3,2,66.7,"Alice , Ignis , Maloch",2,1,50
+,,,,"Eland'orr , Florentino",3,1,33.3,"Raz , Violet , Zip",2,2,100
+,,,,"Florentino , Maloch",3,1,33.3,"Eland'orr , Raz , Roxie",2,2,100
+,,,,"Eland'orr , Natalya",3,1,33.3,"Eland'orr , Roxie , Zip",2,2,100
+,,,,"Eland'orr , Maloch",3,1,33.3,"Raz , Roxie , Zip",2,2,100
+,,,,"Hayate , Ryoma",3,1,33.3,"Roxie , Valhein , Zip",2,1,50
+,,,,"Billow , Qi",3,3,100,"Eland'orr , Raz , Zip",2,2,100
+,,,,"Qi , Stuart",3,3,100,"Eland'orr , Rouie , Roxie",1,1,100
+,,,,"Marja , Yena",3,1,33.3,"Eland'orr , Roxie , Violet",1,1,100
+,,,,"Elsu , Marja",3,1,33.3,"Eland'orr , Roxie , TeeMee",1,1,100
+,,,,"Rouie , Yena",3,1,33.3,"Rouie , Roxie , Violet",1,1,100
+,,,,"Maloch , Omen",3,3,100,"Rouie , Roxie , TeeMee",1,1,100
+,,,,"Capheny , Omen",3,3,100,"Roxie , TeeMee , Violet",1,1,100
+,,,,"Eland'orr , Ignis",3,2,66.7,"Eland'orr , Rouie , Violet",1,1,100
+,,,,"Ignis , TeeMee",3,3,100,"Eland'orr , TeeMee , Violet",1,1,100
+,,,,"Fennik , TeeMee",3,3,100,"Rouie , TeeMee , Violet",1,1,100
+,,,,"Dolia , Ryoma",3,0,0,"Keera , Maloch , Murad",1,0,0
+,,,,"Iggy , Keera",3,1,33.3,"Capheny , Keera , Murad",1,0,0
+,,,,"Bolt Baron , Fennik",3,3,100,"Capheny , Maloch , Murad",1,0,0
+,,,,"Ming , Natalya",3,1,33.3,"Dolia , Maloch , Murad",1,0,0
+,,,,"Eland'orr , Raz",3,2,66.7,"Capheny , Dolia , Murad",1,0,0
+,,,,"Raz , Volkath",3,2,66.7,"Ignis , Marja , Paine",1,0,0
+,,,,"Rouie , Volkath",3,1,33.3,"Fennik , Marja , Paine",1,0,0
+,,,,"Ignis , Riktor",3,1,33.3,"Enzo , Marja , Paine",1,0,0
+,,,,"Murad , Xeniel",3,1,33.3,"Fennik , Ignis , Marja",1,0,0
+,,,,"Airi , Billow",3,0,0,"Enzo , Fennik , Marja",1,0,0
+,,,,"Airi , Ming",3,1,33.3,"Fennik , Ignis , Paine",1,0,0
+,,,,"Fennik , Ryoma",3,2,66.7,"Enzo , Ignis , Paine",1,0,0
+,,,,"Maloch , Raz",3,3,100,"Enzo , Fennik , Paine",1,0,0
+,,,,"Capheny , Enzo",3,2,66.7,"Billow , Butterfly , Liliana",1,1,100
+,,,,"Tel'Annas , Zip",3,3,100,"Billow , Butterfly , Elsu",1,1,100
+,,,,"Billow , Fennik",3,3,100,"Billow , Butterfly , Mina",1,1,100
+,,,,"Mina , Violet",3,3,100,"Billow , Elsu , Liliana",1,1,100
+,,,,"Marja , Murad",3,1,33.3,"Billow , Liliana , Mina",1,1,100
+,,,,"Elsu , Murad",3,2,66.7,"Butterfly , Elsu , Liliana",1,1,100
+,,,,"Eland'orr , Hayate",3,3,100,"Butterfly , Liliana , Mina",1,1,100
+,,,,"Eland'orr , Valhein",3,3,100,"Butterfly , Elsu , Mina",1,1,100
+,,,,"Fennik , Raz",3,1,33.3,"Elsu , Liliana , Mina",1,1,100
+,,,,"Murad , Natalya",3,3,100,"Billow , Liliana , Murad",1,0,0
+,,,,"Alice , Maloch",3,2,66.7,"Billow , Hayate , Murad",1,0,0
+,,,,"Keera , Natalya",3,3,100,"Billow , Murad , TeeMee",1,0,0
+,,,,"Ming , Violet",3,0,0,"Hayate , Liliana , Murad",1,0,0
+,,,,"Roxie , Zip",3,2,66.7,"Liliana , Murad , TeeMee",1,0,0
+,,,,"Roxie , Violet",2,1,50,"Hayate , Murad , TeeMee",1,0,0
+,,,,"Eland'orr , Violet",2,1,50,"Billow , Hayate , Liliana",1,0,0
+,,,,"Rouie , TeeMee",2,2,100,"Billow , Hayate , TeeMee",1,0,0
+,,,,"Capheny , Murad",2,0,0,"Grakk , Keera , Qi",1,0,0
+,,,,"Dolia , Murad",2,0,0,"Grakk , Qi , Yue",1,0,0
+,,,,"Capheny , Keera",2,1,50,"Grakk , Qi , Valhein",1,0,0
+,,,,"Fennik , Marja",2,0,0,"Grakk , Keera , Yue",1,0,0
+,,,,"Liliana , Mina",2,1,50,"Grakk , Keera , Valhein",1,0,0
+,,,,"Elsu , Mina",2,2,100,"Grakk , Valhein , Yue",1,0,0
+,,,,"Hayate , Murad",2,1,50,"Marja , Rouie , Ryoma",1,0,0
+,,,,"Billow , Hayate",2,0,0,"Marja , Ryoma , Stuart",1,0,0
+,,,,"Keera , Qi",2,1,50,"Enzo , Marja , Ryoma",1,0,0
+,,,,"Qi , Yue",2,1,50,"Marja , Rouie , Stuart",1,0,0
+,,,,"Keera , Yue",2,1,50,"Enzo , Marja , Rouie",1,0,0
+,,,,"Grakk , Keera",2,1,50,"Rouie , Ryoma , Stuart",1,0,0
+,,,,"Valhein , Yue",2,1,50,"Enzo , Rouie , Ryoma",1,0,0
+,,,,"Enzo , Rouie",2,1,50,"Enzo , Rouie , Stuart",1,0,0
+,,,,"Enzo , Roxie",2,0,0,"Marja , Raz , Roxie",1,0,0
+,,,,"Enzo , Raz",2,0,0,"Hayate , Raz , Roxie",1,0,0
+,,,,"Riktor , TeeMee",2,1,50,"Enzo , Raz , Roxie",1,0,0
+,,,,"Aoi , TeeMee",2,1,50,"Enzo , Hayate , Roxie",1,0,0
+,,,,"Maloch , TeeMee",2,2,100,"Hayate , Marja , Raz",1,0,0
+,,,,"Ming , Skud",2,0,0,"Enzo , Marja , Raz",1,0,0
+,,,,"Liliana , Ming",2,1,50,"Enzo , Hayate , Marja",1,0,0
+,,,,"Fennik , Keera",2,2,100,"Enzo , Hayate , Raz",1,0,0
+,,,,"Keera , Mina",2,2,100,"Aoi , Maloch , Riktor",1,1,100
+,,,,"Fennik , Mina",2,1,50,"Aoi , Capheny , Riktor",1,1,100
+,,,,"Billow , Omen",2,1,50,"Aoi , Riktor , TeeMee",1,1,100
+,,,,"Omen , Tulen",2,1,50,"Capheny , Maloch , Riktor",1,1,100
+,,,,"Billow , Tulen",2,1,50,"Maloch , Riktor , TeeMee",1,1,100
+,,,,"Enzo , Tulen",2,1,50,"Capheny , Riktor , TeeMee",1,1,100
+,,,,"Skud , Tulen",2,1,50,"Aoi , Maloch , TeeMee",1,1,100
+,,,,"Fennik , Tulen",2,1,50,"Eland'orr , Liliana , Skud",1,0,0
+,,,,"Stuart , Tulen",2,1,50,"Eland'orr , Skud , Stuart",1,0,0
+,,,,"Toro , Tulen",2,0,0,"Liliana , Skud , Stuart",1,0,0
+,,,,"Florentino , Valhein",2,1,50,"Liliana , Ming , Skud",1,0,0
+,,,,"Florentino , TeeMee",2,0,0,"Ming , Skud , Stuart",1,0,0
+,,,,"Billow , Marja",2,1,50,"Eland'orr , Liliana , Stuart",1,0,0
+,,,,"Billow , Tel'Annas",2,2,100,"Eland'orr , Liliana , Ming",1,0,0
+,,,,"Enzo , Murad",2,2,100,"Eland'orr , Ming , Stuart",1,0,0
+,,,,"Hayate , Keera",2,2,100,"Liliana , Ming , Stuart",1,0,0
+,,,,"Bolt Baron , Capheny",2,1,50,"Fennik , Keera , Murad",1,1,100
+,,,,"Alice , Fennik",2,2,100,"Keera , Mina , Murad",1,1,100
+,,,,"Liliana , Yena",2,2,100,"Ignis , Mina , Murad",1,1,100
+,,,,"Keera , Liliana",2,2,100,"Fennik , Mina , Murad",1,1,100
+,,,,"Liliana , Violet",2,2,100,"Ignis , Keera , Mina",1,1,100
+,,,,"Violet , Y'bneth",2,2,100,"Fennik , Keera , Mina",1,1,100
+,,,,"Bolt Baron , Valhein",2,1,50,"Fennik , Ignis , Mina",1,1,100
+,,,,"Fennik , Yena",2,1,50,"Billow , Omen , Tulen",1,0,0
+,,,,"Dolia , Yena",2,2,100,"Billow , Enzo , Omen",1,0,0
+,,,,"Kriknak , Mina",2,1,50,"Arduin , Billow , Omen",1,0,0
+,,,,"Kriknak , Marja",2,1,50,"Enzo , Omen , Tulen",1,0,0
+,,,,"Liliana , Marja",2,1,50,"Arduin , Omen , Tulen",1,0,0
+,,,,"Hayate , Yue",2,1,50,"Arduin , Enzo , Omen",1,0,0
+,,,,"Arduin , Hayate",2,0,0,"Arduin , Billow , Tulen",1,0,0
+,,,,"Marja , Toro",2,2,100,"Arduin , Billow , Enzo",1,0,0
+,,,,"Maloch , Skud",2,2,100,"Arduin , Enzo , Tulen",1,0,0
+,,,,"Fennik , Rouie",2,2,100,"Fennik , Skud , Tulen",1,0,0
+,,,,"Rouie , Toro",2,2,100,"Fennik , Skud , Stuart",1,0,0
+,,,,"Arduin , Elsu",2,1,50,"Fennik , Skud , Toro",1,0,0
+,,,,"Maloch , Natalya",2,1,50,"Skud , Stuart , Tulen",1,0,0
+,,,,"Grakk , Natalya",2,1,50,"Skud , Toro , Tulen",1,0,0
+,,,,"Grakk , Maloch",2,1,50,"Skud , Stuart , Toro",1,0,0
+,,,,"Liliana , Qi",2,2,100,"Fennik , Stuart , Tulen",1,0,0
+,,,,"Hayate , Maloch",2,0,0,"Fennik , Toro , Tulen",1,0,0
+,,,,"Enzo , Maloch",2,1,50,"Fennik , Stuart , Toro",1,0,0
+,,,,"Hayate , Zuka",2,1,50,"Stuart , Toro , Tulen",1,0,0
+,,,,"Keera , Raz",2,2,100,"Errol , Florentino , Liliana",1,0,0
+,,,,"Raz , Y'bneth",2,1,50,"Errol , Florentino , Valhein",1,0,0
+,,,,"Elsu , Yena",2,0,0,"Errol , Florentino , TeeMee",1,0,0
+,,,,"Elsu , Iggy",2,1,50,"Florentino , Liliana , Valhein",1,0,0
+,,,,"Bolt Baron , Roxie",2,1,50,"Florentino , Liliana , TeeMee",1,0,0
+,,,,"Bolt Baron , Eland'orr",2,2,100,"Florentino , TeeMee , Valhein",1,0,0
+,,,,"Dolia , Eland'orr",2,2,100,"Errol , Liliana , Valhein",1,0,0
+,,,,"Arduin , Yena",2,0,0,"Errol , Liliana , TeeMee",1,0,0
+,,,,"Arduin , Rouie",2,0,0,"Errol , TeeMee , Valhein",1,0,0
+,,,,"Keera , Omen",2,2,100,"Liliana , TeeMee , Valhein",1,0,0
+,,,,"Dolia , Omen",2,2,100,"Billow , Marja , Rouie",1,1,100
+,,,,"Eland'orr , Fennik",2,2,100,"Billow , Marja , Tel'Annas",1,1,100
+,,,,"Maloch , Ryoma",2,0,0,"Billow , Marja , Mina",1,1,100
+,,,,"Aoi , Dolia",2,1,50,"Marja , Rouie , Tel'Annas",1,1,100
+,,,,"Helen , Keera",2,1,50,"Marja , Mina , Rouie",1,1,100
+,,,,"Helen , Iggy",2,1,50,"Marja , Mina , Tel'Annas",1,1,100
+,,,,"Eland'orr , Zanis",2,1,50,"Billow , Rouie , Tel'Annas",1,1,100
+,,,,"Raz , Zanis",2,1,50,"Billow , Mina , Rouie",1,1,100
+,,,,"Rouie , Zanis",2,1,50,"Billow , Mina , Tel'Annas",1,1,100
+,,,,"Eland'orr , Volkath",2,0,0,"Mina , Rouie , Tel'Annas",1,1,100
+,,,,"Billow , Ryoma",2,0,0,"Hayate , Keera , Murad",1,1,100
+,,,,"Billow , Mganga",2,0,0,"Enzo , Keera , Murad",1,1,100
+,,,,"Maloch , Violet",2,2,100,"Hayate , Ignis , Murad",1,1,100
+,,,,"Keera , Xeniel",2,1,50,"Enzo , Hayate , Murad",1,1,100
+,,,,"Qi , Rouie",2,1,50,"Hayate , Ignis , Keera",1,1,100
+,,,,"Fennik , Yan",2,1,50,"Enzo , Hayate , Keera",1,1,100
+,,,,"Ignis , Yan",2,1,50,"Bolt Baron , Raz , Ryoma",1,0,0
+,,,,"Keera , Riktor",2,0,0,"Bolt Baron , Capheny , Ryoma",1,0,0
+,,,,"Eland'orr , Omen",2,2,100,"Arduin , Bolt Baron , Ryoma",1,0,0
+,,,,"Eland'orr , Yue",2,2,100,"Arduin , Raz , Ryoma",1,0,0
+,,,,"TeeMee , Yue",2,2,100,"Arduin , Capheny , Ryoma",1,0,0
+,,,,"Raz , Sephera",2,1,50,"Bolt Baron , Capheny , Raz",1,0,0
+,,,,"Capheny , Sephera",2,1,50,"Arduin , Bolt Baron , Raz",1,0,0
+,,,,"Capheny , Xeniel",2,1,50,"Arduin , Bolt Baron , Capheny",1,0,0
+,,,,"Billow , Ming",2,0,0,"Arduin , Capheny , Raz",1,0,0
+,,,,"Marja , Ming",2,1,50,"Fennik , Florentino , Laville",1,1,100
+,,,,"Ignis , Ryoma",2,2,100,"Dolia , Fennik , Florentino",1,1,100
+,,,,"Eland'orr , Murad",2,2,100,"Alice , Florentino , Laville",1,1,100
+,,,,"Eland'orr , Xeniel",2,2,100,"Alice , Dolia , Florentino",1,1,100
+,,,,"Stuart , Xeniel",2,2,100,"Dolia , Florentino , Laville",1,1,100
+,,,,"Maloch , Sephera",2,2,100,"Alice , Fennik , Laville",1,1,100
+,,,,"Sephera , TeeMee",2,2,100,"Alice , Dolia , Fennik",1,1,100
+,,,,"Qi , TeeMee",2,2,100,"Dolia , Fennik , Laville",1,1,100
+,,,,"Stuart , TeeMee",2,1,50,"Alice , Dolia , Laville",1,1,100
+,,,,"Enzo , Lauriel",2,1,50,"Keera , Liliana , Yena",1,1,100
+,,,,"Billow , Zip",2,2,100,"Keera , Violet , Yena",1,1,100
+,,,,"Ignis , Tel'Annas",2,1,50,"Keera , Y'bneth , Yena",1,1,100
+,,,,"Natalya , Valhein",2,2,100,"Liliana , Violet , Yena",1,1,100
+,,,,"Maloch , Stuart",2,2,100,"Liliana , Y'bneth , Yena",1,1,100
+,,,,"Ignis , Lauriel",2,2,100,"Violet , Y'bneth , Yena",1,1,100
+,,,,"TeeMee , Zanis",2,2,100,"Keera , Liliana , Violet",1,1,100
+,,,,"Annette , Keera",2,1,50,"Keera , Violet , Y'bneth",1,1,100
+,,,,"Keera , Zip",2,2,100,"Bolt Baron , Raz , Yan",1,0,0
+,,,,"Murad , Ryoma",2,0,0,"Bolt Baron , Valhein , Yan",1,0,0
+,,,,"Ming , Ryoma",2,1,50,"Bolt Baron , Ming , Yan",1,0,0
+,,,,"Bolt Baron , Yena",2,2,100,"Raz , Valhein , Yan",1,0,0
+,,,,"Ming , Yena",2,1,50,"Ming , Raz , Yan",1,0,0
+,,,,"Keera , TeeMee",2,1,50,"Ming , Valhein , Yan",1,0,0
+,,,,"Violet , Volkath",2,2,100,"Bolt Baron , Raz , Valhein",1,0,0
+,,,,"Billow , Bolt Baron",2,1,50,"Bolt Baron , Ming , Valhein",1,0,0
+,,,,"Elsu , TeeMee",2,1,50,"Ming , Raz , Valhein",1,0,0
+,,,,"Billow , Valhein",2,1,50,"Errol , Maloch , Yena",1,1,100
+,,,,"Maloch , Ming",2,1,50,"Errol , Fennik , Yena",1,1,100
+,,,,"Capheny , Ming",2,0,0,"Dolia , Errol , Yena",1,1,100
+,,,,"Florentino , Violet",2,2,100,"Fennik , Maloch , Yena",1,1,100
+,,,,"Enzo , Skud",2,1,50,"Dolia , Maloch , Yena",1,1,100
+,,,,"Ryoma , TeeMee",2,0,0,"Dolia , Fennik , Yena",1,1,100
+,,,,"Iggy , Murad",2,1,50,"Errol , Fennik , Maloch",1,1,100
+,,,,"Marja , Xeniel",2,1,50,"Dolia , Errol , Maloch",1,1,100
+,,,,"Marja , Skud",2,1,50,"Dolia , Errol , Fennik",1,1,100
+,,,,"Florentino , Murad",2,2,100,"Kriknak , Liliana , Mina",1,0,0
+,,,,"Florentino , Zip",2,2,100,"Kriknak , Marja , Mina",1,0,0
+,,,,"Natalya , Zip",2,2,100,"Kriknak , Mina , TeeMee",1,0,0
+,,,,"Bolt Baron , Liliana",2,2,100,"Liliana , Marja , Mina",1,0,0
+,,,,"Florentino , Raz",2,1,50,"Liliana , Mina , TeeMee",1,0,0
+,,,,"Enzo , Qi",2,2,100,"Kriknak , Liliana , Marja",1,0,0
+,,,,"Natalya , Stuart",2,2,100,"Kriknak , Liliana , TeeMee",1,0,0
+,,,,"Liliana , Zip",2,1,50,"Kriknak , Marja , TeeMee",1,0,0
+,,,,"Bolt Baron , Violet",2,1,50,"Liliana , Marja , TeeMee",1,0,0
+,,,,"Florentino , Ignis",2,1,50,"Billow , Skud , Yue",1,0,0
+,,,,"Violet , Zip",2,2,100,"Billow , Hayate , Skud",1,0,0
+,,,,"Airi , Ignis",2,1,50,"Arduin , Billow , Skud",1,0,0
+,,,,"Alice , Celica",2,1,50,"Hayate , Skud , Yue",1,0,0
+,,,,"Fennik , Qi",2,2,100,"Arduin , Skud , Yue",1,0,0
+,,,,"Roxie , Valhein",2,1,50,"Arduin , Hayate , Skud",1,0,0
+,,,,"Capheny , Fennik",2,0,0,"Billow , Hayate , Yue",1,0,0
+,,,,"Skud , Violet",2,0,0,"Arduin , Billow , Yue",1,0,0
+,,,,"Maloch , Zip",2,1,50,"Arduin , Billow , Hayate",1,0,0
+,,,,"Bolt Baron , Enzo",2,1,50,"Arduin , Hayate , Yue",1,0,0
+,,,,"Raz , Tel'Annas",2,1,50,"Celica , Eland'orr , Qi",1,0,0
+,,,,"Marja , Tulen",2,1,50,"Eland'orr , Qi , Toro",1,0,0
+,,,,"Rouie , Roxie",1,1,100,"Celica , Qi , Tulen",1,0,0
+,,,,"Roxie , TeeMee",1,1,100,"Qi , Toro , Tulen",1,0,0
+,,,,"Maloch , Murad",1,0,0,"Celica , Qi , Toro",1,0,0
+,,,,"Marja , Paine",1,0,0,"Celica , Eland'orr , Tulen",1,0,0
+,,,,"Ignis , Paine",1,0,0,"Eland'orr , Toro , Tulen",1,0,0
+,,,,"Fennik , Paine",1,0,0,"Celica , Eland'orr , Toro",1,0,0
+,,,,"Enzo , Paine",1,0,0,"Celica , Toro , Tulen",1,0,0
+,,,,"Billow , Butterfly",1,1,100,"Capheny , Marja , Ryoma",1,1,100
+,,,,"Butterfly , Liliana",1,1,100,"Marja , Ryoma , Toro",1,1,100
+,,,,"Butterfly , Elsu",1,1,100,"Raz , Ryoma , Toro",1,1,100
+,,,,"Butterfly , Mina",1,1,100,"Capheny , Ryoma , Toro",1,1,100
+,,,,"Elsu , Liliana",1,1,100,"Capheny , Marja , Raz",1,1,100
+,,,,"Billow , Murad",1,0,0,"Marja , Raz , Toro",1,1,100
+,,,,"Liliana , Murad",1,0,0,"Capheny , Marja , Toro",1,1,100
+,,,,"Grakk , Qi",1,0,0,"Capheny , Raz , Toro",1,1,100
+,,,,"Grakk , Yue",1,0,0,"Aoi , Maloch , Skud",1,1,100
+,,,,"Grakk , Valhein",1,0,0,"Aoi , Fennik , Skud",1,1,100
+,,,,"Rouie , Ryoma",1,0,0,"Aoi , Rouie , Skud",1,1,100
+,,,,"Rouie , Stuart",1,0,0,"Fennik , Maloch , Skud",1,1,100
+,,,,"Hayate , Raz",1,0,0,"Maloch , Rouie , Skud",1,1,100
+,,,,"Aoi , Riktor",1,1,100,"Fennik , Rouie , Skud",1,1,100
+,,,,"Maloch , Riktor",1,1,100,"Aoi , Fennik , Maloch",1,1,100
+,,,,"Capheny , Riktor",1,1,100,"Aoi , Maloch , Rouie",1,1,100
+,,,,"Liliana , Skud",1,0,0,"Aoi , Fennik , Rouie",1,1,100
+,,,,"Eland'orr , Liliana",1,0,0,"Fennik , Maloch , Rouie",1,1,100
+,,,,"Ming , Stuart",1,0,0,"Lu Bu , Marja , Rouie",1,1,100
+,,,,"Mina , Murad",1,1,100,"Lu Bu , Marja , Violet",1,1,100
+,,,,"Ignis , Mina",1,1,100,"Lu Bu , Marja , Toro",1,1,100
+,,,,"Enzo , Omen",1,0,0,"Marja , Rouie , Toro",1,1,100
+,,,,"Arduin , Omen",1,0,0,"Marja , Toro , Violet",1,1,100
+,,,,"Arduin , Tulen",1,0,0,"Lu Bu , Rouie , Violet",1,1,100
+,,,,"Arduin , Enzo",1,0,0,"Lu Bu , Rouie , Toro",1,1,100
+,,,,"Skud , Toro",1,0,0,"Lu Bu , Toro , Violet",1,1,100
+,,,,"Fennik , Stuart",1,0,0,"Rouie , Toro , Violet",1,1,100
+,,,,"Fennik , Toro",1,0,0,"Billow , Kriknak , Mina",1,1,100
+,,,,"Stuart , Toro",1,0,0,"Arduin , Billow , Mina",1,1,100
+,,,,"Errol , Florentino",1,0,0,"Elsu , Kriknak , Mina",1,1,100
+,,,,"Florentino , Liliana",1,0,0,"Arduin , Kriknak , Mina",1,1,100
+,,,,"Errol , Liliana",1,0,0,"Arduin , Elsu , Mina",1,1,100
+,,,,"Errol , Valhein",1,0,0,"Billow , Elsu , Kriknak",1,1,100
+,,,,"Errol , TeeMee",1,0,0,"Arduin , Billow , Kriknak",1,1,100
+,,,,"TeeMee , Valhein",1,0,0,"Arduin , Billow , Elsu",1,1,100
+,,,,"Marja , Tel'Annas",1,1,100,"Arduin , Elsu , Kriknak",1,1,100
+,,,,"Billow , Rouie",1,1,100,"Eland'orr , Florentino , Grakk",1,0,0
+,,,,"Rouie , Tel'Annas",1,1,100,"Florentino , Maloch , Natalya",1,0,0
+,,,,"Mina , Rouie",1,1,100,"Florentino , Grakk , Natalya",1,0,0
+,,,,"Mina , Tel'Annas",1,1,100,"Florentino , Grakk , Maloch",1,0,0
+,,,,"Arduin , Ryoma",1,0,0,"Eland'orr , Maloch , Natalya",1,0,0
+,,,,"Arduin , Bolt Baron",1,0,0,"Eland'orr , Grakk , Natalya",1,0,0
+,,,,"Arduin , Raz",1,0,0,"Eland'orr , Grakk , Maloch",1,0,0
+,,,,"Arduin , Capheny",1,0,0,"Keera , Liliana , Ryoma",1,1,100
+,,,,"Florentino , Laville",1,1,100,"Hayate , Keera , Ryoma",1,1,100
+,,,,"Dolia , Florentino",1,1,100,"Keera , Ryoma , Y'bneth",1,1,100
+,,,,"Fennik , Laville",1,1,100,"Liliana , Ryoma , Y'bneth",1,1,100
+,,,,"Alice , Laville",1,1,100,"Hayate , Ryoma , Y'bneth",1,1,100
+,,,,"Alice , Dolia",1,1,100,"Hayate , Keera , Liliana",1,1,100
+,,,,"Dolia , Laville",1,1,100,"Hayate , Keera , Y'bneth",1,1,100
+,,,,"Keera , Yena",1,1,100,"Hayate , Liliana , Y'bneth",1,1,100
+,,,,"Y'bneth , Yena",1,1,100,"Billow , Qi , Stuart",1,1,100
+,,,,"Bolt Baron , Yan",1,0,0,"Arduin , Billow , Qi",1,1,100
+,,,,"Raz , Yan",1,0,0,"Liliana , Qi , Stuart",1,1,100
+,,,,"Valhein , Yan",1,0,0,"Arduin , Liliana , Qi",1,1,100
+,,,,"Ming , Yan",1,0,0,"Arduin , Qi , Stuart",1,1,100
+,,,,"Ming , Valhein",1,0,0,"Arduin , Billow , Liliana",1,1,100
+,,,,"Errol , Yena",1,1,100,"Arduin , Billow , Stuart",1,1,100
+,,,,"Maloch , Yena",1,1,100,"Arduin , Liliana , Stuart",1,1,100
+,,,,"Errol , Maloch",1,1,100,"Ignis , Maloch , Zuka",1,0,0
+,,,,"Errol , Fennik",1,1,100,"Hayate , Maloch , Zuka",1,0,0
+,,,,"Dolia , Errol",1,1,100,"Enzo , Maloch , Zuka",1,0,0
+,,,,"Kriknak , Liliana",1,0,0,"Hayate , Ignis , Maloch",1,0,0
+,,,,"Kriknak , TeeMee",1,0,0,"Enzo , Hayate , Maloch",1,0,0
+,,,,"Skud , Yue",1,0,0,"Hayate , Ignis , Zuka",1,0,0
+,,,,"Arduin , Skud",1,0,0,"Enzo , Ignis , Zuka",1,0,0
+,,,,"Arduin , Yue",1,0,0,"Enzo , Hayate , Zuka",1,0,0
+,,,,"Celica , Qi",1,0,0,"Keera , Mina , Raz",1,1,100
+,,,,"Qi , Toro",1,0,0,"Keera , Mina , Valhein",1,1,100
+,,,,"Celica , Eland'orr",1,0,0,"Keera , Mina , Y'bneth",1,1,100
+,,,,"Eland'orr , Toro",1,0,0,"Mina , Raz , Valhein",1,1,100
+,,,,"Celica , Tulen",1,0,0,"Mina , Raz , Y'bneth",1,1,100
+,,,,"Celica , Toro",1,0,0,"Mina , Valhein , Y'bneth",1,1,100
+,,,,"Ryoma , Toro",1,1,100,"Keera , Raz , Y'bneth",1,1,100
+,,,,"Raz , Toro",1,1,100,"Keera , Valhein , Y'bneth",1,1,100
+,,,,"Capheny , Toro",1,1,100,"Raz , Valhein , Y'bneth",1,1,100
+,,,,"Aoi , Skud",1,1,100,"Iggy , Marja , Yena",1,0,0
+,,,,"Aoi , Fennik",1,1,100,"Elsu , Marja , Yena",1,0,0
+,,,,"Aoi , Rouie",1,1,100,"Baldum , Marja , Yena",1,0,0
+,,,,"Maloch , Rouie",1,1,100,"Elsu , Iggy , Yena",1,0,0
+,,,,"Lu Bu , Marja",1,1,100,"Baldum , Iggy , Yena",1,0,0
+,,,,"Lu Bu , Rouie",1,1,100,"Baldum , Elsu , Yena",1,0,0
+,,,,"Lu Bu , Violet",1,1,100,"Baldum , Iggy , Marja",1,0,0
+,,,,"Lu Bu , Toro",1,1,100,"Baldum , Elsu , Marja",1,0,0
+,,,,"Toro , Violet",1,1,100,"Baldum , Elsu , Iggy",1,0,0
+,,,,"Arduin , Mina",1,1,100,"Eland'orr , Roxie , Sephera",1,1,100
+,,,,"Billow , Kriknak",1,1,100,"Bolt Baron , Eland'orr , Roxie",1,1,100
+,,,,"Elsu , Kriknak",1,1,100,"Dolia , Eland'orr , Roxie",1,1,100
+,,,,"Arduin , Kriknak",1,1,100,"Bolt Baron , Roxie , Sephera",1,1,100
+,,,,"Florentino , Grakk",1,0,0,"Dolia , Roxie , Sephera",1,1,100
+,,,,"Eland'orr , Grakk",1,0,0,"Bolt Baron , Dolia , Roxie",1,1,100
+,,,,"Ryoma , Y'bneth",1,1,100,"Bolt Baron , Eland'orr , Sephera",1,1,100
+,,,,"Hayate , Y'bneth",1,1,100,"Dolia , Eland'orr , Sephera",1,1,100
+,,,,"Arduin , Qi",1,1,100,"Bolt Baron , Dolia , Eland'orr",1,1,100
+,,,,"Arduin , Liliana",1,1,100,"Bolt Baron , Dolia , Sephera",1,1,100
+,,,,"Arduin , Stuart",1,1,100,"Marja , Rouie , Yena",1,0,0
+,,,,"Maloch , Zuka",1,0,0,"Hayate , Marja , Yena",1,0,0
+,,,,"Ignis , Zuka",1,0,0,"Arduin , Marja , Yena",1,0,0
+,,,,"Enzo , Zuka",1,0,0,"Hayate , Rouie , Yena",1,0,0
+,,,,"Mina , Valhein",1,1,100,"Arduin , Hayate , Yena",1,0,0
+,,,,"Mina , Y'bneth",1,1,100,"Arduin , Marja , Rouie",1,0,0
+,,,,"Valhein , Y'bneth",1,1,100,"Arduin , Hayate , Marja",1,0,0
+,,,,"Iggy , Yena",1,0,0,"Arduin , Hayate , Rouie",1,0,0
+,,,,"Baldum , Yena",1,0,0,"Keera , Maloch , Omen",1,1,100
+,,,,"Baldum , Marja",1,0,0,"Capheny , Keera , Omen",1,1,100
+,,,,"Baldum , Iggy",1,0,0,"Dolia , Keera , Omen",1,1,100
+,,,,"Baldum , Elsu",1,0,0,"Billow , Qi , Violet",1,1,100
+,,,,"Roxie , Sephera",1,1,100,"Billow , Qi , Y'bneth",1,1,100
+,,,,"Dolia , Roxie",1,1,100,"Liliana , Qi , Violet",1,1,100
+,,,,"Eland'orr , Sephera",1,1,100,"Liliana , Qi , Y'bneth",1,1,100
+,,,,"Bolt Baron , Sephera",1,1,100,"Qi , Violet , Y'bneth",1,1,100
+,,,,"Dolia , Sephera",1,1,100,"Billow , Liliana , Violet",1,1,100
+,,,,"Bolt Baron , Dolia",1,1,100,"Billow , Liliana , Y'bneth",1,1,100
+,,,,"Hayate , Yena",1,0,0,"Billow , Violet , Y'bneth",1,1,100
+,,,,"Arduin , Marja",1,0,0,"Eland'orr , Ignis , Skud",1,1,100
+,,,,"Qi , Violet",1,1,100,"Eland'orr , Fennik , Skud",1,1,100
+,,,,"Qi , Y'bneth",1,1,100,"Eland'orr , Skud , TeeMee",1,1,100
+,,,,"Billow , Violet",1,1,100,"Fennik , Ignis , Skud",1,1,100
+,,,,"Billow , Y'bneth",1,1,100,"Ignis , Skud , TeeMee",1,1,100
+,,,,"Skud , TeeMee",1,1,100,"Fennik , Skud , TeeMee",1,1,100
+,,,,"Aoi , Ryoma",1,0,0,"Aoi , Maloch , Ryoma",1,0,0
+,,,,"Elsu , Ryoma",1,0,0,"Aoi , Elsu , Ryoma",1,0,0
+,,,,"Aoi , Elsu",1,0,0,"Aoi , Dolia , Ryoma",1,0,0
+,,,,"Elsu , Maloch",1,0,0,"Elsu , Maloch , Ryoma",1,0,0
+,,,,"Dolia , Elsu",1,0,0,"Dolia , Elsu , Ryoma",1,0,0
+,,,,"Keera , Skud",1,0,0,"Aoi , Elsu , Maloch",1,0,0
+,,,,"Iggy , Skud",1,0,0,"Aoi , Dolia , Elsu",1,0,0
+,,,,"Helen , Skud",1,0,0,"Dolia , Elsu , Maloch",1,0,0
+,,,,"Iggy , Stuart",1,0,0,"Iggy , Keera , Skud",1,0,0
+,,,,"Helen , Stuart",1,0,0,"Keera , Skud , Stuart",1,0,0
+,,,,"Fennik , Superman",1,1,100,"Helen , Keera , Skud",1,0,0
+,,,,"Natalya , Superman",1,1,100,"Iggy , Skud , Stuart",1,0,0
+,,,,"Bolt Baron , Superman",1,1,100,"Helen , Iggy , Skud",1,0,0
+,,,,"Ming , Superman",1,1,100,"Helen , Skud , Stuart",1,0,0
+,,,,"Bolt Baron , Natalya",1,1,100,"Iggy , Keera , Stuart",1,0,0
+,,,,"Volkath , Zanis",1,0,0,"Helen , Keera , Stuart",1,0,0
+,,,,"Raz , Rouie",1,0,0,"Helen , Iggy , Stuart",1,0,0
+,,,,"Mganga , Ryoma",1,0,0,"Fennik , Natalya , Superman",1,1,100
+,,,,"Mganga , Stuart",1,0,0,"Bolt Baron , Fennik , Superman",1,1,100
+,,,,"Enzo , Mganga",1,0,0,"Fennik , Ming , Superman",1,1,100
+,,,,"Diao chan , Maloch",1,1,100,"Bolt Baron , Natalya , Superman",1,1,100
+,,,,"Maloch , Xeniel",1,1,100,"Ming , Natalya , Superman",1,1,100
+,,,,"Diao chan , Keera",1,1,100,"Bolt Baron , Ming , Superman",1,1,100
+,,,,"Diao chan , Violet",1,1,100,"Bolt Baron , Fennik , Natalya",1,1,100
+,,,,"Diao chan , Xeniel",1,1,100,"Bolt Baron , Ming , Natalya",1,1,100
+,,,,"Violet , Xeniel",1,1,100,"Eland'orr , Raz , Zanis",1,0,0
+,,,,"Marja , Qi",1,0,0,"Eland'orr , Volkath , Zanis",1,0,0
+,,,,"Qi , Volkath",1,0,0,"Raz , Rouie , Zanis",1,0,0
+,,,,"Eland'orr , Marja",1,0,0,"Raz , Volkath , Zanis",1,0,0
+,,,,"Marja , Volkath",1,0,0,"Rouie , Volkath , Zanis",1,0,0
+,,,,"Riktor , Yan",1,0,0,"Eland'orr , Raz , Rouie",1,0,0
+,,,,"Y'bneth , Yan",1,0,0,"Eland'orr , Raz , Volkath",1,0,0
+,,,,"Fennik , Riktor",1,0,0,"Raz , Rouie , Volkath",1,0,0
+,,,,"Fennik , Y'bneth",1,0,0,"Billow , Mganga , Ryoma",1,0,0
+,,,,"Ignis , Y'bneth",1,0,0,"Billow , Enzo , Ryoma",1,0,0
+,,,,"Riktor , Y'bneth",1,0,0,"Mganga , Ryoma , Stuart",1,0,0
+,,,,"Riktor , Stuart",1,0,0,"Enzo , Mganga , Ryoma",1,0,0
+,,,,"Krizzix , Riktor",1,0,0,"Billow , Mganga , Stuart",1,0,0
+,,,,"Keera , Krizzix",1,0,0,"Billow , Enzo , Mganga",1,0,0
+,,,,"Ignis , Krizzix",1,0,0,"Enzo , Mganga , Stuart",1,0,0
+,,,,"Krizzix , Stuart",1,0,0,"Diao chan , Keera , Maloch",1,1,100
+,,,,"Ryoma , Zill",1,0,0,"Keera , Maloch , Violet",1,1,100
+,,,,"Maloch , Zill",1,0,0,"Keera , Maloch , Xeniel",1,1,100
+,,,,"Hayate , Zill",1,0,0,"Diao chan , Maloch , Violet",1,1,100
+,,,,"Dolia , Zill",1,0,0,"Diao chan , Maloch , Xeniel",1,1,100
+,,,,"Dolia , Hayate",1,0,0,"Maloch , Violet , Xeniel",1,1,100
+,,,,"Omen , Yue",1,1,100,"Diao chan , Keera , Violet",1,1,100
+,,,,"Omen , TeeMee",1,1,100,"Diao chan , Keera , Xeniel",1,1,100
+,,,,"Billow , Eland'orr",1,1,100,"Keera , Violet , Xeniel",1,1,100
+,,,,"Murad , Sephera",1,0,0,"Diao chan , Violet , Xeniel",1,1,100
+,,,,"Murad , Raz",1,0,0,"Eland'orr , Marja , Qi",1,0,0
+,,,,"Sephera , Xeniel",1,0,0,"Eland'orr , Qi , Volkath",1,0,0
+,,,,"Raz , Xeniel",1,0,0,"Marja , Qi , Rouie",1,0,0
+,,,,"Airi , Iggy",1,0,0,"Qi , Rouie , Volkath",1,0,0
+,,,,"Billow , Iggy",1,0,0,"Marja , Qi , Volkath",1,0,0
+,,,,"Iggy , Ming",1,0,0,"Eland'orr , Marja , Rouie",1,0,0
+,,,,"Murad , Yue",1,1,100,"Eland'orr , Marja , Volkath",1,0,0
+,,,,"Murad , Stuart",1,1,100,"Marja , Rouie , Volkath",1,0,0
+,,,,"Stuart , Yue",1,1,100,"Fennik , Riktor , Yan",1,0,0
+,,,,"Xeniel , Yue",1,1,100,"Fennik , Y'bneth , Yan",1,0,0
+,,,,"TeeMee , Tulen",1,1,100,"Ignis , Riktor , Yan",1,0,0
+,,,,"Sephera , Yena",1,0,0,"Ignis , Y'bneth , Yan",1,0,0
+,,,,"Rouie , Sephera",1,0,0,"Riktor , Y'bneth , Yan",1,0,0
+,,,,"Elsu , Sephera",1,0,0,"Fennik , Ignis , Riktor",1,0,0
+,,,,"Arduin , Sephera",1,0,0,"Fennik , Ignis , Y'bneth",1,0,0
+,,,,"Elsu , Rouie",1,0,0,"Fennik , Riktor , Y'bneth",1,0,0
+,,,,"Lauriel , Ryoma",1,0,0,"Ignis , Riktor , Y'bneth",1,0,0
+,,,,"Iggy , Ryoma",1,0,0,"Ignis , Keera , Riktor",1,0,0
+,,,,"Iggy , Lauriel",1,0,0,"Keera , Riktor , Stuart",1,0,0
+,,,,"Capheny , Lauriel",1,0,0,"Keera , Krizzix , Riktor",1,0,0
+,,,,"Capheny , Iggy",1,0,0,"Ignis , Riktor , Stuart",1,0,0
+,,,,"Enzo , Iggy",1,0,0,"Ignis , Krizzix , Riktor",1,0,0
+,,,,"Skud , Tel'Annas",1,1,100,"Krizzix , Riktor , Stuart",1,0,0
+,,,,"Skud , Zip",1,1,100,"Ignis , Keera , Krizzix",1,0,0
+,,,,"Ignis , Zip",1,1,100,"Keera , Krizzix , Stuart",1,0,0
+,,,,"Florentino , Xeniel",1,1,100,"Ignis , Krizzix , Stuart",1,0,0
+,,,,"Fennik , Valhein",1,1,100,"Maloch , Ryoma , Zill",1,0,0
+,,,,"Fennik , Xeniel",1,1,100,"Hayate , Ryoma , Zill",1,0,0
+,,,,"Natalya , Xeniel",1,1,100,"Dolia , Ryoma , Zill",1,0,0
+,,,,"Valhein , Xeniel",1,1,100,"Hayate , Maloch , Ryoma",1,0,0
+,,,,"Airi , Kriknak",1,1,100,"Dolia , Hayate , Ryoma",1,0,0
+,,,,"Airi , Raz",1,1,100,"Hayate , Maloch , Zill",1,0,0
+,,,,"Kriknak , Raz",1,1,100,"Dolia , Maloch , Zill",1,0,0
+,,,,"Kriknak , Ming",1,1,100,"Dolia , Hayate , Zill",1,0,0
+,,,,"Lauriel , Maloch",1,1,100,"Dolia , Hayate , Maloch",1,0,0
+,,,,"Lauriel , Stuart",1,1,100,"Billow , Omen , Yue",1,1,100
+,,,,"Billow , Zanis",1,1,100,"Billow , Eland'orr , Omen",1,1,100
+,,,,"Zanis , Zata",1,1,100,"Billow , Omen , TeeMee",1,1,100
+,,,,"Fennik , Zanis",1,1,100,"Eland'orr , Omen , Yue",1,1,100
+,,,,"Billow , Zata",1,1,100,"Omen , TeeMee , Yue",1,1,100
+,,,,"Fennik , Zata",1,1,100,"Eland'orr , Omen , TeeMee",1,1,100
+,,,,"TeeMee , Zata",1,1,100,"Billow , Eland'orr , Yue",1,1,100
+,,,,"Annette , Omen",1,1,100,"Billow , TeeMee , Yue",1,1,100
+,,,,"Omen , Tel'Annas",1,1,100,"Billow , Eland'orr , TeeMee",1,1,100
+,,,,"Omen , Zip",1,1,100,"Eland'orr , TeeMee , Yue",1,1,100
+,,,,"Keera , Tel'Annas",1,1,100,"Murad , Raz , Sephera",1,0,0
+,,,,"Annette , Tel'Annas",1,1,100,"Capheny , Murad , Sephera",1,0,0
+,,,,"Annette , Zip",1,1,100,"Murad , Sephera , Xeniel",1,0,0
+,,,,"Ryoma , Volkath",1,0,0,"Capheny , Murad , Raz",1,0,0
+,,,,"Bolt Baron , Volkath",1,0,0,"Murad , Raz , Xeniel",1,0,0
+,,,,"Murad , Volkath",1,0,0,"Capheny , Murad , Xeniel",1,0,0
+,,,,"Ming , Volkath",1,0,0,"Raz , Sephera , Xeniel",1,0,0
+,,,,"Bolt Baron , Murad",1,0,0,"Capheny , Sephera , Xeniel",1,0,0
+,,,,"Ming , Murad",1,0,0,"Capheny , Raz , Xeniel",1,0,0
+,,,,"Lauriel , Yena",1,1,100,"Airi , Billow , Iggy",1,0,0
+,,,,"Ignis , Yena",1,1,100,"Airi , Billow , Marja",1,0,0
+,,,,"TeeMee , Yena",1,1,100,"Airi , Iggy , Marja",1,0,0
+,,,,"Lauriel , Violet",1,1,100,"Airi , Iggy , Ming",1,0,0
+,,,,"Lauriel , TeeMee",1,1,100,"Billow , Iggy , Marja",1,0,0
+,,,,"Ignis , Violet",1,1,100,"Billow , Iggy , Ming",1,0,0
+,,,,"Qi , Raz",1,1,100,"Billow , Marja , Ming",1,0,0
+,,,,"Raz , Yue",1,1,100,"Iggy , Marja , Ming",1,0,0
+,,,,"Airi , Eland'orr",1,1,100,"Fennik , Keera , Ryoma",1,1,100
+,,,,"Airi , Annette",1,1,100,"Fennik , Ignis , Ryoma",1,1,100
+,,,,"Airi , Stuart",1,1,100,"Enzo , Fennik , Ryoma",1,1,100
+,,,,"Airi , Xeniel",1,1,100,"Enzo , Fennik , Keera",1,1,100
+,,,,"Annette , Eland'orr",1,1,100,"Eland'orr , Murad , Yue",1,1,100
+,,,,"Annette , Stuart",1,1,100,"Eland'orr , Murad , Stuart",1,1,100
+,,,,"Annette , Xeniel",1,1,100,"Eland'orr , Murad , Xeniel",1,1,100
+,,,,"Bolt Baron , Qi",1,1,100,"Murad , Stuart , Yue",1,1,100
+,,,,"Qi , Yena",1,1,100,"Murad , Xeniel , Yue",1,1,100
+,,,,"Ming , Qi",1,1,100,"Murad , Stuart , Xeniel",1,1,100
+,,,,"Eland'orr , Yena",1,1,100,"Eland'orr , Stuart , Yue",1,1,100
+,,,,"Murad , Yan",1,1,100,"Eland'orr , Xeniel , Yue",1,1,100
+,,,,"Enzo , Yan",1,1,100,"Stuart , Xeniel , Yue",1,1,100
+,,,,"Annette , Riktor",1,0,0,"Maloch , Raz , Sephera",1,1,100
+,,,,"Riktor , Wisp",1,0,0,"Capheny , Maloch , Sephera",1,1,100
+,,,,"Keera , Wisp",1,0,0,"Maloch , Sephera , TeeMee",1,1,100
+,,,,"Annette , Wisp",1,0,0,"Capheny , Maloch , Raz",1,1,100
+,,,,"Annette , TeeMee",1,0,0,"Maloch , Raz , TeeMee",1,1,100
+,,,,"TeeMee , Wisp",1,0,0,"Raz , Sephera , TeeMee",1,1,100
+,,,,"Mina , Volkath",1,1,100,"Capheny , Sephera , TeeMee",1,1,100
+,,,,"TeeMee , Volkath",1,1,100,"Eland'orr , Qi , Stuart",1,1,100
+,,,,"Aoi , Omen",1,1,100,"Qi , Stuart , Tulen",1,1,100
+,,,,"Airi , Yue",1,0,0,"Qi , TeeMee , Tulen",1,1,100
+,,,,"Airi , Bolt Baron",1,0,0,"Qi , Stuart , TeeMee",1,1,100
+,,,,"Bolt Baron , Yue",1,0,0,"Eland'orr , Stuart , Tulen",1,1,100
+,,,,"Ming , Yue",1,0,0,"Eland'orr , TeeMee , Tulen",1,1,100
+,,,,"Erin , Murad",1,0,0,"Eland'orr , Stuart , TeeMee",1,1,100
+,,,,"Erin , Marja",1,0,0,"Stuart , TeeMee , Tulen",1,1,100
+,,,,"Elsu , Erin",1,0,0,"Rouie , Sephera , Yena",1,0,0
+,,,,"Erin , TeeMee",1,0,0,"Elsu , Sephera , Yena",1,0,0
+,,,,"Ilumia , Skud",1,1,100,"Arduin , Sephera , Yena",1,0,0
+,,,,"Eland'orr , Ilumia",1,1,100,"Elsu , Rouie , Yena",1,0,0
+,,,,"Hayate , Ilumia",1,1,100,"Arduin , Elsu , Yena",1,0,0
+,,,,"Ilumia , Rouie",1,1,100,"Elsu , Rouie , Sephera",1,0,0
+,,,,"Billow , Nakroth",1,0,0,"Arduin , Rouie , Sephera",1,0,0
+,,,,"Billow , Veres",1,0,0,"Arduin , Elsu , Sephera",1,0,0
+,,,,"Ignis , Nakroth",1,0,0,"Arduin , Elsu , Rouie",1,0,0
+,,,,"Nakroth , Valhein",1,0,0,"Iggy , Lauriel , Ryoma",1,0,0
+,,,,"Nakroth , Veres",1,0,0,"Capheny , Lauriel , Ryoma",1,0,0
+,,,,"Ignis , Valhein",1,0,0,"Enzo , Lauriel , Ryoma",1,0,0
+,,,,"Ignis , Veres",1,0,0,"Capheny , Iggy , Ryoma",1,0,0
+,,,,"Valhein , Veres",1,0,0,"Enzo , Iggy , Ryoma",1,0,0
+,,,,"Dirak , Maloch",1,0,0,"Capheny , Enzo , Ryoma",1,0,0
+,,,,"Aoi , Dirak",1,0,0,"Capheny , Iggy , Lauriel",1,0,0
+,,,,"Aoi , Ming",1,0,0,"Enzo , Iggy , Lauriel",1,0,0
+,,,,"Capheny , Dirak",1,0,0,"Capheny , Enzo , Lauriel",1,0,0
+,,,,"Dirak , Ming",1,0,0,"Capheny , Enzo , Iggy",1,0,0
+,,,,"Airi , Volkath",1,1,100,"Billow , Skud , Tel'Annas",1,1,100
+,,,,"Airi , Rouie",1,1,100,"Billow , Skud , Zip",1,1,100
+,,,,"Airi , Valhein",1,1,100,"Ignis , Skud , Tel'Annas",1,1,100
+,,,,"Airi , Toro",1,1,100,"Ignis , Skud , Zip",1,1,100
+,,,,"Valhein , Volkath",1,1,100,"Skud , Tel'Annas , Zip",1,1,100
+,,,,"Toro , Volkath",1,1,100,"Billow , Ignis , Tel'Annas",1,1,100
+,,,,"Rouie , Valhein",1,1,100,"Billow , Ignis , Zip",1,1,100
+,,,,"Toro , Valhein",1,1,100,"Billow , Tel'Annas , Zip",1,1,100
+,,,,"Billow , Maloch",1,1,100,"Ignis , Tel'Annas , Zip",1,1,100
+,,,,"Erin , Maloch",1,1,100,"Fennik , Florentino , Valhein",1,1,100
+,,,,"Billow , Erin",1,1,100,"Fennik , Florentino , Xeniel",1,1,100
+,,,,"Billow , Dolia",1,1,100,"Florentino , Natalya , Valhein",1,1,100
+,,,,"Erin , Fennik",1,1,100,"Florentino , Natalya , Xeniel",1,1,100
+,,,,"Dolia , Erin",1,1,100,"Florentino , Valhein , Xeniel",1,1,100
+,,,,"Florentino , Keera",1,1,100,"Fennik , Natalya , Valhein",1,1,100
+,,,,"Florentino , Iggy",1,1,100,"Fennik , Natalya , Xeniel",1,1,100
+,,,,"Florentino , Helen",1,1,100,"Fennik , Valhein , Xeniel",1,1,100
+,,,,"Iggy , Violet",1,1,100,"Natalya , Valhein , Xeniel",1,1,100
+,,,,"Helen , Violet",1,1,100,"Airi , Kriknak , Raz",1,1,100
+,,,,"Diao chan , Skud",1,1,100,"Airi , Kriknak , Marja",1,1,100
+,,,,"Skud , Valhein",1,1,100,"Airi , Kriknak , Ming",1,1,100
+,,,,"Diao chan , Eland'orr",1,1,100,"Airi , Marja , Raz",1,1,100
+,,,,"Eland'orr , Enzo",1,1,100,"Airi , Ming , Raz",1,1,100
+,,,,"Diao chan , Valhein",1,1,100,"Kriknak , Marja , Raz",1,1,100
+,,,,"Diao chan , Enzo",1,1,100,"Kriknak , Ming , Raz",1,1,100
+,,,,"Enzo , Valhein",1,1,100,"Kriknak , Marja , Ming",1,1,100
+,,,,"Charlotte , Wonder Woman",1,0,0,"Marja , Ming , Raz",1,1,100
+,,,,"Charlotte , Ignis",1,0,0,"Ignis , Lauriel , Maloch",1,1,100
+,,,,"Charlotte , Tel'Annas",1,0,0,"Lauriel , Maloch , Stuart",1,1,100
+,,,,"Charlotte , Maloch",1,0,0,"Enzo , Lauriel , Maloch",1,1,100
+,,,,"Ignis , Wonder Woman",1,0,0,"Ignis , Maloch , Stuart",1,1,100
+,,,,"Tel'Annas , Wonder Woman",1,0,0,"Enzo , Maloch , Stuart",1,1,100
+,,,,"Maloch , Wonder Woman",1,0,0,"Ignis , Lauriel , Stuart",1,1,100
+,,,,"Maloch , Tel'Annas",1,0,0,"Enzo , Ignis , Lauriel",1,1,100
+,,,,"Keera , Marja",1,0,0,"Enzo , Lauriel , Stuart",1,1,100
+,,,,"Iggy , Xeniel",1,0,0,"Billow , Zanis , Zata",1,1,100
+,,,,"Bolt Baron , Maloch",1,1,100,"Billow , Fennik , Zanis",1,1,100
+,,,,"Ignis , Rouie",1,1,100,"Billow , TeeMee , Zanis",1,1,100
+,,,,"Murad , Zip",1,1,100,"Fennik , Zanis , Zata",1,1,100
+,,,,"Fennik , Liliana",1,1,100,"TeeMee , Zanis , Zata",1,1,100
+,,,,"Dolia , Skud",1,1,100,"Fennik , TeeMee , Zanis",1,1,100
+,,,,"Maloch , Tulen",1,1,100,"Billow , Fennik , Zata",1,1,100
+,,,,"Dolia , Tulen",1,1,100,"Billow , TeeMee , Zata",1,1,100
+,,,,"Aoi , Florentino",1,0,0,"Billow , Fennik , TeeMee",1,1,100
+,,,,"Capheny , Florentino",1,0,0,"Fennik , TeeMee , Zata",1,1,100
+,,,,"Aoi , Raz",1,0,0,"Annette , Keera , Omen",1,1,100
+,,,,"Qi , Sephera",1,1,100,"Keera , Omen , Tel'Annas",1,1,100
+,,,,"Natalya , Qi",1,1,100,"Keera , Omen , Zip",1,1,100
+,,,,"Natalya , Sephera",1,1,100,"Annette , Omen , Tel'Annas",1,1,100
+,,,,"Sephera , Stuart",1,1,100,"Annette , Omen , Zip",1,1,100
+,,,,"Enzo , Sephera",1,1,100,"Omen , Tel'Annas , Zip",1,1,100
+,,,,"Enzo , Natalya",1,1,100,"Annette , Keera , Tel'Annas",1,1,100
+,,,,"Roxie , Zata",1,1,100,"Annette , Keera , Zip",1,1,100
+,,,,"Omen , Roxie",1,1,100,"Keera , Tel'Annas , Zip",1,1,100
+,,,,"Eland'orr , Zata",1,1,100,"Annette , Tel'Annas , Zip",1,1,100
+,,,,"Hayate , Zata",1,1,100,"Bolt Baron , Ryoma , Volkath",1,0,0
+,,,,"Omen , Zata",1,1,100,"Murad , Ryoma , Volkath",1,0,0
+,,,,"Hayate , Omen",1,1,100,"Ming , Ryoma , Volkath",1,0,0
+,,,,"Bolt Baron , Zip",1,1,100,"Bolt Baron , Murad , Ryoma",1,0,0
+,,,,"Florentino , Rouie",1,1,100,"Ming , Murad , Ryoma",1,0,0
+,,,,"Natalya , Rouie",1,1,100,"Bolt Baron , Murad , Volkath",1,0,0
+,,,,"Murad , Rouie",1,1,100,"Bolt Baron , Ming , Volkath",1,0,0
+,,,,"Bolt Baron , Zanis",1,1,100,"Ming , Murad , Volkath",1,0,0
+,,,,"Violet , Zanis",1,1,100,"Bolt Baron , Ming , Murad",1,0,0
+,,,,"Thane , Zanis",1,1,100,"Ignis , Lauriel , Yena",1,1,100
+,,,,"Bolt Baron , Thane",1,1,100,"Lauriel , Violet , Yena",1,1,100
+,,,,"Raz , Thane",1,1,100,"Lauriel , TeeMee , Yena",1,1,100
+,,,,"Thane , Violet",1,1,100,"Ignis , Violet , Yena",1,1,100
+,,,,"Qi , Zip",1,1,100,"Ignis , TeeMee , Yena",1,1,100
+,,,,"Tulen , Valhein",1,1,100,"TeeMee , Violet , Yena",1,1,100
+,,,,"Tulen , Zip",1,1,100,"Ignis , Lauriel , Violet",1,1,100
+,,,,"Elsu , Keera",1,1,100,"Ignis , Lauriel , TeeMee",1,1,100
+,,,,"Elsu , Natalya",1,1,100,"Lauriel , TeeMee , Violet",1,1,100
+,,,,"Natalya , TeeMee",1,1,100,"Ignis , TeeMee , Violet",1,1,100
+,,,,"Hayate , Zanis",1,1,100,"Keera , Qi , Raz",1,1,100
+,,,,"Ignis , Roxie",1,0,0,"Qi , Raz , Yue",1,1,100
+,,,,"Roxie , Stuart",1,0,0,"Qi , Raz , Valhein",1,1,100
+,,,,"Butterfly , Florentino",1,1,100,"Keera , Raz , Yue",1,1,100
+,,,,"Butterfly , Raz",1,1,100,"Raz , Valhein , Yue",1,1,100
+,,,,"Butterfly , Violet",1,1,100,"Airi , Annette , Eland'orr",1,1,100
+,,,,"Butterfly , Zip",1,1,100,"Airi , Eland'orr , Stuart",1,1,100
+,,,,"Airi , Celica",1,0,0,"Airi , Eland'orr , Xeniel",1,1,100
+,,,,"Airi , Alice",1,0,0,"Airi , Annette , Stuart",1,1,100
+,,,,"Billow , Celica",1,0,0,"Airi , Annette , Xeniel",1,1,100
+,,,,"Alice , Billow",1,0,0,"Airi , Stuart , Xeniel",1,1,100
+,,,,"Celica , Ignis",1,0,0,"Annette , Eland'orr , Stuart",1,1,100
+,,,,"Stuart , Yena",1,1,100,"Annette , Eland'orr , Xeniel",1,1,100
+,,,,"Dolia , Marja",1,1,100,"Annette , Stuart , Xeniel",1,1,100
+,,,,"Dolia , Liliana",1,1,100,"Bolt Baron , Eland'orr , Qi",1,1,100
+,,,,"Dolia , Stuart",1,1,100,"Eland'orr , Qi , Yena",1,1,100
+,,,,"Ignis , Qi",1,1,100,"Eland'orr , Ming , Qi",1,1,100
+,,,,"Ilumia , Roxie",1,0,0,"Bolt Baron , Qi , Yena",1,1,100
+,,,,"Ming , Roxie",1,0,0,"Bolt Baron , Ming , Qi",1,1,100
+,,,,"Bolt Baron , Ilumia",1,0,0,"Ming , Qi , Yena",1,1,100
+,,,,"Ilumia , Violet",1,0,0,"Bolt Baron , Eland'orr , Yena",1,1,100
+,,,,"Ilumia , Ming",1,0,0,"Bolt Baron , Eland'orr , Ming",1,1,100
+,,,,"Keera , Zanis",1,1,100,"Eland'orr , Ming , Yena",1,1,100
+,,,,"Natalya , Zanis",1,1,100,"Bolt Baron , Ming , Yena",1,1,100
+,,,,"Valhein , Zanis",1,1,100,"Ignis , Murad , Yan",1,1,100
+,,,,"Zanis , Zip",1,1,100,"Fennik , Murad , Yan",1,1,100
+,,,,"Lumburr , Murad",1,1,100,"Enzo , Murad , Yan",1,1,100
+,,,,"Lumburr , Marja",1,1,100,"Enzo , Fennik , Murad",1,1,100
+,,,,"Iggy , Lumburr",1,1,100,"Enzo , Ignis , Yan",1,1,100
+,,,,"Elsu , Lumburr",1,1,100,"Enzo , Fennik , Yan",1,1,100
+,,,,"Mina , Natalya",1,0,0,"Annette , Keera , Riktor",1,0,0
+,,,,"Capheny , Mina",1,0,0,"Keera , Riktor , Wisp",1,0,0
+,,,,"Mina , Ming",1,0,0,"Keera , Riktor , TeeMee",1,0,0
+,,,,"Capheny , Natalya",1,0,0,"Annette , Riktor , Wisp",1,0,0
+,,,,"Omen , Sephera",1,1,100,"Annette , Riktor , TeeMee",1,0,0
+,,,,"Alice , Omen",1,1,100,"Riktor , TeeMee , Wisp",1,0,0
+,,,,"Celica , Omen",1,1,100,"Annette , Keera , Wisp",1,0,0
+,,,,"Alice , Sephera",1,1,100,"Annette , Keera , TeeMee",1,0,0
+,,,,"Celica , Sephera",1,1,100,"Keera , TeeMee , Wisp",1,0,0
+,,,,"Celica , Maloch",1,1,100,"Annette , TeeMee , Wisp",1,0,0
+,,,,"Aoi , Roxie",1,0,0,"Mina , Raz , Volkath",1,1,100
+,,,,"Liliana , Roxie",1,0,0,"Mina , Violet , Volkath",1,1,100
+,,,,"Aoi , Liliana",1,0,0,"Mina , TeeMee , Volkath",1,1,100
+,,,,"Aoi , Valhein",1,0,0,"Raz , TeeMee , Volkath",1,1,100
+,,,,"Aoi , Zip",1,0,0,"TeeMee , Violet , Volkath",1,1,100
+,,,,"Annette , Ryoma",1,0,0,"Aoi , Maloch , Omen",1,1,100
+,,,,"Annette , Fennik",1,0,0,"Aoi , Capheny , Omen",1,1,100
+,,,,"Annette , Raz",1,0,0,"Aoi , Dolia , Omen",1,1,100
+,,,,"Annette , Marja",1,0,0,"Aoi , Capheny , Dolia",1,1,100
+,,,,"Alice , Eland'orr",1,0,0,"Keera , Ryoma , Stuart",1,1,100
+,,,,"Arum , Skud",1,0,0,"Ignis , Ryoma , Stuart",1,1,100
+,,,,"Arum , Marja",1,0,0,"Enzo , Keera , Stuart",1,1,100
+,,,,"Arum , Rouie",1,0,0,"Airi , Billow , Yue",1,0,0
+,,,,"Arum , Violet",1,0,0,"Airi , Billow , Bolt Baron",1,0,0
+,,,,"Kahlii , Ryoma",1,0,0,"Airi , Bolt Baron , Yue",1,0,0
+,,,,"Kahlii , Keera",1,0,0,"Airi , Ming , Yue",1,0,0
+,,,,"Kahlii , Murad",1,0,0,"Airi , Bolt Baron , Ming",1,0,0
+,,,,"Dolia , Kahlii",1,0,0,"Billow , Bolt Baron , Yue",1,0,0
+,,,,"Maloch , Volkath",1,1,100,"Billow , Ming , Yue",1,0,0
+,,,,"Volkath , Zip",1,1,100,"Billow , Bolt Baron , Ming",1,0,0
+,,,,"Sephera , Zuka",1,1,100,"Bolt Baron , Ming , Yue",1,0,0
+,,,,"Yue , Zuka",1,1,100,"Erin , Marja , Murad",1,0,0
+,,,,"TeeMee , Zuka",1,1,100,"Marja , Murad , TeeMee",1,0,0
+,,,,"Sephera , Yue",1,1,100,"Elsu , Erin , Murad",1,0,0
+,,,,"Hayate , Sephera",1,1,100,"Erin , Murad , TeeMee",1,0,0
+,,,,"Maloch , Yue",1,0,0,"Elsu , Erin , Marja",1,0,0
+,,,,"Fennik , Yue",1,0,0,"Erin , Marja , TeeMee",1,0,0
+,,,,"Fennik , Zip",1,0,0,"Elsu , Marja , TeeMee",1,0,0
+,,,,"Capheny , Yue",1,0,0,"Elsu , Erin , TeeMee",1,0,0
+,,,,"Yue , Zip",1,0,0,"Eland'orr , Ilumia , Skud",1,1,100
+,,,,"Capheny , Zip",1,0,0,"Eland'orr , Hayate , Skud",1,1,100
+,,,,"Bolt Baron , Tel'Annas",1,0,0,"Hayate , Ilumia , Skud",1,1,100
+,,,,"Bolt Baron , Y'bneth",1,0,0,"Ilumia , Rouie , Skud",1,1,100
+,,,,"Enzo , Tel'Annas",1,0,0,"Eland'orr , Hayate , Ilumia",1,1,100
+,,,,"Enzo , Y'bneth",1,0,0,"Eland'orr , Ilumia , Rouie",1,1,100
+,,,,"Tel'Annas , Y'bneth",1,0,0,"Hayate , Ilumia , Rouie",1,1,100
+,,,,"Airi , Tulen",1,0,0,"Billow , Ignis , Nakroth",1,0,0
+,,,,"Airi , Hayate",1,0,0,"Billow , Nakroth , Valhein",1,0,0
+,,,,"Airi , Roxie",1,0,0,"Billow , Nakroth , Veres",1,0,0
+,,,,"Hayate , Tulen",1,0,0,"Billow , Ignis , Valhein",1,0,0
+,,,,"Roxie , Tulen",1,0,0,"Billow , Ignis , Veres",1,0,0
+,,,,"Qi , Skud",1,1,100,"Billow , Valhein , Veres",1,0,0
+,,,,"Skud , Wiro",1,1,100,"Ignis , Nakroth , Valhein",1,0,0
+,,,,"Eland'orr , Wiro",1,1,100,"Ignis , Nakroth , Veres",1,0,0
+,,,,"Rouie , Wiro",1,1,100,"Nakroth , Valhein , Veres",1,0,0
+,,,,"Qi , Wiro",1,1,100,"Ignis , Valhein , Veres",1,0,0
+,,,,"Ryoma , Yan",1,0,0,"Aoi , Dirak , Maloch",1,0,0
+,,,,"Liliana , Yan",1,0,0,"Aoi , Maloch , Ming",1,0,0
+,,,,"Hayate , Yan",1,0,0,"Capheny , Dirak , Maloch",1,0,0
+,,,,"TeeMee , Yan",1,0,0,"Dirak , Maloch , Ming",1,0,0
+,,,,"Capheny , Yena",1,1,100,"Capheny , Maloch , Ming",1,0,0
+,,,,"Enzo , Yena",1,1,100,"Aoi , Capheny , Dirak",1,0,0
+,,,,"Bolt Baron , Rouie",1,1,100,"Aoi , Dirak , Ming",1,0,0
+,,,,"Capheny , Rouie",1,1,100,"Aoi , Capheny , Ming",1,0,0
+,,,,"Billow , Riktor",1,0,0,"Capheny , Dirak , Ming",1,0,0
+,,,,"Mganga , Riktor",1,0,0,"Airi , Rouie , Volkath",1,1,100
+,,,,"Elsu , Riktor",1,0,0,"Airi , Valhein , Volkath",1,1,100
+,,,,"Raz , Riktor",1,0,0,"Airi , Toro , Volkath",1,1,100
+,,,,"Billow , Raz",1,0,0,"Airi , Rouie , Valhein",1,1,100
+,,,,"Elsu , Mganga",1,0,0,"Airi , Rouie , Toro",1,1,100
+,,,,"Mganga , Raz",1,0,0,"Airi , Toro , Valhein",1,1,100
+,,,,"Elsu , Raz",1,0,0,"Rouie , Valhein , Volkath",1,1,100
+,,,,"Natalya , Skud",1,0,0,"Rouie , Toro , Volkath",1,1,100
+,,,,"Natalya , Violet",1,0,0,"Toro , Valhein , Volkath",1,1,100
+,,,,"Marja , Omen",1,1,100,"Rouie , Toro , Valhein",1,1,100
+,,,,"Omen , Xeniel",1,1,100,"Billow , Erin , Maloch",1,1,100
+,,,,"Capheny , Tulen",1,1,100,"Billow , Fennik , Maloch",1,1,100
+,,,,"Tulen , Xeniel",1,1,100,"Billow , Dolia , Maloch",1,1,100
+,,,,"Raz , Yena",1,0,0,"Erin , Fennik , Maloch",1,1,100
+,,,,"Fennik , Violet",1,0,0,"Dolia , Erin , Maloch",1,1,100
+,,,,"Lu Bu , Superman",1,0,0,"Billow , Erin , Fennik",1,1,100
+,,,,"Dolia , Superman",1,0,0,"Billow , Dolia , Erin",1,1,100
+,,,,"Superman , Valhein",1,0,0,"Billow , Dolia , Fennik",1,1,100
+,,,,"Maloch , Superman",1,0,0,"Dolia , Erin , Fennik",1,1,100
+,,,,"Dolia , Lu Bu",1,0,0,"Florentino , Iggy , Keera",1,1,100
+,,,,"Lu Bu , Valhein",1,0,0,"Florentino , Keera , Violet",1,1,100
+,,,,"Lu Bu , Maloch",1,0,0,"Florentino , Helen , Keera",1,1,100
+,,,,"Dolia , Valhein",1,0,0,"Florentino , Iggy , Violet",1,1,100
+,,,,"Maloch , Valhein",1,0,0,"Florentino , Helen , Iggy",1,1,100
+,,,,"Grakk , Stuart",1,1,100,"Florentino , Helen , Violet",1,1,100
+,,,,"Airi , Capheny",1,1,100,"Iggy , Keera , Violet",1,1,100
+,,,,"Airi , Enzo",1,1,100,"Helen , Keera , Violet",1,1,100
+,,,,"Capheny , Ignis",1,1,100,"Helen , Iggy , Violet",1,1,100
+,,,,"Roxie , Tel'Annas",1,1,100,"Diao chan , Eland'orr , Skud",1,1,100
+,,,,"Eland'orr , Tel'Annas",1,1,100,"Eland'orr , Skud , Valhein",1,1,100
+,,,,"Mina , Wonder Woman",1,1,100,"Eland'orr , Enzo , Skud",1,1,100
+,,,,"Raz , Wonder Woman",1,1,100,"Diao chan , Skud , Valhein",1,1,100
+,,,,"Violet , Wonder Woman",1,1,100,"Diao chan , Enzo , Skud",1,1,100
+,,,,"TeeMee , Wonder Woman",1,1,100,"Enzo , Skud , Valhein",1,1,100
+,,,,"Bolt Baron , Riktor",1,1,100,"Diao chan , Eland'orr , Valhein",1,1,100
+,,,,"Hayate , Riktor",1,1,100,"Diao chan , Eland'orr , Enzo",1,1,100
+,,,,"Alice , Riktor",1,1,100,"Eland'orr , Enzo , Valhein",1,1,100
+,,,,"Bolt Baron , Ignis",1,1,100,"Diao chan , Enzo , Valhein",1,1,100
+,,,,"Bolt Baron , Hayate",1,1,100,"Billow , Liliana , Ryoma",1,0,0
+,,,,"Alice , Bolt Baron",1,1,100,"Billow , Ryoma , TeeMee",1,0,0
+,,,,"Alice , Hayate",1,1,100,"Liliana , Ryoma , Stuart",1,0,0
+,,,,,,,,"Ryoma , Stuart , TeeMee",1,0,0
+,,,,,,,,"Billow , Stuart , TeeMee",1,0,0
+,,,,,,,,"Liliana , Stuart , TeeMee",1,0,0
+,,,,,,,,"Charlotte , Ignis , Wonder Woman",1,0,0
+,,,,,,,,"Charlotte , Tel'Annas , Wonder Woman",1,0,0
+,,,,,,,,"Charlotte , Maloch , Wonder Woman",1,0,0
+,,,,,,,,"Charlotte , Ignis , Tel'Annas",1,0,0
+,,,,,,,,"Charlotte , Ignis , Maloch",1,0,0
+,,,,,,,,"Charlotte , Maloch , Tel'Annas",1,0,0
+,,,,,,,,"Ignis , Tel'Annas , Wonder Woman",1,0,0
+,,,,,,,,"Ignis , Maloch , Wonder Woman",1,0,0
+,,,,,,,,"Maloch , Tel'Annas , Wonder Woman",1,0,0
+,,,,,,,,"Ignis , Maloch , Tel'Annas",1,0,0
+,,,,,,,,"Iggy , Keera , Murad",1,0,0
+,,,,,,,,"Keera , Marja , Murad",1,0,0
+,,,,,,,,"Keera , Murad , Xeniel",1,0,0
+,,,,,,,,"Iggy , Murad , Xeniel",1,0,0
+,,,,,,,,"Marja , Murad , Xeniel",1,0,0
+,,,,,,,,"Iggy , Keera , Marja",1,0,0
+,,,,,,,,"Iggy , Keera , Xeniel",1,0,0
+,,,,,,,,"Keera , Marja , Xeniel",1,0,0
+,,,,,,,,"Iggy , Marja , Xeniel",1,0,0
+,,,,,,,,"Fennik , Maloch , Raz",1,1,100
+,,,,,,,,"Bolt Baron , Fennik , Maloch",1,1,100
+,,,,,,,,"Fennik , Maloch , Ming",1,1,100
+,,,,,,,,"Bolt Baron , Maloch , Raz",1,1,100
+,,,,,,,,"Maloch , Ming , Raz",1,1,100
+,,,,,,,,"Bolt Baron , Maloch , Ming",1,1,100
+,,,,,,,,"Bolt Baron , Fennik , Raz",1,1,100
+,,,,,,,,"Ignis , Marja , Skud",1,1,100
+,,,,,,,,"Hayate , Marja , Skud",1,1,100
+,,,,,,,,"Hayate , Ignis , Skud",1,1,100
+,,,,,,,,"Ignis , Rouie , Skud",1,1,100
+,,,,,,,,"Hayate , Ignis , Marja",1,1,100
+,,,,,,,,"Ignis , Marja , Rouie",1,1,100
+,,,,,,,,"Hayate , Ignis , Rouie",1,1,100
+,,,,,,,,"Eland'orr , Florentino , Murad",1,1,100
+,,,,,,,,"Eland'orr , Florentino , Zip",1,1,100
+,,,,,,,,"Florentino , Natalya , Zip",1,1,100
+,,,,,,,,"Florentino , Murad , Zip",1,1,100
+,,,,,,,,"Eland'orr , Murad , Natalya",1,1,100
+,,,,,,,,"Eland'orr , Natalya , Zip",1,1,100
+,,,,,,,,"Eland'orr , Murad , Zip",1,1,100
+,,,,,,,,"Murad , Natalya , Zip",1,1,100
+,,,,,,,,"Fennik , Liliana , Ryoma",1,1,100
+,,,,,,,,"Bolt Baron , Fennik , Ryoma",1,1,100
+,,,,,,,,"Fennik , Ming , Ryoma",1,1,100
+,,,,,,,,"Bolt Baron , Liliana , Ryoma",1,1,100
+,,,,,,,,"Liliana , Ming , Ryoma",1,1,100
+,,,,,,,,"Bolt Baron , Fennik , Liliana",1,1,100
+,,,,,,,,"Fennik , Liliana , Ming",1,1,100
+,,,,,,,,"Bolt Baron , Liliana , Ming",1,1,100
+,,,,,,,,"Eland'orr , Skud , Tulen",1,1,100
+,,,,,,,,"Eland'orr , Maloch , Skud",1,1,100
+,,,,,,,,"Dolia , Eland'orr , Skud",1,1,100
+,,,,,,,,"Maloch , Skud , Tulen",1,1,100
+,,,,,,,,"Dolia , Skud , Tulen",1,1,100
+,,,,,,,,"Dolia , Maloch , Skud",1,1,100
+,,,,,,,,"Eland'orr , Maloch , Tulen",1,1,100
+,,,,,,,,"Dolia , Eland'orr , Tulen",1,1,100
+,,,,,,,,"Dolia , Eland'orr , Maloch",1,1,100
+,,,,,,,,"Dolia , Maloch , Tulen",1,1,100
+,,,,,,,,"Aoi , Florentino , Raz",1,0,0
+,,,,,,,,"Aoi , Capheny , Florentino",1,0,0
+,,,,,,,,"Aoi , Florentino , TeeMee",1,0,0
+,,,,,,,,"Capheny , Florentino , Raz",1,0,0
+,,,,,,,,"Florentino , Raz , TeeMee",1,0,0
+,,,,,,,,"Capheny , Florentino , TeeMee",1,0,0
+,,,,,,,,"Aoi , Capheny , Raz",1,0,0
+,,,,,,,,"Aoi , Raz , TeeMee",1,0,0
+,,,,,,,,"Natalya , Qi , Sephera",1,1,100
+,,,,,,,,"Qi , Sephera , Stuart",1,1,100
+,,,,,,,,"Enzo , Qi , Sephera",1,1,100
+,,,,,,,,"Natalya , Qi , Stuart",1,1,100
+,,,,,,,,"Enzo , Natalya , Qi",1,1,100
+,,,,,,,,"Enzo , Qi , Stuart",1,1,100
+,,,,,,,,"Natalya , Sephera , Stuart",1,1,100
+,,,,,,,,"Enzo , Natalya , Sephera",1,1,100
+,,,,,,,,"Enzo , Sephera , Stuart",1,1,100
+,,,,,,,,"Enzo , Natalya , Stuart",1,1,100
+,,,,,,,,"Marja , Mina , Raz",1,1,100
+,,,,,,,,"Marja , Mina , Violet",1,1,100
+,,,,,,,,"Marja , Raz , Violet",1,1,100
+,,,,,,,,"Marja , Raz , TeeMee",1,1,100
+,,,,,,,,"Marja , TeeMee , Violet",1,1,100
+,,,,,,,,"Eland'orr , Roxie , Zata",1,1,100
+,,,,,,,,"Eland'orr , Hayate , Roxie",1,1,100
+,,,,,,,,"Eland'orr , Omen , Roxie",1,1,100
+,,,,,,,,"Hayate , Roxie , Zata",1,1,100
+,,,,,,,,"Omen , Roxie , Zata",1,1,100
+,,,,,,,,"Hayate , Omen , Roxie",1,1,100
+,,,,,,,,"Eland'orr , Hayate , Zata",1,1,100
+,,,,,,,,"Eland'orr , Omen , Zata",1,1,100
+,,,,,,,,"Eland'orr , Hayate , Omen",1,1,100
+,,,,,,,,"Hayate , Omen , Zata",1,1,100
+,,,,,,,,"Billow , Bolt Baron , Liliana",1,1,100
+,,,,,,,,"Billow , Bolt Baron , Valhein",1,1,100
+,,,,,,,,"Billow , Bolt Baron , Zip",1,1,100
+,,,,,,,,"Bolt Baron , Liliana , Valhein",1,1,100
+,,,,,,,,"Bolt Baron , Liliana , Zip",1,1,100
+,,,,,,,,"Bolt Baron , Valhein , Zip",1,1,100
+,,,,,,,,"Billow , Liliana , Valhein",1,1,100
+,,,,,,,,"Billow , Liliana , Zip",1,1,100
+,,,,,,,,"Billow , Valhein , Zip",1,1,100
+,,,,,,,,"Fennik , Florentino , Murad",1,1,100
+,,,,,,,,"Fennik , Florentino , Rouie",1,1,100
+,,,,,,,,"Florentino , Natalya , Rouie",1,1,100
+,,,,,,,,"Florentino , Murad , Rouie",1,1,100
+,,,,,,,,"Fennik , Murad , Natalya",1,1,100
+,,,,,,,,"Fennik , Natalya , Rouie",1,1,100
+,,,,,,,,"Fennik , Murad , Rouie",1,1,100
+,,,,,,,,"Murad , Natalya , Rouie",1,1,100
+,,,,,,,,"Bolt Baron , Raz , Zanis",1,1,100
+,,,,,,,,"Bolt Baron , Violet , Zanis",1,1,100
+,,,,,,,,"Bolt Baron , Thane , Zanis",1,1,100
+,,,,,,,,"Raz , Violet , Zanis",1,1,100
+,,,,,,,,"Raz , Thane , Zanis",1,1,100
+,,,,,,,,"Thane , Violet , Zanis",1,1,100
+,,,,,,,,"Bolt Baron , Raz , Violet",1,1,100
+,,,,,,,,"Bolt Baron , Raz , Thane",1,1,100
+,,,,,,,,"Bolt Baron , Thane , Violet",1,1,100
+,,,,,,,,"Raz , Thane , Violet",1,1,100
+,,,,,,,,"Eland'orr , Qi , Valhein",1,1,100
+,,,,,,,,"Eland'orr , Qi , Zip",1,1,100
+,,,,,,,,"Qi , Tulen , Valhein",1,1,100
+,,,,,,,,"Qi , Tulen , Zip",1,1,100
+,,,,,,,,"Qi , Valhein , Zip",1,1,100
+,,,,,,,,"Eland'orr , Tulen , Valhein",1,1,100
+,,,,,,,,"Eland'orr , Tulen , Zip",1,1,100
+,,,,,,,,"Tulen , Valhein , Zip",1,1,100
+,,,,,,,,"Fennik , Florentino , Ignis",1,1,100
+,,,,,,,,"Fennik , Florentino , Maloch",1,1,100
+,,,,,,,,"Fennik , Ignis , Maloch",1,1,100
+,,,,,,,,"Alice , Fennik , Ignis",1,1,100
+,,,,,,,,"Alice , Fennik , Maloch",1,1,100
+,,,,,,,,"Keera , Murad , Natalya",1,1,100
+,,,,,,,,"Elsu , Keera , Murad",1,1,100
+,,,,,,,,"Keera , Murad , TeeMee",1,1,100
+,,,,,,,,"Elsu , Murad , Natalya",1,1,100
+,,,,,,,,"Murad , Natalya , TeeMee",1,1,100
+,,,,,,,,"Elsu , Keera , Natalya",1,1,100
+,,,,,,,,"Keera , Natalya , TeeMee",1,1,100
+,,,,,,,,"Elsu , Keera , TeeMee",1,1,100
+,,,,,,,,"Elsu , Natalya , TeeMee",1,1,100
+,,,,,,,,"Eland'orr , Hayate , Zanis",1,1,100
+,,,,,,,,"Eland'orr , TeeMee , Zanis",1,1,100
+,,,,,,,,"Hayate , Rouie , Zanis",1,1,100
+,,,,,,,,"Rouie , TeeMee , Zanis",1,1,100
+,,,,,,,,"Hayate , TeeMee , Zanis",1,1,100
+,,,,,,,,"Eland'orr , Hayate , TeeMee",1,1,100
+,,,,,,,,"Hayate , Rouie , TeeMee",1,1,100
+,,,,,,,,"Ignis , Marja , Roxie",1,0,0
+,,,,,,,,"Marja , Roxie , Stuart",1,0,0
+,,,,,,,,"Ignis , Roxie , Stuart",1,0,0
+,,,,,,,,"Enzo , Ignis , Roxie",1,0,0
+,,,,,,,,"Enzo , Roxie , Stuart",1,0,0
+,,,,,,,,"Ignis , Marja , Stuart",1,0,0
+,,,,,,,,"Butterfly , Florentino , Raz",1,1,100
+,,,,,,,,"Butterfly , Florentino , Violet",1,1,100
+,,,,,,,,"Butterfly , Florentino , Zip",1,1,100
+,,,,,,,,"Florentino , Raz , Violet",1,1,100
+,,,,,,,,"Florentino , Raz , Zip",1,1,100
+,,,,,,,,"Florentino , Violet , Zip",1,1,100
+,,,,,,,,"Butterfly , Raz , Violet",1,1,100
+,,,,,,,,"Butterfly , Raz , Zip",1,1,100
+,,,,,,,,"Butterfly , Violet , Zip",1,1,100
+,,,,,,,,"Airi , Billow , Ignis",1,0,0
+,,,,,,,,"Airi , Billow , Celica",1,0,0
+,,,,,,,,"Airi , Alice , Billow",1,0,0
+,,,,,,,,"Airi , Celica , Ignis",1,0,0
+,,,,,,,,"Airi , Alice , Ignis",1,0,0
+,,,,,,,,"Airi , Alice , Celica",1,0,0
+,,,,,,,,"Billow , Celica , Ignis",1,0,0
+,,,,,,,,"Alice , Billow , Ignis",1,0,0
+,,,,,,,,"Alice , Billow , Celica",1,0,0
+,,,,,,,,"Alice , Celica , Ignis",1,0,0
+,,,,,,,,"Liliana , Marja , Yena",1,1,100
+,,,,,,,,"Marja , Stuart , Yena",1,1,100
+,,,,,,,,"Dolia , Marja , Yena",1,1,100
+,,,,,,,,"Liliana , Stuart , Yena",1,1,100
+,,,,,,,,"Dolia , Liliana , Yena",1,1,100
+,,,,,,,,"Dolia , Stuart , Yena",1,1,100
+,,,,,,,,"Liliana , Marja , Stuart",1,1,100
+,,,,,,,,"Dolia , Liliana , Marja",1,1,100
+,,,,,,,,"Dolia , Marja , Stuart",1,1,100
+,,,,,,,,"Dolia , Liliana , Stuart",1,1,100
+,,,,,,,,"Eland'orr , Ignis , Qi",1,1,100
+,,,,,,,,"Eland'orr , Fennik , Qi",1,1,100
+,,,,,,,,"Fennik , Ignis , Qi",1,1,100
+,,,,,,,,"Ignis , Qi , TeeMee",1,1,100
+,,,,,,,,"Fennik , Qi , TeeMee",1,1,100
+,,,,,,,,"Bolt Baron , Ilumia , Roxie",1,0,0
+,,,,,,,,"Bolt Baron , Roxie , Violet",1,0,0
+,,,,,,,,"Bolt Baron , Ming , Roxie",1,0,0
+,,,,,,,,"Ilumia , Roxie , Violet",1,0,0
+,,,,,,,,"Ilumia , Ming , Roxie",1,0,0
+,,,,,,,,"Ming , Roxie , Violet",1,0,0
+,,,,,,,,"Bolt Baron , Ilumia , Violet",1,0,0
+,,,,,,,,"Bolt Baron , Ilumia , Ming",1,0,0
+,,,,,,,,"Bolt Baron , Ming , Violet",1,0,0
+,,,,,,,,"Ilumia , Ming , Violet",1,0,0
+,,,,,,,,"Keera , Natalya , Zanis",1,1,100
+,,,,,,,,"Keera , Valhein , Zanis",1,1,100
+,,,,,,,,"Keera , Zanis , Zip",1,1,100
+,,,,,,,,"Natalya , Valhein , Zanis",1,1,100
+,,,,,,,,"Natalya , Zanis , Zip",1,1,100
+,,,,,,,,"Valhein , Zanis , Zip",1,1,100
+,,,,,,,,"Keera , Natalya , Valhein",1,1,100
+,,,,,,,,"Keera , Natalya , Zip",1,1,100
+,,,,,,,,"Keera , Valhein , Zip",1,1,100
+,,,,,,,,"Natalya , Valhein , Zip",1,1,100
+,,,,,,,,"Lumburr , Marja , Murad",1,1,100
+,,,,,,,,"Elsu , Iggy , Murad",1,1,100
+,,,,,,,,"Iggy , Lumburr , Murad",1,1,100
+,,,,,,,,"Elsu , Lumburr , Murad",1,1,100
+,,,,,,,,"Iggy , Lumburr , Marja",1,1,100
+,,,,,,,,"Elsu , Lumburr , Marja",1,1,100
+,,,,,,,,"Elsu , Iggy , Lumburr",1,1,100
+,,,,,,,,"Eland'orr , Roxie , Valhein",1,1,100
+,,,,,,,,"Raz , Roxie , Valhein",1,1,100
+,,,,,,,,"Eland'orr , Raz , Valhein",1,1,100
+,,,,,,,,"Raz , Valhein , Zip",1,1,100
+,,,,,,,,"Fennik , Mina , Natalya",1,0,0
+,,,,,,,,"Capheny , Fennik , Mina",1,0,0
+,,,,,,,,"Fennik , Mina , Ming",1,0,0
+,,,,,,,,"Capheny , Mina , Natalya",1,0,0
+,,,,,,,,"Mina , Ming , Natalya",1,0,0
+,,,,,,,,"Capheny , Mina , Ming",1,0,0
+,,,,,,,,"Capheny , Fennik , Natalya",1,0,0
+,,,,,,,,"Capheny , Fennik , Ming",1,0,0
+,,,,,,,,"Capheny , Ming , Natalya",1,0,0
+,,,,,,,,"Alice , Omen , Sephera",1,1,100
+,,,,,,,,"Celica , Omen , Sephera",1,1,100
+,,,,,,,,"Maloch , Omen , Sephera",1,1,100
+,,,,,,,,"Alice , Celica , Omen",1,1,100
+,,,,,,,,"Alice , Maloch , Omen",1,1,100
+,,,,,,,,"Celica , Maloch , Omen",1,1,100
+,,,,,,,,"Alice , Celica , Sephera",1,1,100
+,,,,,,,,"Alice , Maloch , Sephera",1,1,100
+,,,,,,,,"Celica , Maloch , Sephera",1,1,100
+,,,,,,,,"Alice , Celica , Maloch",1,1,100
+,,,,,,,,"Aoi , Liliana , Roxie",1,0,0
+,,,,,,,,"Aoi , Roxie , Valhein",1,0,0
+,,,,,,,,"Aoi , Roxie , Zip",1,0,0
+,,,,,,,,"Liliana , Roxie , Valhein",1,0,0
+,,,,,,,,"Liliana , Roxie , Zip",1,0,0
+,,,,,,,,"Aoi , Liliana , Valhein",1,0,0
+,,,,,,,,"Aoi , Liliana , Zip",1,0,0
+,,,,,,,,"Aoi , Valhein , Zip",1,0,0
+,,,,,,,,"Fennik , Raz , Ryoma",1,0,0
+,,,,,,,,"Fennik , Marja , Ryoma",1,0,0
+,,,,,,,,"Annette , Fennik , Ryoma",1,0,0
+,,,,,,,,"Annette , Raz , Ryoma",1,0,0
+,,,,,,,,"Annette , Marja , Ryoma",1,0,0
+,,,,,,,,"Fennik , Marja , Raz",1,0,0
+,,,,,,,,"Annette , Fennik , Raz",1,0,0
+,,,,,,,,"Annette , Fennik , Marja",1,0,0
+,,,,,,,,"Annette , Marja , Raz",1,0,0
+,,,,,,,,"Eland'orr , Florentino , Ignis",1,0,0
+,,,,,,,,"Alice , Eland'orr , Florentino",1,0,0
+,,,,,,,,"Eland'orr , Ignis , Maloch",1,0,0
+,,,,,,,,"Alice , Eland'orr , Ignis",1,0,0
+,,,,,,,,"Alice , Eland'orr , Maloch",1,0,0
+,,,,,,,,"Marja , Skud , Violet",1,0,0
+,,,,,,,,"Arum , Marja , Skud",1,0,0
+,,,,,,,,"Rouie , Skud , Violet",1,0,0
+,,,,,,,,"Arum , Rouie , Skud",1,0,0
+,,,,,,,,"Arum , Skud , Violet",1,0,0
+,,,,,,,,"Arum , Marja , Rouie",1,0,0
+,,,,,,,,"Arum , Marja , Violet",1,0,0
+,,,,,,,,"Arum , Rouie , Violet",1,0,0
+,,,,,,,,"Kahlii , Keera , Ryoma",1,0,0
+,,,,,,,,"Keera , Murad , Ryoma",1,0,0
+,,,,,,,,"Dolia , Keera , Ryoma",1,0,0
+,,,,,,,,"Kahlii , Murad , Ryoma",1,0,0
+,,,,,,,,"Dolia , Kahlii , Ryoma",1,0,0
+,,,,,,,,"Dolia , Murad , Ryoma",1,0,0
+,,,,,,,,"Kahlii , Keera , Murad",1,0,0
+,,,,,,,,"Dolia , Kahlii , Keera",1,0,0
+,,,,,,,,"Dolia , Kahlii , Murad",1,0,0
+,,,,,,,,"Maloch , Raz , Volkath",1,1,100
+,,,,,,,,"Maloch , Violet , Volkath",1,1,100
+,,,,,,,,"Maloch , Volkath , Zip",1,1,100
