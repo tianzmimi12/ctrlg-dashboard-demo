@@ -268,14 +268,14 @@ export function parseComboStatsFromExcel(file, setComboStats, setDropdowns) {
       }
     }
     // combo2: B32 ลงไป
-    for (let row = 32; row < 100; row++) {
+    for (let row = 35; row < 100; row++) {
       let val = sheet[row]?.[1];
       if (/^\d{8}$/.test(val) && !dropdownDates.includes(val)) {
         dropdownDates.push(val);
       }
     }
     // combo3: P32 ลงไป
-    for (let row = 32; row < 100; row++) {
+    for (let row = 35; row < 100; row++) {
       let val = sheet[row]?.[15];
       if (/^\d{8}$/.test(val) && !dropdownDates.includes(val)) {
         dropdownDates.push(val);
@@ -331,9 +331,9 @@ export function parseComboStatsFromExcel(file, setComboStats, setDropdowns) {
     });
 
     // ----------- 2-heroes: วันที่อยู่ที่บรรทัด 30, คอลัมน์ B -----------
-    const combo2Date = sheet[30]?.[1] || "";
+    const combo2Date = sheet[33]?.[1] || "";
     const combo2 = [];
-    let row = 33;
+    let row = 36;
     while (
       sheet[row] &&
       sheet[row][7] &&
@@ -354,9 +354,9 @@ export function parseComboStatsFromExcel(file, setComboStats, setDropdowns) {
       row++;
     }
     // ----------- 3-heroes: วันที่อยู่ที่บรรทัด 31, คอลัมน์ P -----------
-    const combo3Date = sheet[31]?.[15] || "";
+    const combo3Date = sheet[34]?.[15] || "";
     const combo3 = [];
-    row = 33;
+    row = 36;
     while (
       sheet[row] &&
       sheet[row][21] &&

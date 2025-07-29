@@ -41,7 +41,7 @@ ChartJS.register(
 
 const theme = {
   primary: "#7B1FA2",
-  secondary: "#00FFA3",
+  secondary: "#00FFA3", 
   accent: "#fae100",
   success: "#00c47a",
   danger: "#FF4B4B",
@@ -1331,7 +1331,6 @@ export default function HomePage({ games = [] }) {
                 </div>
               </div>
               <hr style={{ margin: "8px 0", border: "none", borderTop: "1px dashed #e4d3ff" }} />
-
               {/* Multi-select competitor */}
               <div>
                 <div style={{ fontWeight: 700, color: "#7B1FA2", marginBottom: 6, fontSize: 15 }}>
@@ -1349,7 +1348,6 @@ export default function HomePage({ games = [] }) {
                 />
               </div>
               <hr style={{ margin: "8px 0", border: "none", borderTop: "1px dashed #e4d3ff" }} />
-
               {/* Multi-select Type */}
               <div>
                 <div style={{ fontWeight: 700, color: "#7B1FA2", marginBottom: 6, fontSize: 15 }}>
