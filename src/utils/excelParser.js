@@ -12,32 +12,60 @@ function excelSerialDateToYMD(serial) {
 
 function parseDate(value) {
   if (!value) return "";
-  if (typeof value === "number" && value > 40000 && value < 60000) {
+
+  // Excel serial date
+  if (typeof value === "number" && value > 40000 && value < 70000) {
     return excelSerialDateToYMD(value);
   }
+
   const s = typeof value === "number" ? String(value) : String(value).trim();
-  if (/^\d{7}$/.test(s)) {
-    let d, m, y;
-    if (parseInt(s.slice(0, 2), 10) >= 10) {
-      d = s.slice(0, 2); m = s.slice(2, 4); y = s.slice(4, 8);
-    } else {
-      d = s.slice(0, 1); m = s.slice(1, 3); y = s.slice(3, 7);
+
+  // 8 หลัก: ddMMyyyy หรือ yyyyMMdd
+  if (/^\d{8}$/.test(s)) {
+    // กรณี ddMMyyyy
+    const d1 = +s.slice(0,2), m1 = +s.slice(2,4), y1 = +s.slice(4,8);
+    // กรณี yyyyMMdd
+    const y2 = +s.slice(0,4), m2 = +s.slice(4,6), d2 = +s.slice(6,8);
+
+    // ddMMyyyy
+    if (d1 >= 1 && d1 <= 31 && m1 >= 1 && m1 <= 12 && y1 >= 2020 && y1 <= 2100) {
+      return `${y1}${String(m1).padStart(2, "0")}${String(d1).padStart(2, "0")}`;
     }
-    return `${y}${m.padStart(2, "0")}${d.padStart(2, "0")}`;
+    // yyyyMMdd
+    if (y2 >= 2020 && y2 <= 2100 && m2 >= 1 && m2 <= 12 && d2 >= 1 && d2 <= 31) {
+      return s;
+    }
+    // ถ้าไม่ตรงทั้งสองแบบ
+    return "";
   }
-  if (/^\d{8}$/.test(s)) return s;
-  if (/^\d{2}\/\d{2}\/\d{4}$/.test(s)) {
-    const [d, m, y] = s.split("/");
-    return `${y}${m}${d}`;
+
+  // 7 หลัก: dMMyyyy
+  if (/^\d{7}$/.test(s)) {
+    const d = +s.slice(0,1), m = +s.slice(1,3), y = +s.slice(3,7);
+    if (d >= 1 && d <= 31 && m >= 1 && m <= 12 && y >= 2020 && y <= 2100) {
+      return `${y}${String(m).padStart(2, "0")}${String(d).padStart(2, "0")}`;
+    }
+    return "";
   }
-  if (/^\d{4}-\d{2}-\d{2}$/.test(s)) {
-    const [y, m, d] = s.split("-");
-    return `${y}${m}${d}`;
-  }
+
+  // dd/mm/yyyy
   if (/^\d{1,2}\/\d{1,2}\/\d{4}$/.test(s)) {
-    const [d, m, y] = s.split("/");
-    return `${y}${m.padStart(2, "0")}${d.padStart(2, "0")}`;
+    const [d, m, y] = s.split("/").map(Number);
+    if (d >= 1 && d <= 31 && m >= 1 && m <= 12 && y >= 2020 && y <= 2100) {
+      return `${y}${String(m).padStart(2, "0")}${String(d).padStart(2, "0")}`;
+    }
+    return "";
   }
+
+  // yyyy-mm-dd
+  if (/^\d{4}-\d{2}-\d{2}$/.test(s)) {
+    const [y, m, d] = s.split("-").map(Number);
+    if (d >= 1 && d <= 31 && m >= 1 && m <= 12 && y >= 2020 && y <= 2100) {
+      return `${y}${String(m).padStart(2, "0")}${String(d).padStart(2, "0")}`;
+    }
+    return "";
+  }
+
   return "";
 }
 

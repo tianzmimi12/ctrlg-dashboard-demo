@@ -84,7 +84,8 @@ function formatDateDisplay(dateStr) {
   if (!dateStr) return "";
   let s = String(dateStr).replace(".0", "");
   if (s.length !== 8) return s;
-  return `${s.slice(0,2)}/${s.slice(2,4)}/${s.slice(4,8)}`;
+  // yyyyMMdd > dd/mm/yyyy
+  return `${s.slice(6,8)}/${s.slice(4,6)}/${s.slice(0,4)}`;
 }
 
 function formatDateShort(raw) {
