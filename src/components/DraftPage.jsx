@@ -27,7 +27,7 @@ const pickSeq2 = [
 ];
 
 const BO_OPTIONS = { BO1: 1, BO3: 3, BO7: 7 };
-const highlightColor = '#ea1c24';
+const highlightColor = '#39FF14';
 
 const ROLE_ICON = {
   ทั้งหมด: '🌐',
@@ -831,7 +831,7 @@ export default function DraftPage({
                 fontSize:21,
                 color:'#fff600',
                 fontWeight:800,
-                textShadow:'0 2px 18px #ea1c2490',
+                textShadow:'0 2px 18pxrgba(114, 209, 4, 0.56)',
               }}>
                 {`Game ${currentGame}/${totalGames} • ${currentStep.type === 'ban' ? 'Ban' : 'Pick'} ${stepIndex+1}/${totalSteps}`}
               </strong>
