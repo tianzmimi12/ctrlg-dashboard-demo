@@ -669,6 +669,8 @@ export default function DraftPage({
               border:'none', background:'#292a37',
               color:'#fff', cursor:'pointer',
             }}>← Back</button>
+
+
             <strong style={{
               fontSize:21, color:'#fff600',
               fontWeight:800, textShadow:'0 2px 18px #ea1c2490',
