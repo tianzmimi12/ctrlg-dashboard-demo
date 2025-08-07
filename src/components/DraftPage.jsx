@@ -453,7 +453,7 @@ export default function DraftPage({
               } : {}}
               onClick={() => !disabled && handleHeroClick(hero)}
               onMouseEnter={e => showHeroTooltip(hero.name, e)}
-              onMouseMove={e => setTooltipPos({ x:e.clientX, y:e.clientY })}
+            onMouseMove={e => setTooltipPos({ x:e.clientX, y:e.clientY })}
               onMouseLeave={hideTooltip}
               style={{
                 width:84,
@@ -642,7 +642,7 @@ export default function DraftPage({
     }
   }, [stepIndex]);
 
-  // ============ Final Render ============
+  // ============ Initial/BO Selection Screen ============
   if (!comboStats || !excelData) {
     return (
       <div style={{
@@ -712,207 +712,257 @@ export default function DraftPage({
     );
   }
 
+  // ============ Main Draft View ============
   return viewingHistory !== null
     ? renderHistoryView()
     : (
-      <div style={{
-        display:'flex',
-        height:'100vh',
-        background:'#161720',
-        position:'relative'
-      }}>
-        {/* Team A */}
+      <>
+        {/* ——— Control Bar ——— */}
         <div style={{
-          width:170,
-          background:panelColors.A,
-          padding:17,
-          boxShadow:'2px 0 18px #000d',
-          borderRadius:'0 28px 28px 0',
-          border: highlightTeam==='A'
-            ? `3px solid ${highlightColor}`
-            : '3px solid transparent',
+          width: '100%',
+          padding: '12px 24px',
+          background: '#23263a',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+          gap: '40px',
         }}>
-          <h4 style={{ color:'#fff', textAlign:'center' }}>Team A</h4>
-          <strong style={{ color:'#f9b041' }}>Bans</strong>
-          <div style={{ display:'flex', flexWrap:'wrap', justifyContent:'center' }}>
-            {renderSlots(bans.A, 4, 'A', 'ban')}
+          {/* Team A คือ Red/Blue */}
+          <div>
+            <strong style={{ color:'#fff', marginRight:8 }}>Team A คือ</strong>
+            <label style={{ marginRight:12, color:'#fff' }}>
+              <input
+                type="radio"
+                value="red"
+                checked={teamARole==='red'}
+                onChange={() => setTeamARole('red')}
+              /> Red
+            </label>
+            <label style={{ color:'#fff' }}>
+              <input
+                type="radio"
+                value="blue"
+                checked={teamARole==='blue'}
+                onChange={() => setTeamARole('blue')}
+              /> Blue
+            </label>
           </div>
-          <strong style={{ color:'#57eae7' }}>Picks</strong>
-          <div style={{ display:'flex', flexWrap:'wrap', justifyContent:'center' }}>
-            {renderSlots(picks.A, 5, 'A', 'pick')}
+
+          {/* ฝั่งเลือกก่อน */}
+          <div>
+            <strong style={{ color:'#fff', marginRight:8 }}>ฝั่งเลือกก่อน</strong>
+            <label style={{ marginRight:12, color:'#fff' }}>
+              <input
+                type="radio"
+                value="A"
+                checked={firstPickTeam==='A'}
+                onChange={() => setFirstPickTeam('A')}
+              /> Team A
+            </label>
+            <label style={{ color:'#fff' }}>
+              <input
+                type="radio"
+                value="B"
+                checked={firstPickTeam==='B'}
+                onChange={() => setFirstPickTeam('B')}
+              /> Team B
+            </label>
           </div>
         </div>
 
-        {/* Hero Pool */}
         <div style={{
-          flex:1,
-          overflowY:'auto',
-          padding:40,
-          background:'#23263a'
+          display:'flex',
+          height:'100vh',
+          background:'#161720',
+          position:'relative'
         }}>
+          {/* Team A */}
           <div style={{
-            margin:'10px 0 25px',
-            textAlign:'right'
+            width:170,
+            background:panelColors.A,
+            padding:17,
+            boxShadow:'2px 0 18px #000d',
+            borderRadius:'0 28px 28px 0',
+            border: highlightTeam==='A'
+              ? `3px solid ${highlightColor}`
+              : '3px solid transparent',
           }}>
-            <span style={{ color:'#fff', fontWeight:700 }}>ฝั่งตรงข้าม:</span>
-            {renderOpponentDropDown()}
-          </div>
-
-          {/* ==== ย้าย Team A / First Pick Controls มาไว้ที่นี่ ==== */}
-          <div style={{ display:'flex', justifyContent:'center', gap:32, marginBottom:18 }}>
-            <div style={{ display:'flex', alignItems:'center' }}>
-              <strong style={{ color:'#fff', marginRight:12 }}>Team A คือ</strong>
-              <label style={{ marginRight:16, color:'#fff' }}>
-                <input
-                  type="radio"
-                  value="red"
-                  checked={teamARole==='red'}
-                  onChange={() => setTeamARole('red')}
-                /> Red Side
-              </label>
-              <label style={{ color:'#fff' }}>
-                <input
-                  type="radio"
-                  value="blue"
-                  checked={teamARole==='blue'}
-                  onChange={() => setTeamARole('blue')}
-                /> Blue Side
-              </label>
+            <h4 style={{ color:'#fff', textAlign:'center' }}>Team A</h4>
+            <strong style={{ color:'#f9b041' }}>Bans</strong>
+            <div style={{ display:'flex', flexWrap:'wrap', justifyContent:'center' }}>
+              {renderSlots(bans.A, 4, 'A', 'ban')}
             </div>
-            <div style={{ display:'flex', alignItems:'center' }}>
-              <strong style={{ color:'#fff', marginRight:12 }}>ฝั่งเลือกก่อน</strong>
-              <label style={{ marginRight:16, color:'#fff' }}>
-                <input
-                  type="radio"
-                  value="A"
-                  checked={firstPickTeam==='A'}
-                  onChange={() => setFirstPickTeam('A')}
-                /> Team A
-              </label>
-              <label style={{ color:'#fff' }}>
-                <input
-                  type="radio"
-                  value="B"
-                  checked={firstPickTeam==='B'}
-                  onChange={() => setFirstPickTeam('B')}
-                /> Team B
-              </label>
+            <strong style={{ color:'#57eae7' }}>Picks</strong>
+            <div style={{ display:'flex', flexWrap:'wrap', justifyContent:'center' }}>
+              {renderSlots(picks.A, 5, 'A', 'pick')}
             </div>
           </div>
 
+          {/* Hero Pool */}
           <div style={{
-            display:'flex',
-            alignItems:'center',
-            justifyContent:'space-between',
-            marginBottom:18
+            flex:1,
+            overflowY:'auto',
+            padding:40,
+            background:'#23263a'
           }}>
-            <button onClick={() => navigate(-1)} style={{
-              padding:'7px 24px',
-              borderRadius:18,
-              border:'none',
-              background:'#292a37',
-              color:'#fff',
-              cursor:'pointer',
-            }}>← Back</button>
-            <strong style={{
-              fontSize:21,
-              color:'#fff600',
-              fontWeight:800,
-              textShadow:'0 2px 18px #ea1c2490',
-            }}>
-              {`Game ${currentGame}/${totalGames} • ${currentStep.type === 'ban' ? 'Ban' : 'Pick'} ${stepIndex+1}/${totalSteps}`}
-            </strong>
-            <button onClick={handleUndo} disabled={!history.length} style={{
-              padding:'7px 22px',
-              borderRadius:17,
-              border:'none',
-              background: history.length ? '#fff600' : '#333',
-              color: history.length ? '#23232a' : '#666',
-              cursor: history.length ? 'pointer' : 'not-allowed',
-              fontWeight:800,
-            }}>แก้ไข</button>
-          </div>
-
-          {alertMsg && (
             <div style={{
-              background:'#ea1c24',
-              color:'#fff600',
-              padding:14,
-              borderRadius:10,
-              textAlign:'center',
-              fontWeight:'bold',
-              marginBottom:17,
+              margin:'10px 0 25px',
+              textAlign:'right'
             }}>
-              {alertMsg}
-              <button onClick={() => setAlertMsg('')} style={{
-                marginLeft:16,
-                background:'transparent',
+              <span style={{ color:'#fff', fontWeight:700 }}>ฝั่งตรงข้าม:</span>
+              {renderOpponentDropDown()}
+            </div>
+
+            <div style={{
+              display:'flex',
+              alignItems:'center',
+              justifyContent:'space-between',
+              marginBottom:18
+            }}>
+              <button onClick={() => navigate(-1)} style={{
+                padding:'7px 24px',
+                borderRadius:18,
                 border:'none',
-                color:'#fff600',
+                background:'#292a37',
+                color:'#fff',
                 cursor:'pointer',
-              }}>×</button>
-            </div>
-          )}
-
-          {completedGames.length > 0 && (
-            <div style={{ marginBottom:15 }}>
-              <strong style={{ color:'#ffd600' }}>History:</strong>
-              {completedGames.map((_, i) => (
-                <button key={i} onClick={() => setViewingHistory(i)} style={{
-                  margin:'0 7px',
-                  padding:'7px 16px',
-                  borderRadius:14,
-                  border:'none',
-                  background:'#ea1c24',
-                  color:'#fff',
-                  fontWeight:800,
-                  cursor:'pointer',
-                }}>Game {i+1}</button>
-              ))}
-            </div>
-          )}
-
-          {renderHeroGrid()}
-
-          {stepIndex >= totalSteps && currentGame < totalGames && (
-            <div style={{ textAlign:'center', marginTop:34 }}>
-              <button onClick={nextGame} style={{
-                padding:'10px 30px',
+              }}>← Back</button>
+              <strong style={{
+                fontSize:21,
+                color:'#fff600',
+                fontWeight:800,
+                textShadow:'0 2px 18px #ea1c2490',
+              }}>
+                {`Game ${currentGame}/${totalGames} • ${currentStep.type === 'ban' ? 'Ban' : 'Pick'} ${stepIndex+1}/${totalSteps}`}
+              </strong>
+              <button onClick={handleUndo} disabled={!history.length} style={{
+                padding:'7px 22px',
                 borderRadius:17,
                 border:'none',
-                background:'#57eae7',
-                color:'#23232a',
+                background: history.length ? '#fff600' : '#333',
+                color: history.length ? '#23232a' : '#666',
+                cursor: history.length ? 'pointer' : 'not-allowed',
                 fontWeight:800,
-                cursor:'pointer',
-                fontSize:17,
-              }}>Next Game &gt;</button>
+              }}>แก้ไข</button>
             </div>
-          )}
-        </div>
 
-        {/* Team B */}
-        <div style={{
-          width:170,
-          background:panelColors.B,
-          padding:17,
-          boxShadow:'-2px 0 18px #000d',
-          borderRadius:'28px 0 0 28px',
-          border: highlightTeam==='B'
-            ? `3px solid ${highlightColor}`
-            : '3px solid transparent',
-        }}>
-          <h4 style={{ color:'#fff', textAlign:'center' }}>Team B</h4>
-          <strong style={{ color:'#f9b041' }}>Bans</strong>
-          <div style={{ display:'flex', flexWrap:'wrap', justifyContent:'center' }}>
-            {renderSlots(bans.B, 4, 'B', 'ban')}
-          </div>
-          <strong style={{ color:'#57eae7' }}>Picks</strong>
-          <div style={{ display:'flex', flexWrap:'wrap', justifyContent:'center' }}>
-            {renderSlots(picks.B, 5, 'B', 'pick')}
-          </div>
-        </div>
+            <div style={{
+              display:'flex',
+              gap:10,
+              flexWrap:'wrap',
+              margin:'4px 0 26px'
+            }}>
+              {roleList.map(role => (
+                <button key={role} onClick={() => setSelectedRole(role)} style={{
+                  padding:'8px 23px',
+                  borderRadius:18,
+                  border:'none',
+                  background: selectedRole===role?'#ea1c24':'#21212b',
+                  color: selectedRole===role?'#fff':'#bdbdbd',
+                  fontWeight:800,
+                  cursor:'pointer',
+                }}>{ROLE_ICON[role]} {role}</button>
+              ))}
+              <input
+                type="text"
+                placeholder="🔍 ค้นหา hero..."
+                value={searchTerm}
+                onChange={e => setSearchTerm(e.target.value)}
+                style={{
+                  marginLeft:12,
+                  padding:'0 16px',
+                  height:38,
+                  borderRadius:17,
+                  border:'none',
+                  background:'#171826',
+                  color:'#fff',
+                  fontWeight:600,
+                  letterSpacing:1,
+                }}
+              />
+            </div>
 
-        {renderTooltip()}
-      </div>
+            {alertMsg && (
+              <div style={{
+                background:'#ea1c24',
+                color:'#fff600',
+                padding:14,
+                borderRadius:10,
+                textAlign:'center',
+                fontWeight:'bold',
+                marginBottom:17,
+              }}>
+                {alertMsg}
+                <button onClick={() => setAlertMsg('')} style={{
+                  marginLeft:16,
+                  background:'transparent',
+                  border:'none',
+                  color:'#fff600',
+                  cursor:'pointer',
+                }}>×</button>
+              </div>
+            )}
+
+            {completedGames.length > 0 && (
+              <div style={{ marginBottom:15 }}>
+                <strong style={{ color:'#ffd600' }}>History:</strong>
+                {completedGames.map((_, i) => (
+                  <button key={i} onClick={() => setViewingHistory(i)} style={{
+                    margin:'0 7px',
+                    padding:'7px 16px',
+                    borderRadius:14,
+                    border:'none',
+                    background:'#ea1c24',
+                    color:'#fff',
+                    fontWeight:800,
+                    cursor:'pointer',
+                  }}>Game {i+1}</button>
+                ))}
+              </div>
+            )}
+
+            {renderHeroGrid()}
+
+            {stepIndex >= totalSteps && currentGame < totalGames && (
+              <div style={{ textAlign:'center', marginTop:34 }}>
+                <button onClick={nextGame} style={{
+                  padding:'10px 30px',
+                  borderRadius:17,
+                  border:'none',
+                  background:'#57eae7',
+                  color:'#23232a',
+                  fontWeight:800,
+                  cursor:'pointer',
+                  fontSize:17,
+                }}>Next Game &gt;</button>
+              </div>
+            )}
+          </div>
+
+          {/* Team B */}
+          <div style={{
+            width:170,
+            background:panelColors.B,
+            padding:17,
+            boxShadow:'-2px 0 18px #000d',
+            borderRadius:'28px 0 0 28px',
+            border: highlightTeam==='B'
+              ? `3px solid ${highlightColor}`
+              : '3px solid transparent',
+          }}>
+            <h4 style={{ color:'#fff', textAlign:'center' }}>Team B</h4>
+            <strong style={{ color:'#f9b041' }}>Bans</strong>
+            <div style={{ display:'flex', flexWrap:'wrap', justifyContent:'center' }}>
+              {renderSlots(bans.B, 4, 'B', 'ban')}
+            </div>
+            <strong style={{ color:'#57eae7' }}>Picks</strong>
+            <div style={{ display:'flex', flexWrap:'wrap', justifyContent:'center' }}>
+              {renderSlots(picks.B, 5, 'B', 'pick')}
+            </div>
+          </div>
+
+          {renderTooltip()}
+        </div>
+      </>
     );
 }
