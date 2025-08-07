@@ -1,42 +1,61 @@
+// src/components/DashboardLoader.jsx
+
 import React, { useState } from "react";
 import { Routes, Route, useNavigate } from "react-router-dom";
 import HomePage from "./HomePage";
+import DraftPage from "./DraftPage";
 import WinRateTierSelection from "./WinRateTierSelection";
 import TierData from "./tier/TierData";
+import heroList from "../data/heroList.json";
 import { parseGamesFromExcel, parseComboStatsFromExcel } from "../utils/excelParser";
 import { motion, AnimatePresence } from "framer-motion";
 import Confetti from "react-confetti";
+import * as XLSX from "xlsx";
 
 export default function DashboardLoader() {
   const [games, setGames] = useState([]);
   const [comboStats, setComboStats] = useState(null);
+  const [dropdownDates, setDropdownDates] = useState([]);
+  const [excelData, setExcelData] = useState(null);
   const [uploaded, setUploaded] = useState(false);
   const [showDashboard, setShowDashboard] = useState(false);
-  const [dropdownDates, setDropdownDates] = useState([]);
   const navigate = useNavigate();
 
   function handleFile(e) {
     const file = e.target.files[0];
     if (!file) return;
-    // Parse All_Scrim_Stats & ComboStats
-    parseGamesFromExcel(file, (g) => {
+
+    // 1) Parse game data
+    parseGamesFromExcel(file, g => {
       setGames(g);
       setUploaded(true);
       setTimeout(() => {
         setShowDashboard(true);
+        // → เปลี่ยนให้พาไปหน้า HomePage ("/dashboard") แทน
         navigate("/dashboard");
-      }, 1500); 
+      }, 1500);
     });
-    parseComboStatsFromExcel(file, setComboStats, (dropdowns) => {
-      if (dropdowns && dropdowns.dates) setDropdownDates(dropdowns.dates);
+
+    // 2) Parse combo stats & dropdown dates
+    parseComboStatsFromExcel(file, setComboStats, dropdowns => {
+      if (dropdowns?.dates) setDropdownDates(dropdowns.dates);
     });
+
+    // 3) อ่าน raw workbook ส่งให้ DraftPage.jsx
+    const reader = new FileReader();
+    reader.onload = evt => {
+      const data = new Uint8Array(evt.target.result);
+      const wb = XLSX.read(data, { type: "array" });
+      setExcelData(wb);
+    };
+    reader.readAsArrayBuffer(file);
   }
 
   function GateEffect() {
     return (
       <motion.div
         initial={{ opacity: 1 }}
-        animate={{ opacity: 1 }} 
+        animate={{ opacity: 1 }}
         exit={{ opacity: 0 }}
         transition={{ duration: 0.7, type: "tween" }}
         style={{
@@ -66,7 +85,7 @@ export default function DashboardLoader() {
             color: "#fff",
             fontWeight: 900,
             letterSpacing: 2,
-            textShadow: "0 0 28px #fff,0 0 60px #ffe47a, 0 0 140px #9C27B0",
+            textShadow: "0 0 28px #fff,0 0 60px #ffe47a,0 0 140px #9C27B0",
             border: "8px solid #ffe47a88",
             zIndex: 95,
           }}
@@ -85,9 +104,17 @@ export default function DashboardLoader() {
           </motion.span>
           <span>GAME START!</span>
         </motion.div>
-        <Confetti width={window.innerWidth} height={window.innerHeight} numberOfPieces={380} recycle={false} />
+        <Confetti
+          width={window.innerWidth}
+          height={window.innerHeight}
+          numberOfPieces={380}
+          recycle={false}
+        />
         <audio autoPlay>
-          <source src="https://cdn.pixabay.com/audio/2022/10/16/audio_12adfd47d6.mp3" type="audio/mp3" />
+          <source
+            src="https://cdn.pixabay.com/audio/2022/10/16/audio_12adfd47d6.mp3"
+            type="audio/mp3"
+          />
         </audio>
       </motion.div>
     );
@@ -115,7 +142,8 @@ export default function DashboardLoader() {
               exit={{ opacity: 0, scale: 1.16, y: 80 }}
               transition={{ type: "spring", stiffness: 130, damping: 19 }}
               style={{
-                background: "linear-gradient(135deg,rgba(255,255,255,0.28),#19165433 80%)",
+                background:
+                  "linear-gradient(135deg,rgba(255,255,255,0.28),#19165433 80%)",
                 borderRadius: "38px",
                 boxShadow: "0 16px 66px #19165455, 0 4px 38px #ffe47a77",
                 border: "3.7px solid #ffe47a88",
@@ -140,9 +168,16 @@ export default function DashboardLoader() {
                   WebkitBackgroundClip: "text",
                   WebkitTextFillColor: "transparent",
                   letterSpacing: 2,
-                  textShadow: "0 0 60px #00ffa3bb, 0 0 160px #ffe47a",
+                  textShadow: "0 0 60px #00ffa3bb,0 0 160px #ffe47a",
                 }}
-                animate={{ scale: [1, 1.06, 1], textShadow: ["0 0 60px #00ffa3bb", "0 0 120px #ffe47a", "0 0 60px #00ffa3bb"] }}
+                animate={{
+                  scale: [1, 1.06, 1],
+                  textShadow: [
+                    "0 0 60px #00ffa3bb",
+                    "0 0 120px #ffe47a",
+                    "0 0 60px #00ffa3bb",
+                  ],
+                }}
                 transition={{ repeat: Infinity, duration: 2.5, type: "tween" }}
               >
                 FS ROV Dashboard
@@ -150,8 +185,7 @@ export default function DashboardLoader() {
               <label
                 htmlFor="file-upload"
                 style={{
-                  background:
-                    "linear-gradient(99deg,#ffe47a 0%, #fffbe6 100%)",
+                  background: "linear-gradient(99deg,#ffe47a 0%, #fffbe6 100%)",
                   padding: "18px 42px",
                   borderRadius: "34px",
                   fontWeight: 900,
@@ -187,7 +221,8 @@ export default function DashboardLoader() {
                   fontWeight: 600,
                 }}
               >
-                อัปโหลดไฟล์ข้อมูล Scrim ตามฟอร์แมทล่าสุด <br />
+                อัปโหลดไฟล์ข้อมูล Scrim ตามฟอร์แมทล่าสุด
+                <br />
                 <span style={{ color: "#ffe47a", fontWeight: 800 }}>
                   (รองรับเฉพาะไฟล์ .xlsx)
                 </span>
@@ -203,8 +238,32 @@ export default function DashboardLoader() {
   return (
     <Routes>
       <Route path="/" element={<UploadPage />} />
-      <Route path="/dashboard" element={<HomePage games={games} />} />
-      <Route path="/win-rate" element={<WinRateTierSelection games={games} />} />
+      <Route
+        path="/dashboard"
+        element={
+          <HomePage
+            games={games}
+            comboStats={comboStats}
+            dropdownDates={dropdownDates}
+          />
+        }
+      />
+      <Route
+        path="/draft"
+        element={
+          <DraftPage
+            heroes={heroList}
+            comboStats={comboStats}
+            excelData={excelData}
+            games={games}
+            dropdownDates={dropdownDates}
+          />
+        }
+      />
+      <Route
+        path="/win-rate"
+        element={<WinRateTierSelection games={games} />}
+      />
       <Route
         path="/tier-data"
         element={

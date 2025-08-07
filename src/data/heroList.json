@@ -1,0 +1,623 @@
+[
+    {
+      "name": "Airi",
+      "role": "Fighter",
+      "image": "airi.jpg"
+    },
+    {
+      "name": "Aleister",
+      "role": "Mage",
+      "image": "aleister.jpg"
+    },
+    {
+      "name": "Alice",
+      "role": "Support",
+      "image": "alice.jpg"
+    },
+    {
+      "name": "Allain",
+      "role": "Fighter",
+      "image": "allain.jpg"
+    },
+    {
+      "name": "Amily",
+      "role": "Fighter",
+      "image": "amily.jpg"
+    },
+    {
+      "name": "Annette",
+      "role": "Support",
+      "image": "annette.jpg"
+    },
+    {
+      "name": "Aoi",
+      "role": "Assasin",
+      "image": "aoi.jpg"
+    },
+    {
+      "name": "Arduin",
+      "role": "Tank",
+      "image": "arduin.jpg"
+    },
+    {
+      "name": "Arum",
+      "role": "Support",
+      "image": "arum.jpg"
+    },
+    {
+      "name": "Astrid",
+      "role": "Fighter",
+      "image": "astrid.jpg"
+    },
+    {
+      "name": "Ata",
+      "role": "Support",
+      "image": "ata.jpg"
+    },
+    {
+      "name": "Aya",
+      "role": "Support",
+      "image": "aya.jpg"
+    },
+    {
+      "name": "Billow",
+      "role": "Assasin",
+      "image": "billow.jpg"
+    },
+    {
+      "name": "Baldum",
+      "role": "Tank",
+      "image": "baldum.jpg"
+    },
+    {
+      "name": "Bijan",
+      "role": "Fighter",
+      "image": "bijan.jpg"
+    },
+    {
+      "name": "Biron",
+      "role": "Fighter",
+      "image": "biron.jpg"
+    },
+    {
+      "name": "Bolt Baron",
+      "role": "Mage",
+      "image": "bolt-baron.jpg"
+    },
+    {
+      "name": "Bonnie",
+      "role": "Mage",
+      "image": "bonnie.jpg"
+    },
+    {
+      "name": "Bright",
+      "role": "Assasin",
+      "image": "bright.jpg"
+    },
+    {
+      "name": "Butterfly",
+      "role": "Assasin",
+      "image": "butterfly.jpg"
+    },
+    {
+      "name": "Capheny",
+      "role": "Carry",
+      "image": "capheny.jpg"
+    },
+    {
+      "name": "Celica",
+      "role": "Carry",
+      "image": "celica.jpg"
+    },
+    {
+      "name": "Charlotte",
+      "role": "Fighter",
+      "image": "charlotte.jpg"
+    },
+    {
+      "name": "Chaugnar",
+      "role": "Tank",
+      "image": "chaugnar.jpg"
+    },
+    {
+      "name": "Cresht",
+      "role": "Support",
+      "image": "cresht.jpg"
+    },
+    {
+      "name": "Dolia",
+      "role": "Support",
+      "image": "dolia.jpg"
+    },
+    {
+      "name": "D'Arcy",
+      "role": "Mage",
+      "image": "darcy.jpg"
+    },
+    {
+      "name": "Dextra",
+      "role": "Fighter",
+      "image": "dextra.jpg"
+    },
+    {
+      "name": "Diao chan",
+      "role": "Mage",
+      "image": "diao-chan.jpg"
+    },
+    {
+      "name": "Dirak",
+      "role": "Mage",
+      "image": "dirak.jpg"
+    },
+    {
+      "name": "Elandorr",
+      "role": "Carry",
+      "image": "elandorr.jpg"
+    },
+    {
+      "name": "Elsu",
+      "role": "Carry",
+      "image": "elsu.jpg"
+    },
+    {
+      "name": "Enzo",
+      "role": "Assasin",
+      "image": "enzo.jpg"
+    },
+    {
+      "name": "Erin",
+      "role": "Carry",
+      "image": "erin.jpg"
+    },
+    {
+      "name": "Errol",
+      "role": "Fighter",
+      "image": "errol.jpg"
+    },
+    {
+      "name": "Fennik",
+      "role": "Carry",
+      "image": "fennik.jpg"
+    },
+    {
+      "name": "Florentino",
+      "role": "Fighter",
+      "image": "florentino.jpg"
+    },
+    {
+      "name": "Grakk",
+      "role": "Support",
+      "image": "grakk.jpg"
+    },
+    {
+      "name": "Gildur",
+      "role": "Tank",
+      "image": "gildur.jpg"
+    },
+    {
+      "name": "Hayate",
+      "role": "Carry",
+      "image": "hayate.jpg"
+    },
+    {
+      "name": "Heino",
+      "role": "Mage",
+      "image": "heino.jpg"
+    },
+    {
+      "name": "Helen",
+      "role": "Support",
+      "image": "helen.jpg"
+    },
+    {
+      "name": "Iggy",
+      "role": "Mage",
+      "image": "iggy.jpg"
+    },
+    {
+      "name": "Ignis",
+      "role": "Mage",
+      "image": "ignis.jpg"
+    },
+    {
+      "name": "Ilumia",
+      "role": "Mage",
+      "image": "ilumia.jpg"
+    },
+    {
+      "name": "Ishar",
+      "role": "Mage",
+      "image": "ishar.jpg"
+    },
+    {
+      "name": "Jinna",
+      "role": "Mage",
+      "image": "jinna.jpg"
+    },
+    {
+      "name": "Keera",
+      "role": "Assasin",
+      "image": "keera.jpg"
+    },
+    {
+      "name": "Kahlii",
+      "role": "Mage",
+      "image": "kahlii.jpg"
+    },
+    {
+      "name": "Kaine",
+      "role": "Assasin",
+      "image": "kaine.jpg"
+    },
+    {
+      "name": "Kil'Groth",
+      "role": "Fighter",
+      "image": "kilgroth.jpg"
+    },
+    {
+      "name": "Kriknak",
+      "role": "Assasin",
+      "image": "kriknak.jpg"
+    },
+    {
+      "name": "Krixi",
+      "role": "Mage",
+      "image": "krixi.jpg"
+    },
+    {
+      "name": "Krizzix",
+      "role": "Support",
+      "image": "krizzix.jpg"
+    },
+    {
+      "name": "Lorion",
+      "role": "Mage",
+      "image": "lorion.jpg"
+    },
+    {
+      "name": "Lauriel",
+      "role": "Mage",
+      "image": "lauriel.jpg"
+    },
+    {
+      "name": "Laville",
+      "role": "Carry",
+      "image": "laville.jpg"
+    },
+    {
+      "name": "Liliana",
+      "role": "Mage",
+      "image": "liliana.jpg"
+    },
+    {
+      "name": "Lindis",
+      "role": "Carry",
+      "image": "lindis.jpg"
+    },
+    {
+      "name": "Lu Bu",
+      "role": "Fighter",
+      "image": "lu-bu.jpg"
+    },
+    {
+      "name": "Lumburr",
+      "role": "Support",
+      "image": "lumburr.jpg"
+    },
+    {
+      "name": "Maloch",
+      "role": "Fighter",
+      "image": "maloch.jpg"
+    },
+    {
+      "name": "Marja",
+      "role": "Mage",
+      "image": "marja.jpg"
+    },
+    {
+      "name": "Max",
+      "role": "Tank",
+      "image": "max.jpg"
+    },
+    {
+      "name": "Mganga",
+      "role": "Mage",
+      "image": "mganga.jpg"
+    },
+    {
+      "name": "Mina",
+      "role": "Tank",
+      "image": "mina.jpg"
+    },
+    {
+      "name": "Ming",
+      "role": "Support",
+      "image": "ming.jpg"
+    },
+    {
+      "name": "Moren",
+      "role": "Carry",
+      "image": "moren.jpg"
+    },
+    {
+      "name": "Mortos",
+      "role": "Fighter",
+      "image": "mortos.jpg"
+    },
+    {
+      "name": "Murad",
+      "role": "Assasin",
+      "image": "murad.jpg"
+    },
+    {
+      "name": "Nakroth",
+      "role": "Assasin",
+      "image": "nakroth.jpg"
+    },
+    {
+      "name": "Natalya",
+      "role": "Mage",
+      "image": "natalya.jpg"
+    },
+    {
+      "name": "Omen",
+      "role": "Fighter",
+      "image": "omen.jpg"
+    },
+    {
+      "name": "Omega",
+      "role": "Tank",
+      "image": "omega.jpg"
+    },
+    {
+      "name": "Ormarr",
+      "role": "Tank",
+      "image": "ormarr.jpg"
+    },
+    {
+      "name": "Paine",
+      "role": "Assasin",
+      "image": "paine.jpg"
+    },
+    {
+      "name": "Preyta",
+      "role": "Mage",
+      "image": "preyta.jpg"
+    },
+    {
+      "name": "Qi",
+      "role": "Fighter",
+      "image": "qi.jpg"
+    },
+    {
+      "name": "Quillen",
+      "role": "Assasin",
+      "image": "quillen.jpg"
+    },
+    {
+      "name": "Raz",
+      "role": "Assasin",
+      "image": "raz.jpg"
+    },
+    {
+      "name": "Riktor",
+      "role": "Fighter",
+      "image": "riktor.jpg"
+    },
+    {
+      "name": "Rouie",
+      "role": "Support",
+      "image": "rouie.jpg"
+    },
+    {
+      "name": "Rourke",
+      "role": "Fighter",
+      "image": "rourke.jpg"
+    },
+    {
+      "name": "Roxie",
+      "role": "Tank",
+      "image": "roxie.jpg"
+    },
+    {
+      "name": "Ryoma",
+      "role": "Fighter",
+      "image": "ryoma.jpg"
+    },
+    {
+      "name": "Stuart",
+      "role": "Carry",
+      "image": "stuart.jpg"
+    },
+    {
+      "name": "Sephera",
+      "role": "Mage",
+      "image": "sephera.jpg"
+    },
+    {
+      "name": "Sinestrea",
+      "role": "Assasin",
+      "image": "sinestrea.jpg"
+    },
+    {
+      "name": "Skud",
+      "role": "Fighter",
+      "image": "skud.jpg"
+    },
+    {
+      "name": "Slimz",
+      "role": "Carry",
+      "image": "slimz.jpg"
+    },
+    {
+      "name": "Superman",
+      "role": "Fighter",
+      "image": "superman.jpg"
+    },
+    {
+      "name": "Tachi",
+      "role": "Fighter",
+      "image": "tachi.jpg"
+    },
+    {
+      "name": "Taara",
+      "role": "Tank",
+      "image": "taara.jpg"
+    },
+    {
+      "name": "TeeMee",
+      "role": "Support",
+      "image": "teemee.jpg"
+    },
+    {
+      "name": "Teeri",
+      "role": "Carry",
+      "image": "teeri.jpg"
+    },
+    {
+      "name": "Tel'Annas",
+      "role": "Carry",
+      "image": "telannas.jpg"
+    },
+    {
+      "name": "Thane",
+      "role": "Tank",
+      "image": "thane.jpg"
+    },
+    {
+      "name": "The Flash",
+      "role": "Assasin",
+      "image": "the-flash.jpg"
+    },
+    {
+      "name": "Thorne",
+      "role": "Carry",
+      "image": "thorne.jpg"
+    },
+    {
+      "name": "Toro",
+      "role": "Tank",
+      "image": "toro.jpg"
+    },
+    {
+      "name": "Tulen",
+      "role": "Mage",
+      "image": "tulen.jpg"
+    },
+    {
+      "name": "Valhein",
+      "role": "Carry",
+      "image": "valhein.jpg"
+    },
+    {
+      "name": "Veera",
+      "role": "Mage",
+      "image": "veera.jpg"
+    },
+    {
+      "name": "Veres",
+      "role": "Fighter",
+      "image": "veres.jpg"
+    },
+    {
+      "name": "Violet",
+      "role": "Carry",
+      "image": "violet.jpg"
+    },
+    {
+      "name": "Volkath",
+      "role": "Fighter",
+      "image": "volkath.jpg"
+    },
+    {
+      "name": "Wisp",
+      "role": "Carry",
+      "image": "wisp.jpg"
+    },
+    {
+      "name": "Wiro",
+      "role": "Tank",
+      "image": "wiro.jpg"
+    },
+    {
+      "name": "Wonder Woman",
+      "role": "Fighter",
+      "image": "wonder-woman.jpg"
+    },
+    {
+      "name": "WuKong",
+      "role": "Assasin",
+      "image": "wukong.jpg"
+    },
+    {
+      "name": "Xeniel",
+      "role": "Tank",
+      "image": "xeniel.jpg"
+    },
+    {
+      "name": "Yena",
+      "role": "Fighter",
+      "image": "yena.jpg"
+    },
+    {
+      "name": "Yan",
+      "role": "Fighter",
+      "image": "yan.jpg"
+    },
+    {
+      "name": "Y'bneth",
+      "role": "Tank",
+      "image": "ybneth.jpg"
+    },
+    {
+      "name": "Yorn",
+      "role": "Carry",
+      "image": "yorn.jpg"
+    },
+    {
+      "name": "Yue",
+      "role": "Mage",
+      "image": "yue.jpg"
+    },
+    {
+      "name": "Zata",
+      "role": "Assasin",
+      "image": "zata.jpg"
+    },
+    {
+      "name": "Zanis",
+      "role": "Fighter",
+      "image": "zanis.jpg"
+    },
+    {
+      "name": "Zephys",
+      "role": "Fighter",
+      "image": "zephys.jpg"
+    },
+    {
+      "name": "Zill",
+      "role": "Assasin",
+      "image": "zill.jpg"
+    },
+    {
+      "name": "Zip",
+      "role": "Support",
+      "image": "zip.jpg"
+    },
+    {
+      "name": "Zuka",
+      "role": "Fighter",
+      "image": "zuka.jpg"
+    },
+    {
+      "name": "Azzen'Ka",
+      "role": "Mage",
+      "image": "azzenka.jpg"
+    },
+    {
+      "name": "Goverra",
+      "role": "Mage",
+      "image": "goverra.jpg"
+    }
+  ]
+  

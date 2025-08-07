@@ -1,12 +1,12 @@
+// src/pages/HomePage.jsx
+
 import React, { useState, useMemo } from "react";
-import { Bar, Pie, Line, Radar } from "react-chartjs-2";
+import { Bar, Pie, Line, Radar, Scatter } from "react-chartjs-2";
 import { motion, AnimatePresence } from "framer-motion";
 import ReactSelect from "react-select";
 import { useNavigate } from "react-router-dom";
-import { Scatter } from 'react-chartjs-2';
-import Chart from 'chart.js/auto';                      // สำหรับ matrix chart
-import { MatrixController, MatrixElement } from 'chartjs-chart-matrix';
-
+import Chart from "chart.js/auto"; // สำหรับ matrix chart
+import { MatrixController, MatrixElement } from "chartjs-chart-matrix";
 
 import {
   Chart as ChartJS,
@@ -41,7 +41,7 @@ ChartJS.register(
 
 const theme = {
   primary: "#7B1FA2",
-  secondary: "#00FFA3", 
+  secondary: "#00FFA3",
   accent: "#fae100",
   success: "#00c47a",
   danger: "#FF4B4B",
@@ -80,13 +80,21 @@ const icons = {
   menu: "☰",
 };
 
-function formatDateShort(str) {
-  if (!str) return "ไม่พบข้อมูล";
-  const s = String(str);
+function formatDateDisplay(dateStr) {
+  if (!dateStr) return "";
+  let s = String(dateStr).replace(".0", "");
+  if (s.length !== 8) return s;
+  return `${s.slice(0,2)}/${s.slice(2,4)}/${s.slice(4,8)}`;
+}
+
+function formatDateShort(raw) {
+  if (raw == null) return "ไม่พบข้อมูล";
+  let s = String(raw);
+  if (s.endsWith(".0")) s = s.slice(0, -2);
   if (s.length !== 8) return "ไม่พบข้อมูล";
-  const yyyy = s.slice(0, 4),
-    mm = s.slice(4, 6),
-    dd = s.slice(6, 8);
+  const yyyy = s.slice(0, 4);
+  const mm = s.slice(4, 6);
+  const dd = s.slice(6, 8);
   return `${dd}/${mm}/${yyyy.slice(2)}`;
 }
 
@@ -98,13 +106,18 @@ function formatTime(t) {
 function buildWeekMap(games) {
   const dates = [
     ...new Set(
-      games
-        .map((g) => g.Date)
-        .filter((d) => typeof d === "string" && d.length === 8)
+      games.map((g) => {
+        let d = String(g.Date);
+        if (d.endsWith(".0")) d = d.slice(0, -2);
+        return d;
+      })
+      .filter((d) => d.length === 8)
     ),
-  ].sort(); // YYYYMMDD ascending
+  ].sort();
   const weekMap = {};
-  dates.forEach((d, i) => (weekMap[d] = `W${i + 1}`));
+  dates.forEach((d, i) => {
+    weekMap[d] = `W${i + 1}`;
+  });
   return weekMap;
 }
 
@@ -134,13 +147,28 @@ const heroColors = [
 
 function hexToRgba(hex, alpha = 0.7) {
   const r = parseInt(hex.slice(1, 3), 16),
-    g = parseInt(hex.slice(3, 5), 16),
-    b = parseInt(hex.slice(5, 7), 16);
+        g = parseInt(hex.slice(3, 5), 16),
+        b = parseInt(hex.slice(5, 7), 16);
   return `rgba(${r}, ${g}, ${b}, ${alpha})`;
 }
 
-export default function HomePage({ games = [] }) {
+export default function HomePage({ games, comboStats, dropdownDates }) {
   const navigate = useNavigate();
+
+  // สไตล์ปุ่ม เริ่มดราฟ
+  const draftButtonStyle = {
+    background: theme.tealGradient,
+    color: "#fff",
+    border: "none",
+    borderRadius: 12,
+    padding: "12px 28px",
+    fontWeight: 700,
+    fontSize: "1rem",
+    boxShadow: "0 4px 14px rgba(0,196,130,0.4)",
+    cursor: "pointer",
+    transition: "transform 0.2s",
+    marginBottom: 20,
+  };
 
   // Filter States
   const [filter, setFilter] = useState({
@@ -178,21 +206,15 @@ export default function HomePage({ games = [] }) {
   const weekLabels = [...new Set(Object.values(weekMap))].sort(
     (a, b) => parseInt(a.slice(1)) - parseInt(b.slice(1))
   );
-
-  // —— ปรับตรงนี้: สร้าง dateOptions จากค่า Date แล้ว sort ตาม YYYYMMDD ——
-  const dateOptions = Array.from(
-    new Set(
-      validGames
-        .map((g) => g.Date)
-        .filter((d) => typeof d === "string" && d.length === 8)
-    )
-  )
-    .sort() // จากเก่า→ใหม่; ถ้าต้องการใหม่→เก่า ให้ .reverse()
-    .map((date) => ({
-      value: date,
-      label: formatDateShort(date),
+  const dateOptions = useMemo(() => {
+    const source = dropdownDates.length > 0
+      ? dropdownDates
+      : [...new Set(validGames.map((g) => g.Date).filter(Boolean))].sort();
+    return source.map((d) => ({
+      value: String(d).replace(".0", ""),
+      label: formatDateDisplay(d)
     }));
-
+  }, [dropdownDates, validGames]);
   const types = useMemo(
     () =>
       [
@@ -220,7 +242,7 @@ export default function HomePage({ games = [] }) {
       .map(([t]) => t);
   }, [validGames]);
 
-  // Filtered for table (sorted by Date desc)
+  // Filtered for table
   const filteredGames = useMemo(() => {
     let arr = validGames;
     if (filter.result !== "all") {
@@ -300,7 +322,7 @@ export default function HomePage({ games = [] }) {
     weekLabels,
   ]);
 
-  // Filtered for charts (unchanged)
+  // Filtered for charts
   const filteredGamesForCharts = useMemo(() => {
     let arr = validGames;
     if (filter.result !== "all") {
@@ -378,7 +400,7 @@ export default function HomePage({ games = [] }) {
     weekLabels,
   ]);
 
-  // --- CHARTS DATA ---
+  // --- CHARTS DATA & OPTIONS ---
 
   // 1. Pie Win/Lose
   const totalWin = filteredGamesForCharts.filter(
@@ -447,9 +469,8 @@ export default function HomePage({ games = [] }) {
     layout: { padding: 20 },
     animation: { animateScale: true, animateRotate: true },
   };
-  
 
-  // --- Dynamic week labels for Radar chart ---
+  // 2. Hero Performance by Week (Radar)
   const dynamicWeekLabels = useMemo(() => {
     const weeks = [
       ...new Set(filteredGamesForCharts.map((g) => weekMap[g.Date])),
@@ -459,7 +480,6 @@ export default function HomePage({ games = [] }) {
       .sort((a, b) => parseInt(a.slice(1)) - parseInt(b.slice(1)));
   }, [filteredGamesForCharts, weekMap]);
 
-  // 2. Hero Performance by Week (Radar)
   const heroRadarData = useMemo(() => {
     const topHeroes = heroTypes.slice(0, 5);
     return {
@@ -471,7 +491,8 @@ export default function HomePage({ games = [] }) {
           );
           const wins = gamesIn.filter(
             (g) =>
-              String(g.match || g["Match Win"] || "").toUpperCase() === "FS"
+              String(g.match || g["Match Win"] || "").toUpperCase() ===
+              "FS"
           ).length;
           return gamesIn.length
             ? Number(((wins / gamesIn.length) * 100).toFixed(1))
@@ -535,9 +556,7 @@ export default function HomePage({ games = [] }) {
         borderColor: "#bdb8d7",
         borderWidth: 1.5,
         callbacks: {
-          // แสดงหัวข้อเป็นชื่อ Hero
           title: (tooltipItems) => tooltipItems[0].dataset.label,
-          // แสดง WinRate พร้อมคำว่า "(WinRate)"
           label: (tooltipItem) => `WinRate: ${tooltipItem.raw}%`,
         },
       },
@@ -545,7 +564,6 @@ export default function HomePage({ games = [] }) {
     },
     layout: { padding: 12 },
   };
-  
 
   // 3. End Type Distribution (Pie)
   const endTypeMap = {};
@@ -611,7 +629,7 @@ export default function HomePage({ games = [] }) {
     ),
   ];
   const winByRival = {},
-    loseByRival = {};
+        loseByRival = {};
   rivals.forEach((r) => {
     winByRival[r] = filteredGamesForCharts.filter(
       (g) =>
@@ -779,7 +797,7 @@ export default function HomePage({ games = [] }) {
     validGames.length,
   ]);
 
-  // Styles
+  // Styles for table & inputs
   const chartTitleStyle = {
     color: "#8B27C6",
     fontWeight: 900,
@@ -891,6 +909,18 @@ export default function HomePage({ games = [] }) {
         position: "relative",
       }}
     >
+      {/* ปุ่ม เริ่มดราฟ */}
+      <div style={{ display: "flex", justifyContent: "center" }}>
+        <motion.button
+          style={draftButtonStyle}
+          whileHover={{ scale: 1.05 }}
+          whileTap={{ scale: 0.95 }}
+          onClick={() => navigate("/draft")}
+        >
+          เริ่มดราฟ
+        </motion.button>
+      </div>
+
       {/* Summary Cards */}
       <motion.div
         initial={{ opacity: 0 }}
@@ -1177,7 +1207,7 @@ export default function HomePage({ games = [] }) {
                   </div>
                   <div style={{ display: "flex", gap: 6 }}>
                     <select
-                      style={{ ...inputStyle, minWidth: 80, fontWeight: 700 }}
+                      style={{ ...inputStyle, minWidth: 100, fontWeight: 700 }}
                       value={selectedWeekRange.from}
                       onChange={(e) => {
                         setSelectedWeekRange((r) => ({ ...r, from: e.target.value }));
@@ -1185,14 +1215,12 @@ export default function HomePage({ games = [] }) {
                       }}
                     >
                       <option value="">จาก</option>
-                      {weekOptions.map((w) => (
-                        <option key={w.value} value={w.value}>
-                          {w.label}
-                        </option>
+                      {weekOptions.map(({ value, label }) => (
+                        <option key={value} value={value}>{label}</option>
                       ))}
                     </select>
                     <select
-                      style={{ ...inputStyle, minWidth: 80, fontWeight: 700 }}
+                      style={{ ...inputStyle, minWidth: 100, fontWeight: 700 }}
                       value={selectedWeekRange.to}
                       onChange={(e) => {
                         setSelectedWeekRange((r) => ({ ...r, to: e.target.value }));
@@ -1200,10 +1228,8 @@ export default function HomePage({ games = [] }) {
                       }}
                     >
                       <option value="">ถึง</option>
-                      {weekOptions.map((w) => (
-                        <option key={w.value} value={w.value}>
-                          {w.label}
-                        </option>
+                      {weekOptions.map(({ value, label }) => (
+                        <option key={value} value={value}>{label}</option>
                       ))}
                     </select>
                   </div>
@@ -1241,10 +1267,8 @@ export default function HomePage({ games = [] }) {
                       }}
                     >
                       <option value="">จาก</option>
-                      {dateOptions.map((d) => (
-                        <option key={d.value} value={d.value}>
-                          {d.label}
-                        </option>
+                      {dateOptions.map(({ value, label }) => (
+                        <option key={value} value={value}>{label}</option>
                       ))}
                     </select>
                     <select
@@ -1256,10 +1280,8 @@ export default function HomePage({ games = [] }) {
                       }}
                     >
                       <option value="">ถึง</option>
-                      {dateOptions.map((d) => (
-                        <option key={d.value} value={d.value}>
-                          {d.label}
-                        </option>
+                      {dateOptions.map(({ value, label }) => (
+                        <option key={value} value={value}>{label}</option>
                       ))}
                     </select>
                   </div>
@@ -1331,6 +1353,7 @@ export default function HomePage({ games = [] }) {
                 </div>
               </div>
               <hr style={{ margin: "8px 0", border: "none", borderTop: "1px dashed #e4d3ff" }} />
+
               {/* Multi-select competitor */}
               <div>
                 <div style={{ fontWeight: 700, color: "#7B1FA2", marginBottom: 6, fontSize: 15 }}>
@@ -1348,6 +1371,7 @@ export default function HomePage({ games = [] }) {
                 />
               </div>
               <hr style={{ margin: "8px 0", border: "none", borderTop: "1px dashed #e4d3ff" }} />
+
               {/* Multi-select Type */}
               <div>
                 <div style={{ fontWeight: 700, color: "#7B1FA2", marginBottom: 6, fontSize: 15 }}>
@@ -1392,9 +1416,7 @@ export default function HomePage({ games = [] }) {
                 >
                   <option value="all">ทุกคู่แข่ง</option>
                   {allCompetitors.map((c) => (
-                    <option key={c} value={c}>
-                      {c}
-                    </option>
+                    <option key={c} value={c}>{c}</option>
                   ))}
                 </select>
               </div>
@@ -1422,7 +1444,7 @@ export default function HomePage({ games = [] }) {
                       left: 12,
                       top: "50%",
                       transform: "translateY(-50%)",
-                      fontSize: "1.2rem", 
+                      fontSize: "1.2rem",
                       opacity: 0.6,
                     }}
                   >
@@ -1602,7 +1624,7 @@ export default function HomePage({ games = [] }) {
           style={{
             display: "flex",
             gap: 24,
-            justifyContent: "center", 
+            justifyContent: "center",
             marginBottom: 22,
           }}
           whileHover={{ scale: 1.02 }}
@@ -1704,7 +1726,7 @@ export default function HomePage({ games = [] }) {
               <tr>
                 <th style={thStyle}>สัปดาห์</th>
                 <th style={thStyle}>วันที่</th>
-                <th style={thStyle}>เวลา</th> 
+                <th style={thStyle}>เวลา</th>
                 <th style={thStyle}>คู่แข่ง</th>
                 <th style={thStyle}>Side & Match Win</th>
                 <th style={thStyle}>End Type</th>
@@ -1718,35 +1740,41 @@ export default function HomePage({ games = [] }) {
                     <td
                       colSpan={7}
                       style={{
-                        textAlign: "center", 
-                        padding: "22px", 
+                        textAlign: "center",
+                        padding: 22,
                         color: "#bbb",
                         fontStyle: "italic",
                       }}
                     >
-                      {search.trim() ? "No matches found for your search" : "ยังไม่มีข้อมูล"}
+                      {search.trim()
+                        ? "No matches found for your search"
+                        : "ยังไม่มีข้อมูล"}
                     </td>
                   </tr>
                 ) : (
                   filteredGames
                     .slice((page - 1) * rowsPerPage, page * rowsPerPage)
                     .map((g, idx) => {
-                      const week = weekMap[g.Date] || "-",
-                        dateStr = formatDateShort(g.Date),
-                        time = formatTime(g.time),
-                        comp = g.competitor || "ไม่พบข้อมูล",
-                        matchVal = g.match || g["Match Win"] || "",
-                        mr = getMatchResult(matchVal),
-                        endType = g.endType || g.EndType || "ไม่พบข้อมูล",
-                        type = g.type || g.Type || "ไม่พบข้อมูล",
-                        bg =
-                          matchBgColors[
-                            Math.abs(
-                              matchVal
-                                ? [...String(matchVal)].reduce((a, c) => a + c.charCodeAt(0), 0)
-                                : idx
-                            ) % matchBgColors.length
-                          ];
+                      const week = weekMap[g.Date] || "-";
+                      const dateStr = formatDateDisplay(g.Date);
+                      const time = formatTime(g.time);
+                      const comp = g.competitor || "ไม่พบข้อมูล";
+                      const matchVal = g.match || g["Match Win"] || "";
+                      const mr = getMatchResult(matchVal);
+                      const endType = g.endType || g.EndType || "ไม่พบข้อมูล";
+                      const type = g.type || g.Type || "ไม่พบข้อมูล";
+                      const bg =
+                        matchBgColors[
+                          Math.abs(
+                            matchVal
+                              ? [...String(matchVal)].reduce(
+                                  (a, c) => a + c.charCodeAt(0),
+                                  0
+                                )
+                              : idx
+                          ) % matchBgColors.length
+                        ];
+
                       return (
                         <motion.tr
                           key={`${g.Date}-${comp}-${idx}`}
@@ -1759,7 +1787,6 @@ export default function HomePage({ games = [] }) {
                             fontWeight: 500,
                             borderBottom: "1px solid #eee",
                             transition: "all 0.19s",
-                            ":hover": { background: "#f9f5ff", transform: "scale(1.002)" },
                           }}
                         >
                           <td style={tdStyle}>{week}</td>
@@ -1781,8 +1808,21 @@ export default function HomePage({ games = [] }) {
                             <div style={{ color: "#7B1FA2", fontWeight: 800 }}>
                               {g.side || g.Side || "ไม่พบข้อมูล"}
                             </div>
-                            <div style={{ color: mr.color, fontWeight: 900, fontSize: "1.06em" }}>
-                              <span style={{ fontSize: "1.1em", marginRight: 2 }}>{mr.icon}</span>
+                            <div
+                              style={{
+                                color: mr.color,
+                                fontWeight: 900,
+                                fontSize: "1.06em",
+                              }}
+                            >
+                              <span
+                                style={{
+                                  fontSize: "1.1em",
+                                  marginRight: 2,
+                                }}
+                              >
+                                {mr.icon}
+                              </span>
                               {mr.label}
                             </div>
                           </td>
@@ -1856,6 +1896,16 @@ export default function HomePage({ games = [] }) {
   );
 }
 
+// Helper to convert date formats
+function toYYYYMMDD(dateStr) {
+  if (!dateStr) return "";
+  let s = String(dateStr).replace(/[^\d]/g, "");
+  if (s.length !== 8) return s;
+  if (parseInt(s.slice(0,2)) > 31) return s;
+  return s.slice(4, 8) + s.slice(2, 4) + s.slice(0, 2);
+}
+
+// Summary Card component
 function SummaryCard({ icon, label, value, color, gradient }) {
   return (
     <motion.div
@@ -1902,6 +1952,7 @@ function SummaryCard({ icon, label, value, color, gradient }) {
   );
 }
 
+// Filter Tag component
 function FilterTag({ label, active, onClick, color, icon }) {
   return (
     <motion.button
@@ -1925,7 +1976,6 @@ function FilterTag({ label, active, onClick, color, icon }) {
         alignItems: "center",
         gap: 6,
         border: active ? `2px solid ${color}` : "2px solid transparent",
-    
       }}
     >
       {icon && <span style={{ fontSize: "1.1em", filter: active ? "brightness(1.2)" : undefined }}>{icon}</span>}
@@ -1934,6 +1984,7 @@ function FilterTag({ label, active, onClick, color, icon }) {
   );
 }
 
+// Pagination button component
 function PageBtn({ onClick, disabled, children, "aria-label": ariaLabel }) {
   return (
     <motion.button
@@ -1965,4 +2016,3 @@ function PageBtn({ onClick, disabled, children, "aria-label": ariaLabel }) {
     </motion.button>
   );
 }
-
