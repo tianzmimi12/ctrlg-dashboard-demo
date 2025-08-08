@@ -39,6 +39,17 @@ const ROLE_ICON = {
   Carry: '🏹',
 };
 
+// 1) กำหนดลำดับ role และสีกรอบตามนี้
+const ROLE_ORDER = ['Fighter', 'Mage', 'Support', 'Assasin', 'Tank', 'Carry'];
+const ROLE_BORDER_COLORS = {
+  Fighter: '#FF4500',  // OrangeRed
+  Mage:    '#1E90FF',  // DodgerBlue
+  Support: '#FFD700',  // Gold
+  Assasin: '#8B008B',  // DarkMagenta
+  Tank:    '#228B22',  // ForestGreen
+  Carry:   '#DA70D6',  // Orchid
+};
+
 const getImage = filename =>
   `${process.env.PUBLIC_URL}/heroimages/${filename}`;
 
@@ -88,8 +99,8 @@ export default function DraftPage({
   const navigate = useNavigate();
 
   // ============ Side & First-Pick Settings ===========
-  const [teamARole, setTeamARole]         = useState('red'); // 'red' or 'blue'
-  const [firstPickTeam, setFirstPickTeam] = useState('A');   // 'A' or 'B'
+  const [teamARole, setTeamARole]         = useState('red');
+  const [firstPickTeam, setFirstPickTeam] = useState('A');
 
   // ============ Opponent Stats ===========
   const [opponentStats, setOpponentStats]         = useState(null);
@@ -116,7 +127,7 @@ export default function DraftPage({
 
   const totalGames = boType ? BO_OPTIONS[boType] : 0;
 
-  // ============ Draft Sequence (dynamic by firstPickTeam) ============
+  // ============ Draft Sequence ============
   const draftSeq = useMemo(() => {
     const parts = firstPickTeam === 'A'
       ? [
@@ -133,10 +144,9 @@ export default function DraftPage({
         ];
     return parts;
   }, [firstPickTeam]);
-
   const totalSteps = draftSeq.length;
 
-  // ============ Panel Colors by Side ============
+  // ============ Panel Colors ============
   const panelColors = {
     A: teamARole === 'red' ? '#8b0000' : '#00008b',
     B: teamARole === 'red' ? '#00008b' : '#8b0000',
@@ -145,7 +155,6 @@ export default function DraftPage({
   // ============ Highlight Logic ============
   const currentStep = draftSeq[stepIndex] || {};
   const { team: highlightTeam, type: highlightType, count: highlightCount } = currentStep;
-
   const highlightStartIndex = useMemo(() => {
     return draftSeq
       .slice(0, stepIndex)
@@ -174,6 +183,16 @@ export default function DraftPage({
     }
     return list;
   }, [heroes, selectedRole, searchTerm]);
+
+  // 2) สร้าง sortedHeroList เรียงตาม ROLE_ORDER
+  const sortedHeroList = useMemo(() => {
+    return [...filteredHeroList].sort((a, b) => {
+      const idxA = ROLE_ORDER.indexOf(a.role);
+      const idxB = ROLE_ORDER.indexOf(b.role);
+      if (idxA !== idxB) return idxA - idxB;
+      return a.name.localeCompare(b.name);
+    });
+  }, [filteredHeroList]);
 
   // ============ Load Opponent Stats ============
   useEffect(() => {
@@ -272,7 +291,7 @@ export default function DraftPage({
     );
   }
 
-  // ============ Render History ============
+  // ============ History View ============
   function renderHistoryView() {
     const idx = viewingHistory;
     if (idx === null || idx >= completedGames.length) return null;
@@ -401,139 +420,164 @@ export default function DraftPage({
           i >= highlightStartIndex &&
           i < highlightStartIndex + highlightCount;
 
-        return (
-          <div
-            key={i}
-            style={{
-              width:76,
-              height:100,
-              margin:6,
-              border: `2.5px dashed ${isHighlight ? highlightColor : '#444'}`,
-              borderRadius:14,
-              background:'#21222b',
-            }}
-          />
-        );
+          return (
+                   <div
+                     key={i}
+                     style={{
+                       width:76,
+                       height:100,
+                       margin:6,
+                      border: `2.5px dashed ${isHighlight ? highlightColor : '#444'}`,
+                     borderRadius:14,
+                       background:'#21222b',
+                     }}
+                   />
+                 );
       }
     });
   }
 
-  // ============ Hero Grid ============
-  function renderHeroGrid() {
+  // ============ Legend ============
+  function renderLegend() {
     return (
       <div style={{
-        display:'grid',
-        gridTemplateColumns:'repeat(auto-fit,minmax(84px,1fr))',
-        gap:17,
-        justifyItems:'center',
+        position: 'absolute',
+        top: 16,
+        left: 16,
+        background: '#23263a',
+        padding: '8px 12px',
+        borderRadius: 8,
+        display: 'flex',
+        flexWrap: 'wrap',
+        gap: '8px',
+        zIndex: 10,
       }}>
-        {filteredHeroList.map(hero => {
-          const local    = localUsed.includes(hero.name);
-          const blocked  = highlightType==='pick'
-            && globalPicks[highlightTeam]?.includes(hero.name)
-            && !(boType==='BO7' && currentGame===totalGames);
-          const disabled = local || blocked || stepIndex >= totalSteps;
-
-          let highlightHero = false;
-          if (highlightType==='ban' && completedGames.length > 0) {
-            const oppSet = new Set(
-              completedGames
-                .flatMap(g => g.picks[highlightTeam==='A'?'B':'A'])
-                .map(h => h.name)
-            );
-            highlightHero = oppSet.has(hero.name);
-          }
-
-          return (
-            <motion.div
-              key={hero.name}
-              whileHover={!disabled ? {
-                scale:1.12,
-                boxShadow:'0 8px 24px #fff60080'
-              } : {}}
-              onClick={() => !disabled && handleHeroClick(hero)}
-              onMouseEnter={e => showHeroTooltip(hero.name, e)}
-            onMouseMove={e => setTooltipPos({ x:e.clientX, y:e.clientY })}
-              onMouseLeave={hideTooltip}
-              style={{
-                width:84,
-                height:108,
-                cursor: disabled ? 'not-allowed' : 'pointer',
-                opacity: disabled ? 0.23 : 1,
-                position:'relative',
-                overflow:'hidden',
-                borderRadius:16,
-                background:'#23242e',
-                boxShadow:'0 4px 30px #000a,0 2px 7px #ea1c2425',
-                border: highlightHero ? '3px solid #fff600' : '3px solid transparent',
-                transition:'box-shadow 0.2s,transform 0.15s,border 0.14s',
-              }}
-            >
-              <img
-                src={getImage(hero.image)}
-                alt={hero.name}
-                title={`${hero.name} (${hero.role})`}
-                style={{
-                  width:'100%',
-                  height:84,
-                  objectFit:'cover',
-                  borderRadius:'16px 16px 0 0',
-                }}
-              />
-              {highlightHero && (
-                <div style={{
-                  position:'absolute',
-                  left:0, top:0, right:0, bottom:0,
-                  background:'rgba(255,255,0,0.22)',
-                  zIndex:1,
-                  borderRadius:16,
-                }}/>
-              )}
-              <div style={{
-                width:'100%',
-                height:24,
-                background:'#191921',
-                fontSize:12,
-                borderRadius:'0 0 16px 16px',
-                textAlign:'center',
-                overflow:'hidden',
-                whiteSpace:'nowrap',
-                textOverflow:'ellipsis',
-                fontWeight:800,
-                color:'#fff',
-                borderTop:'1px solid #262535',
-                display:'flex',
-                alignItems:'center',
-                justifyContent:'center',
-              }}>{hero.name}</div>
-            </motion.div>
-          );
-        })}
+        {ROLE_ORDER.map(role => (
+          <div key={role} style={{
+            display: 'inline-flex',
+            alignItems: 'center',
+            color: '#fff',
+            fontSize: 12,
+          }}>
+            <span style={{
+              display: 'inline-block',
+              width: 12, height: 12,
+              background: ROLE_BORDER_COLORS[role],
+              marginRight: 4,
+              borderRadius: 2,
+            }} />
+            {role}
+          </div>
+        ))}
       </div>
     );
   }
 
-  // ============ Opponent Dropdown ============
-  function renderOpponentDropDown() {
+  // ============ Hero Grid with Line Breaks per Role ============
+  function renderHeroGrid() {
     return (
-      <select
-        value={opponentSheet}
-        onChange={e => setOpponentSheet(e.target.value)}
-        style={{
-          margin:'0 15px',
-          padding:'6px 16px',
-          borderRadius:12,
-          border:'none',
-          background:'#23242e',
-          color:'#fff',
-          fontWeight:700,
-          fontSize:16,
-        }}
-      >
-        {opponentSheetList.map(s => (
-          <option key={s} value={s}>{s}</option>
-        ))}
-      </select>
+      <div>
+        {ROLE_ORDER.map(role => {
+          const heroesOfRole = sortedHeroList.filter(h => h.role === role);
+          if (!heroesOfRole.length) return null;
+          return (
+            <div key={role} style={{ marginBottom: 24 }}>
+              <div style={{
+                marginBottom: 8,
+                fontSize: 16,
+                fontWeight: 700,
+                color: '#fff'
+              }}>
+                {ROLE_ICON[role]} {role}
+              </div>
+              <div style={{
+                display: 'grid',
+                gridTemplateColumns: 'repeat(auto-fit,minmax(84px,1fr))',
+                gap: 17,
+                justifyItems: 'center',
+              }}>
+                {heroesOfRole.map(hero => {
+                  const local    = localUsed.includes(hero.name);
+                  const blocked  = highlightType==='pick'
+                    && globalPicks[highlightTeam]?.includes(hero.name)
+                    && !(boType==='BO7' && currentGame===totalGames);
+                  const disabled = local || blocked || stepIndex >= totalSteps;
+
+                  let highlightHero = false;
+                  if (highlightType==='ban' && completedGames.length > 0) {
+                    const oppSet = new Set(
+                      completedGames
+                        .flatMap(g => g.picks[highlightTeam==='A'?'B':'A'])
+                        .map(h => h.name)
+                    );
+                    highlightHero = oppSet.has(hero.name);
+                  }
+
+                  const borderColor = highlightHero
+                    ? highlightColor
+                    : (ROLE_BORDER_COLORS[hero.role] || 'transparent');
+
+                  return (
+                    <motion.div
+                      key={hero.name}
+                      whileHover={!disabled ? {
+                        scale:1.12,
+                        boxShadow:'0 8px 24px #fff60080'
+                      } : {}}
+                      onClick={() => !disabled && handleHeroClick(hero)}
+                      onMouseEnter={e => showHeroTooltip(hero.name, e)}
+                      onMouseMove={e => setTooltipPos({ x:e.clientX, y:e.clientY })}
+                      onMouseLeave={hideTooltip}
+                      style={{
+                        width:84,
+                        height:108,
+                        cursor: disabled ? 'not-allowed' : 'pointer',
+                        opacity: disabled ? 0.23 : 1,
+                        position:'relative',
+                        overflow:'hidden',
+                        borderRadius:16,
+                        background:'#23242e',
+                        boxShadow:'0 4px 30px #000a,0 2px 7px #ea1c2425',
+                        border: `3px solid ${borderColor}`,
+                        transition:'box-shadow 0.2s,transform 0.15s,border 0.14s',
+                      }}
+                    >
+                      <img
+                        src={getImage(hero.image)}
+                        alt={hero.name}
+                        title={`${hero.name} (${hero.role})`}
+                        style={{
+                          width:'100%',
+                          height:84,
+                          objectFit:'cover',
+                          borderRadius:'16px 16px 0 0',
+                        }}
+                      />
+                      <div style={{
+                        width:'100%',
+                        height:24,
+                        background:'#191921',
+                        fontSize:12,
+                        borderRadius:'0 0 16px 16px',
+                        textAlign:'center',
+                        overflow:'hidden',
+                        whiteSpace:'nowrap',
+                        textOverflow:'ellipsis',
+                        fontWeight:800,
+                        color:'#fff',
+                        borderTop:'1px solid #262535',
+                        display:'flex',
+                        alignItems:'center',
+                        justifyContent:'center',
+                      }}>{hero.name}</div>
+                    </motion.div>
+                  );
+                })}
+              </div>
+            </div>
+          );
+        })}
+      </div>
     );
   }
 
@@ -642,7 +686,7 @@ export default function DraftPage({
     }
   }, [stepIndex]);
 
-  // ============ Initial/BO Selection Screen ============
+  // ============ Initial / BO Selection ============
   if (!comboStats || !excelData) {
     return (
       <div style={{
@@ -717,7 +761,7 @@ export default function DraftPage({
     ? renderHistoryView()
     : (
       <>
-        {/* ——— Control Bar ——— */}
+        {/* Control Bar */}
         <div style={{
           width: '100%',
           padding: '12px 24px',
@@ -727,7 +771,6 @@ export default function DraftPage({
           justifyContent: 'center',
           gap: '40px',
         }}>
-          {/* Team A คือ Red/Blue */}
           <div>
             <strong style={{ color:'#fff', marginRight:8 }}>Team A คือ</strong>
             <label style={{ marginRight:12, color:'#fff' }}>
@@ -747,8 +790,6 @@ export default function DraftPage({
               /> Blue
             </label>
           </div>
-
-          {/* ฝั่งเลือกก่อน */}
           <div>
             <strong style={{ color:'#fff', marginRight:8 }}>ฝั่งเลือกก่อน</strong>
             <label style={{ marginRight:12, color:'#fff' }}>
@@ -776,7 +817,7 @@ export default function DraftPage({
           background:'#161720',
           position:'relative'
         }}>
-          {/* Team A */}
+          {/* Team A Panel */}
           <div style={{
             width:170,
             background:panelColors.A,
@@ -800,19 +841,39 @@ export default function DraftPage({
 
           {/* Hero Pool */}
           <div style={{
-            flex:1,
-            overflowY:'auto',
-            padding:40,
-            background:'#23263a'
+            flex: 1,
+            position: 'relative',
+            overflowY: 'auto',
+            padding: 40,
+            background: '#23263a'
           }}>
-            <div style={{
-              margin:'10px 0 25px',
-              textAlign:'right'
-            }}>
+            {/* Legend */}
+            {renderLegend()}
+
+            {/* Opponent Dropdown */}
+            <div style={{ margin:'10px 0 25px', textAlign:'right' }}>
               <span style={{ color:'#fff', fontWeight:700 }}>ฝั่งตรงข้าม:</span>
-              {renderOpponentDropDown()}
+              <select
+                value={opponentSheet}
+                onChange={e => setOpponentSheet(e.target.value)}
+                style={{
+                  margin:'0 15px',
+                  padding:'6px 16px',
+                  borderRadius:12,
+                  border:'none',
+                  background:'#23242e',
+                  color:'#fff',
+                  fontWeight:700,
+                  fontSize:16,
+                }}
+              >
+                {opponentSheetList.map(s => (
+                  <option key={s} value={s}>{s}</option>
+                ))}
+              </select>
             </div>
 
+            {/* Controls: Back / Title / Undo */}
             <div style={{
               display:'flex',
               alignItems:'center',
@@ -846,6 +907,7 @@ export default function DraftPage({
               }}>แก้ไข</button>
             </div>
 
+            {/* Role Filters & Search */}
             <div style={{
               display:'flex',
               gap:10,
@@ -882,6 +944,7 @@ export default function DraftPage({
               />
             </div>
 
+            {/* Alert */}
             {alertMsg && (
               <div style={{
                 background:'#ea1c24',
@@ -903,6 +966,7 @@ export default function DraftPage({
               </div>
             )}
 
+            {/* History Buttons */}
             {completedGames.length > 0 && (
               <div style={{ marginBottom:15 }}>
                 <strong style={{ color:'#ffd600' }}>History:</strong>
@@ -921,8 +985,10 @@ export default function DraftPage({
               </div>
             )}
 
+            {/* Hero Grid */}
             {renderHeroGrid()}
 
+            {/* Next Game Button */}
             {stepIndex >= totalSteps && currentGame < totalGames && (
               <div style={{ textAlign:'center', marginTop:34 }}>
                 <button onClick={nextGame} style={{
@@ -939,7 +1005,7 @@ export default function DraftPage({
             )}
           </div>
 
-          {/* Team B */}
+          {/* Team B Panel */}
           <div style={{
             width:170,
             background:panelColors.B,
