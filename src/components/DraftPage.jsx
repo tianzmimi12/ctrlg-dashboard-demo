@@ -1,4 +1,5 @@
 // src/components/DraftPage.jsx
+// src/components/DraftPage.jsx
 
 import React, { useState, useMemo, useEffect, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
@@ -173,13 +174,19 @@ export default function DraftPage({
 
   const totalGames = boType ? BO_OPTIONS[boType] : 0;
 
-  // Drag-to-select
+  // Drag-to-select (mouse + touch)
   const [isDragging, setIsDragging] = useState(false);
   const [dragConsumed, setDragConsumed] = useState(false);
+
   useEffect(() => {
     const onUp = () => { setIsDragging(false); setDragConsumed(false); };
+    const onTouchEnd = () => { setIsDragging(false); setDragConsumed(false); };
     window.addEventListener('mouseup', onUp);
-    return () => window.removeEventListener('mouseup', onUp);
+    window.addEventListener('touchend', onTouchEnd);
+    return () => {
+      window.removeEventListener('mouseup', onUp);
+      window.removeEventListener('touchend', onTouchEnd);
+    };
   }, []);
 
   // ============ Draft Sequence ============
@@ -635,11 +642,8 @@ export default function DraftPage({
 
   // เลือกผ่าน pointer (ลาก/คลิกใช้ร่วมกัน) + เช็คแบนชนทั้งเกมนี้และเกมก่อนหน้า
   function selectHeroViaPointer(hero) {
-    if (selectingPre) {
-      handlePreChoose(selectingPre.team, selectingPre.i, hero);
-      setSelectingPre(null);
-      return;
-    }
+    // ❗ อยู่โหมด pre-choose ไม่ให้เลือกจริง (กันไปแบน/พิคโดยไม่ตั้งใจจาก drag)
+    if (selectingPre) return;
 
     if (currentStep?.type === 'ban') {
       const t = currentStep.team;
@@ -675,6 +679,30 @@ export default function DraftPage({
   // ============ Hero Grid ============
   function renderHeroGrid() {
     const isSelectingPre = !!selectingPre;
+
+    // helpers สำหรับ touch
+    const handleTouchStart = (e, hero, disabled) => {
+      if (disabled || isSelectingPre) return;
+      setIsDragging(true);
+      setDragConsumed(false);
+      // กันหน้า scroll ระหว่างลาก
+      if (e.cancelable) e.preventDefault();
+      // เลือกทันทีที่เริ่มแตะ (เหมือน mousedown)
+      if (!dragConsumed) {
+        selectHeroViaPointer(hero);
+        setDragConsumed(true);
+      }
+    };
+
+    const handleTouchMove = (e) => {
+      if (e.cancelable) e.preventDefault();
+      // เราใช้ onTouchStart + onTouchEnd เป็นหลัก
+    };
+
+    const handleTouchEnd = () => {
+      setIsDragging(false);
+      setDragConsumed(false);
+    };
 
     return (
       <div>
@@ -748,8 +776,13 @@ export default function DraftPage({
                         scale:1.12,
                         boxShadow:'0 8px 24px #fff60080'
                       } : {}}
+                      // === Mouse ===
                       onMouseDown={() => {
                         if (disabled) return;
+                        if (isSelectingPre) {
+                          // โหมด pre-choose: ไม่เริ่ม drag และไม่ยิงเลือกจาก drag
+                          return;
+                        }
                         setIsDragging(true);
                         if (!dragConsumed) {
                           selectHeroViaPointer(hero);
@@ -757,7 +790,8 @@ export default function DraftPage({
                         }
                       }}
                       onMouseEnter={e => {
-                        if (isDragging && !dragConsumed && !disabled) {
+                        if (isDragging && !dragConsumed && !disabled && !isSelectingPre) {
+                          // drag-to-select เฉพาะตอนที่ไม่ได้ pre-choose
                           selectHeroViaPointer(hero);
                           setDragConsumed(true);
                         }
@@ -767,14 +801,21 @@ export default function DraftPage({
                       onMouseMove={e => setTooltipPos({ x:e.clientX, y:e.clientY })}
                       onMouseUp={() => { setIsDragging(false); setDragConsumed(false); }}
                       onMouseLeave={hideTooltip}
-                      onClick={() => {
+                      onClick={(e) => {
+                        if (disabled) return;
                         if (isSelectingPre && selectingPre) {
+                          // ทำ pre-choose ที่นี่เท่านั้น แล้วจบ
                           handlePreChoose(selectingPre.team, selectingPre.i, hero);
                           setSelectingPre(null);
-                        } else if (!disabled) {
-                          handleHeroClick(hero);
+                          e.stopPropagation?.();
+                          return;
                         }
+                        handleHeroClick(hero);
                       }}
+                      // === Touch (mobile/tablet) ===
+                      onTouchStart={(e) => handleTouchStart(e, hero, disabled)}
+                      onTouchMove={handleTouchMove}
+                      onTouchEnd={handleTouchEnd}
                       style={{
                         width:84, height:108,
                         cursor: disabled && !isPreSelecting ? 'not-allowed' : 'pointer',
@@ -850,8 +891,7 @@ export default function DraftPage({
   // ============ Handlers ============
   function handleHeroClick(hero) {
     if (selectingPre) {
-      handlePreChoose(selectingPre.team, selectingPre.i, hero);
-      setSelectingPre(null);
+      // ปล่อยให้ onClick ของการ์ดเป็นคนจัดการ pre-choose (เราไม่ทำซ้ำที่นี่)
       return;
     }
 
@@ -1188,7 +1228,8 @@ export default function DraftPage({
             {/* Next Game Button */}
             {stepIndex >= totalSteps && currentGame < totalGames && (
               <div style={{ textAlign:'center', marginTop:34 }}>
-                <button onClick={nextGame} style={{
+                <button onClick={nextGame
+} style={{
                   padding:'10px 30px', borderRadius:17, border:'none',
                   background:'#57eae7', color:'#23232a', fontWeight:800, cursor:'pointer', fontSize:17,
                 }}>Next Game &gt;</button>
