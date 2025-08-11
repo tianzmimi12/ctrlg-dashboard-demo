@@ -298,7 +298,7 @@ export function parseComboStatsFromExcel(file, setComboStats, setDropdowns) {
     const combo2MidRoam = [];
     for (let i = 35; i < sheetArr.length; i++) {
       const row = sheetArr[i] || [];
-      const h1  = row[9], h2 = row[10];
+      const h1  = row[8], h2 = row[9];
       if (h1 && h2) {
         const total = Number(row[11]) || 0;
         const win   = Number(row[12]) || 0;
@@ -314,7 +314,7 @@ export function parseComboStatsFromExcel(file, setComboStats, setDropdowns) {
     const combo2DslJug = [];
     for (let i = 35; i < sheetArr.length; i++) {
       const row = sheetArr[i] || [];
-      const h1  = row[39], h2 = row[40];
+      const h1  = row[38], h2 = row[39];
       if (h1 && h2) {
         const total = Number(row[41]) || 0;
         const win   = Number(row[42]) || 0;
@@ -330,7 +330,7 @@ export function parseComboStatsFromExcel(file, setComboStats, setDropdowns) {
     const combo3 = [];
     for (let i = 35; i < sheetArr.length; i++) {
       const row = sheetArr[i] || [];
-      const h1  = row[24], h2 = row[25], h3 = row[26];
+      const h1  = row[23], h2 = row[24], h3 = row[25];
       if (h1 && h2 && h3) {
         const total = Number(row[27]) || 0;
         const win   = Number(row[28]) || 0;
