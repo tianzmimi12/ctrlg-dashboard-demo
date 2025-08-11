@@ -1,10 +1,36 @@
 // src/components/DraftPage.jsx
 
-import React, { useState, useMemo, useEffect } from 'react';
+import React, { useState, useMemo, useEffect, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import heroList from '../data/heroList.json';
 import { parseComboStatsSheet } from '../utils/excelParser';
+
+const COUNTER_MAP = {
+  "Hayate":     ["Elandorr"],
+  "Capheny":    ["Mina", "Stuart", "Valhein"],
+  "Stuart":     ["Tachi"],
+  "Marja":      ["Biron", "Qi", "Elandorr", "Hayate"],
+  "Qi":         ["Omen", "Florentino", "Toro"],
+  "Murad":      ["Omen", "Qi", "Aleister"],
+  "Florentino": ["Marja"],
+  "Raz":        ["Goverra", "Tulen"],
+  "Liliana":    ["Mganga"],
+  "Lorion":     ["Mganga", "Heino"],
+  "Rouie":      ["TeeMee", "Lorion", "Raz"],
+  "Elandorr":   ["Mina", "Murad", "Krixi"],
+  "Keera":      ["Elandorr", "Bolt Baron", "Omen"],
+  "Aoi":        ["Qi", "Stuart"],
+  "Billow":     ["Qi", "Bolt Baron", "Elandorr"],
+  "Tachi":      ["Elandorr"],
+  "Enzo":       ["Krizzix", "Toro", "Arduin"],
+  "Dolia":      ["Enzo", "Billow", "Ming"],
+  "Ming":       ["Enzo", "Krizzix", "Grakk"],
+  "Bolt Baron": ["Tachi", "Qi"],
+  "Nakroth":    ["Stuart", "Billow"],
+  "Biron":      ["Florentino", "Maloch"],
+  "Skud":       ["Florentino", "Maloch"]
+};
 
 const banSeq1 = [
   { team: 'A', count: 1 }, { team: 'B', count: 1 },
@@ -33,22 +59,25 @@ const ROLE_ICON = {
   ทั้งหมด: '🌐',
   Fighter: '⚔️',
   Mage: '🪄',
-  Assasin: '🗡️',
+  Assasin: '🗡️', // ให้ตรงกับ heroList.json
   Support: '💖',
   Tank: '🛡️',
   Carry: '🏹',
 };
-
-// 1) กำหนดลำดับ role และสีกรอบตามนี้
-const ROLE_ORDER = ['Fighter', 'Mage', 'Support', 'Assasin', 'Tank', 'Carry'];
+const ROLE_ORDER = ['Carry', 'Assasin', 'Mage', 'Fighter', 'Tank', 'Support'];
 const ROLE_BORDER_COLORS = {
-  Fighter: '#FF4500',  // OrangeRed
-  Mage:    '#1E90FF',  // DodgerBlue
-  Support: '#FFD700',  // Gold
-  Assasin: '#8B008B',  // DarkMagenta
-  Tank:    '#228B22',  // ForestGreen
-  Carry:   '#DA70D6',  // Orchid
+  Fighter: '#FF4500',
+  Mage:    '#1E90FF',
+  Support: '#FFD700',
+  Assasin: '#8B008B',
+  Tank:    '#228B22',
+  Carry:   '#DA70D6',
 };
+
+// === สีทีม/ประเภทแอ็กชันบนการ์ด ===
+const TEAM_TAG     = { A: 'A', B: 'B' };
+const ACTION_COLOR = { pick: '#57eae7', ban: '#ea1c24' };
+const TEAM_COLOR   = { A: '#ff6b6b', B: '#6ba3ff' };
 
 const getImage = filename =>
   `${process.env.PUBLIC_URL}/heroimages/${filename}`;
@@ -60,8 +89,20 @@ function normalizePosition(pos) {
   if (['mid','fsmid'].includes(s))                return 'MID';
   if (['adl','fsadl'].includes(s))                return 'ADL';
   if (['jungle','fsjungle','jg'].includes(s))     return 'JUG';
-  if (['roaming','fsroaming','roam'].includes(s))  return 'SUP';
+  if (['roaming','fsroaming','roam','support','sup','fsroam'].includes(s))  return 'SUP';
   return pos.toString().toUpperCase();
+}
+
+// normalize role ให้ตรง heroList และกันสะกดหลากหลาย
+function normalizeRole(role) {
+  const s = (role || '').toString().trim().toLowerCase();
+  if (['assassin','assasin'].includes(s)) return 'Assasin';
+  if (s === 'marksman' || s === 'carry') return 'Carry';
+  if (s === 'tank') return 'Tank';
+  if (s === 'fighter') return 'Fighter';
+  if (s === 'mage') return 'Mage';
+  if (s === 'support') return 'Support';
+  return role || 'Unknown';
 }
 
 function getHeroStatsFromGames(heroName, games) {
@@ -97,8 +138,13 @@ export default function DraftPage({
   heroes = heroList,
 }) {
   const navigate = useNavigate();
+  const heroRefs = useRef({}); // ใช้ highlight+scroll suggestBan
 
-  // ============ Side & First-Pick Settings ===========
+  // ============ Pre-choose ===========
+  const [preChoose, setPreChoose] = useState({ A: [null, null, null, null, null], B: [null, null, null, null, null] });
+  const [selectingPre, setSelectingPre] = useState(null); // { team:'A'|'B', i:0-4 } | null
+
+  // ============ Side & First-Pick ===========
   const [teamARole, setTeamARole]         = useState('red');
   const [firstPickTeam, setFirstPickTeam] = useState('A');
 
@@ -126,6 +172,15 @@ export default function DraftPage({
   const [searchTerm, setSearchTerm]     = useState('');
 
   const totalGames = boType ? BO_OPTIONS[boType] : 0;
+
+  // Drag-to-select
+  const [isDragging, setIsDragging] = useState(false);
+  const [dragConsumed, setDragConsumed] = useState(false);
+  useEffect(() => {
+    const onUp = () => { setIsDragging(false); setDragConsumed(false); };
+    window.addEventListener('mouseup', onUp);
+    return () => window.removeEventListener('mouseup', onUp);
+  }, []);
 
   // ============ Draft Sequence ============
   const draftSeq = useMemo(() => {
@@ -169,14 +224,14 @@ export default function DraftPage({
   );
 
   const roleList = useMemo(
-    () => ['ทั้งหมด', ...new Set(heroes.map(h => h.role))],
+    () => ['ทั้งหมด', ...ROLE_ORDER.filter(r => heroes.some(h => normalizeRole(h.role) === r))],
     [heroes]
   );
 
   const filteredHeroList = useMemo(() => {
     let list = selectedRole === 'ทั้งหมด'
       ? heroes
-      : heroes.filter(h => h.role === selectedRole);
+      : heroes.filter(h => normalizeRole(h.role) === selectedRole);
     if (searchTerm.trim()) {
       const term = searchTerm.trim().toLowerCase();
       list = list.filter(h => h.name.toLowerCase().includes(term));
@@ -184,15 +239,27 @@ export default function DraftPage({
     return list;
   }, [heroes, selectedRole, searchTerm]);
 
-  // 2) สร้าง sortedHeroList เรียงตาม ROLE_ORDER
   const sortedHeroList = useMemo(() => {
-    return [...filteredHeroList].sort((a, b) => {
-      const idxA = ROLE_ORDER.indexOf(a.role);
-      const idxB = ROLE_ORDER.indexOf(b.role);
-      if (idxA !== idxB) return idxA - idxB;
-      return a.name.localeCompare(b.name);
+    let arr = [];
+    ROLE_ORDER.forEach(role => {
+      arr = arr.concat(filteredHeroList.filter(h => normalizeRole(h.role) === role));
     });
+    return arr;
   }, [filteredHeroList]);
+
+  // ใคร pick/ban อะไรแล้วในเกมนี้ (เพื่อแปะป้ายบนการ์ด)
+  const pickOwner = useMemo(() => {
+    const m = new Map();
+    picks.A.forEach(h => m.set(h.name, 'A'));
+    picks.B.forEach(h => m.set(h.name, 'B'));
+    return m;
+  }, [picks]);
+  const banOwner = useMemo(() => {
+    const m = new Map();
+    bans.A.forEach(h => m.set(h.name, 'A'));
+    bans.B.forEach(h => m.set(h.name, 'B'));
+    return m;
+  }, [bans]);
 
   // ============ Load Opponent Stats ============
   useEffect(() => {
@@ -225,21 +292,25 @@ export default function DraftPage({
   function showHeroTooltip(heroName, e) {
     if (!heroName) return;
     const ourList = getHeroStatsFromGames(heroName, games || []);
-    const oppList = (opponentStats?.oneHero || [])
-      .filter(h => h.hero.trim().toLowerCase() === heroName.trim().toLowerCase())
+
+    const all = (opponentStats?.oneHero || []).filter(Boolean);
+    const base = all.reduce((s,x)=> s + (x.total || 0), 0) || 1; // กันหาร 0
+    const key  = heroName.trim().toLowerCase();
+
+    const oppList = all
+      .filter(h => (h.hero || '').trim().toLowerCase() === key)
       .map(h => ({
         position:  h.position,
-        total:     h.total,
-        win:       h.win,
-        pickRate:  ((h.total / ((opponentStats.oneHero || []).reduce((s,x)=>s+(x.total||0),0))) * 100).toFixed(1),
-        winRate:   String(h.winrate),
+        total:     h.total || 0,
+        win:       h.win || 0,
+        pickRate:  ((+(h.total || 0) / base) * 100).toFixed(1),
+        winRate:   String(h.winrate ?? '0.0'),
       }));
+
     setTooltipPos({ x: e.clientX, y: e.clientY });
     setTooltip({ heroName, ourList, oppList });
   }
-  function hideTooltip() {
-    setTooltip(null);
-  }
+  function hideTooltip() { setTooltip(null); }
   function renderTooltip() {
     if (!tooltip) return null;
     return (
@@ -257,12 +328,9 @@ export default function DraftPage({
         pointerEvents:'none',
         boxShadow:'0 8px 24px #000a'
       }}>
-        <div style={{
-          fontWeight:900,
-          fontSize:16,
-          marginBottom:6,
-          color:'#fff600'
-        }}>{tooltip.heroName}</div>
+        <div style={{ fontWeight:900, fontSize:16, marginBottom:6, color:'#fff600' }}>
+          {tooltip.heroName}
+        </div>
         <div style={{ marginBottom:6 }}>
           <b>ฝั่งเรา</b>:<br/>
           {tooltip.ourList.length > 0
@@ -291,32 +359,77 @@ export default function DraftPage({
     );
   }
 
+  // ============ Pre-choose ฟังก์ชัน =============
+  function handlePreChoose(team, pickIdx, hero) {
+    setPreChoose(prev => {
+      const arr = [...prev[team]];
+      const dup = arr.findIndex(h => h?.name === hero.name);
+      if (dup !== -1) arr[dup] = null;
+      arr[pickIdx] = hero;
+      return { ...prev, [team]: arr };
+    });
+  }
+  function handleClearPreChoose(team, pickIdx) {
+    setPreChoose(prev => {
+      const arr = [...prev[team]];
+      arr[pickIdx] = null;
+      return { ...prev, [team]: arr };
+    });
+  }
+
+  // ============ ฟังก์ชันหา suggested ban ==========
+  function getSuggestedBan(preChooseState, bansState, picksState) {
+    const used = new Set([...bansState.A, ...bansState.B, ...picksState.A, ...picksState.B].map(h => h?.name));
+    const validHero = new Set(heroes.map(h => h.name));
+    const nameMap = new Map(heroes.map(h => [h.name.toLowerCase(), h.name]));
+    const out = [];
+    Object.values(preChooseState).flat().forEach(hero => {
+      if (!hero) return;
+      const counters = COUNTER_MAP[hero.name] || [];
+      counters.forEach(c => {
+        const canonical = nameMap.get(c.toLowerCase());
+        if (canonical && validHero.has(canonical) && !used.has(canonical) && !out.includes(canonical)) out.push(canonical);
+      });
+    });
+    return out;
+  }
+
+  const suggestBan = useMemo(() => {
+    return getSuggestedBan(preChoose, bans, picks);
+  }, [preChoose, bans, picks, heroes]);
+
+  useEffect(() => {
+    if (selectingPre && suggestBan.length > 0) {
+      const firstHero = suggestBan[0];
+      const node = heroRefs.current[firstHero];
+      if (node && node.scrollIntoView) {
+        node.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      }
+    }
+  }, [selectingPre, suggestBan]);
+
+  // ============ Cleanup heroRefs เมื่อ hero list เปลี่ยน ============
+  useEffect(() => {
+    const keys = new Set(heroes.map(h => h.name));
+    Object.keys(heroRefs.current).forEach(k => {
+      if (!keys.has(k)) delete heroRefs.current[k];
+    });
+  }, [heroes]);
+
   // ============ History View ============
   function renderHistoryView() {
     const idx = viewingHistory;
     if (idx === null || idx >= completedGames.length) return null;
     const { bans: hBans, picks: hPicks } = completedGames[idx];
     return (
-      <div style={{
-        display:'flex',
-        height:'100vh',
-        background:'#161720',
-        position:'relative'
-      }}>
+      <div style={{ display:'flex', height:'100vh', background:'#161720', position:'relative' }}>
         {/* Team A */}
         <div style={{
-          width:170,
-          background:panelColors.A,
-          padding:17,
-          boxShadow:'2px 0 18px #000d',
+          width:170, background:panelColors.A, padding:17, boxShadow:'2px 0 18px #000d',
           borderRadius:'0 28px 28px 0',
-          border: highlightTeam==='A'
-            ? `3px solid ${highlightColor}`
-            : '3px solid transparent',
+          border: `3px solid ${highlightTeam==='A' ? highlightColor : 'transparent'}`
         }}>
-          <h4 style={{ color:'#fff', textAlign:'center' }}>
-            Team A – Game {idx+1}
-          </h4>
+          <h4 style={{ color:'#fff', textAlign:'center' }}>Team A – Game {idx+1}</h4>
           <strong style={{ color:'#f9b041' }}>Bans</strong>
           <div style={{ display:'flex', flexWrap:'wrap', justifyContent:'center' }}>
             {renderSlots(hBans.A, 4, 'A', 'ban')}
@@ -329,18 +442,11 @@ export default function DraftPage({
         <div style={{ flex:1 }} />
         {/* Team B */}
         <div style={{
-          width:170,
-          background:panelColors.B,
-          padding:17,
-          boxShadow:'-2px 0 18px #000d',
+          width:170, background:panelColors.B, padding:17, boxShadow:'-2px 0 18px #000d',
           borderRadius:'28px 0 0 28px',
-          border: highlightTeam==='B'
-            ? `3px solid ${highlightColor}`
-            : '3px solid transparent',
+          border: `3px solid ${highlightTeam==='B' ? highlightColor : 'transparent'}`
         }}>
-          <h4 style={{ color:'#fff', textAlign:'center' }}>
-            Team B – Game {idx+1}
-          </h4>
+          <h4 style={{ color:'#fff', textAlign:'center' }}>Team B – Game {idx+1}</h4>
           <strong style={{ color:'#f9b041' }}>Bans</strong>
           <div style={{ display:'flex', flexWrap:'wrap', justifyContent:'center' }}>
             {renderSlots(hBans.B, 4, 'B', 'ban')}
@@ -353,39 +459,120 @@ export default function DraftPage({
         <button
           onClick={() => setViewingHistory(null)}
           style={{
-            position:'absolute',
-            top:20,
-            left:20,
-            padding:'8px 16px',
-            background:'#fff600',
-            color:'#23232a',
-            border:'none',
-            borderRadius:12,
-            cursor:'pointer',
-            fontWeight:700,
+            position:'absolute', top:20, left:20, padding:'8px 16px',
+            background:'#fff600', color:'#23232a', border:'none', borderRadius:12, cursor:'pointer', fontWeight:700
           }}
         >← กลับ</button>
       </div>
     );
   }
 
-  // ============ Slot Renderer ============
+  // ============ Slot Renderer (เพิ่ม Pre-choose pick) ============
   function renderSlots(arr, max, team, type) {
     return Array.from({ length: max }).map((_, i) => {
+      // PICK
+      if (type === 'pick') {
+        const hero = arr[i];
+        const preHero = preChoose[team][i];
+
+        if (hero) {
+          return (
+            <div
+              key={i}
+              style={{
+                margin:6, textAlign:'center', width:76, height:100,
+                display:'flex', flexDirection:'column', alignItems:'center', justifyContent:'center',
+              }}
+              onMouseEnter={e => showHeroTooltip(hero.name, e)}
+              onMouseMove={e => setTooltipPos({ x:e.clientX, y:e.clientY })}
+              onMouseLeave={hideTooltip}
+            >
+              <img
+                src={getImage(hero.image)}
+                alt={hero.name}
+                title={hero.name}
+                style={{ width:72, height:72, borderRadius:14, boxShadow:'0 2px 12px #000a' }}
+              />
+              <div style={{
+                maxWidth:72, fontSize:13, whiteSpace:'nowrap', overflow:'hidden', textOverflow:'ellipsis',
+                color:'#fff', fontWeight:700,
+              }}>{hero.name}</div>
+            </div>
+          );
+        } else if (preHero) {
+          return (
+            <div
+              key={i}
+              style={{
+                margin:6, textAlign:'center', width:76, height:100,
+                display:'flex', flexDirection:'column', alignItems:'center', justifyContent:'center',
+                background: '#23242e', border: '2.5px dashed #FFD700', borderRadius: 14, position: 'relative'
+              }}
+              title="Pre-choose"
+              onMouseEnter={e => showHeroTooltip(preHero.name, e)}
+              onMouseMove={e => setTooltipPos({ x:e.clientX, y:e.clientY })}
+              onMouseLeave={hideTooltip}
+            >
+              <img
+                src={getImage(preHero.image)}
+                alt={preHero.name}
+                title={preHero.name}
+                style={{ width:72, height:72, borderRadius:14, boxShadow:'0 2px 12px #000a', opacity: 0.54, filter: 'grayscale(70%)' }}
+              />
+              <div style={{
+                maxWidth:72, fontSize:13, whiteSpace:'nowrap', overflow:'hidden', textOverflow:'ellipsis',
+                color:'#FFD700', fontWeight:900,
+              }}>
+                {preHero.name} <span style={{fontSize:11}}>[PRE]</span>
+              </div>
+              <button
+                onClick={() => handleClearPreChoose(team, i)}
+                style={{
+                  position:'absolute', top:3, right:5, background:'transparent', border:'none',
+                  color:'#FFD700', fontSize:16, cursor:'pointer'
+                }}
+                title="ลบ pre-choose"
+              >×</button>
+            </div>
+          );
+        } else {
+          return (
+            <div
+              key={i}
+              style={{
+                width:76, height:100, margin:6,
+                border: `2.5px dashed ${
+                  team === highlightTeam && type === highlightType &&
+                  i >= highlightStartIndex && i < highlightStartIndex + highlightCount ? highlightColor : '#444'
+                }`,
+                borderRadius:14, background:'#21222b',
+                display:'flex', alignItems:'center', justifyContent:'center', flexDirection:'column',
+                cursor: 'pointer', color:'#888', fontWeight: 800, fontSize: 13, letterSpacing:1, position: 'relative',
+              }}
+              onClick={() => setSelectingPre({ team, i })}
+              title="Pre-choose slot"
+            >
+              <span style={{fontSize:18}}>＋</span>
+              <span style={{fontSize:12, marginTop:2}}>Pre-choose</span>
+              {selectingPre && selectingPre.team === team && selectingPre.i === i && (
+                <span style={{ color:'#FFD700', position:'absolute', bottom:5, left:0, right:0, textAlign:'center', fontSize:12, fontWeight:800 }}>
+                  เลือก Hero ด้านขวา
+                </span>
+              )}
+            </div>
+          );
+        }
+      }
+
+      // BAN
       if (i < arr.length) {
         const hero = arr[i];
         return (
           <div
             key={i}
             style={{
-              margin:6,
-              textAlign:'center',
-              width:76,
-              height:100,
-              display:'flex',
-              flexDirection:'column',
-              alignItems:'center',
-              justifyContent:'center',
+              margin:6, textAlign:'center', width:76, height:100,
+              display:'flex', flexDirection:'column', alignItems:'center', justifyContent:'center',
             }}
             onMouseEnter={e => showHeroTooltip(hero.name, e)}
             onMouseMove={e => setTooltipPos({ x:e.clientX, y:e.clientY })}
@@ -395,21 +582,11 @@ export default function DraftPage({
               src={getImage(hero.image)}
               alt={hero.name}
               title={hero.name}
-              style={{
-                width:72,
-                height:72,
-                borderRadius:14,
-                boxShadow:'0 2px 12px #000a'
-              }}
+              style={{ width:72, height:72, borderRadius:14, boxShadow:'0 2px 12px #000a' }}
             />
             <div style={{
-              maxWidth:72,
-              fontSize:13,
-              whiteSpace:'nowrap',
-              overflow:'hidden',
-              textOverflow:'ellipsis',
-              color:'#fff',
-              fontWeight:700,
+              maxWidth:72, fontSize:13, whiteSpace:'nowrap', overflow:'hidden', textOverflow:'ellipsis',
+              color:'#fff', fontWeight:700,
             }}>{hero.name}</div>
           </div>
         );
@@ -421,18 +598,15 @@ export default function DraftPage({
           i < highlightStartIndex + highlightCount;
 
           return (
-                   <div
-                     key={i}
-                     style={{
-                       width:76,
-                       height:100,
-                       margin:6,
-                      border: `2.5px dashed ${isHighlight ? highlightColor : '#444'}`,
-                     borderRadius:14,
-                       background:'#21222b',
-                     }}
-                   />
-                 );
+            <div
+              key={i}
+              style={{
+                width:76, height:100, margin:6,
+                border: `2.5px dashed ${isHighlight ? highlightColor : '#444'}`,
+                borderRadius:14, background:'#21222b',
+              }}
+            />
+          );
       }
     });
   }
@@ -442,30 +616,16 @@ export default function DraftPage({
     return (
       <div style={{
         position: 'absolute',
-        top: 16,
-        left: 16,
+        top: 16, left: 16,
         background: '#23263a',
         padding: '8px 12px',
         borderRadius: 8,
-        display: 'flex',
-        flexWrap: 'wrap',
-        gap: '8px',
+        display: 'flex', flexWrap: 'wrap', gap: '8px',
         zIndex: 10,
       }}>
         {ROLE_ORDER.map(role => (
-          <div key={role} style={{
-            display: 'inline-flex',
-            alignItems: 'center',
-            color: '#fff',
-            fontSize: 12,
-          }}>
-            <span style={{
-              display: 'inline-block',
-              width: 12, height: 12,
-              background: ROLE_BORDER_COLORS[role],
-              marginRight: 4,
-              borderRadius: 2,
-            }} />
+          <div key={role} style={{ display:'inline-flex', alignItems:'center', color:'#fff', fontSize:12 }}>
+            <span style={{ display:'inline-block', width:12, height:12, background: ROLE_BORDER_COLORS[role], marginRight:4, borderRadius:2 }} />
             {role}
           </div>
         ))}
@@ -473,29 +633,73 @@ export default function DraftPage({
     );
   }
 
-  // ============ Hero Grid with Line Breaks per Role ============
+  // เลือกผ่าน pointer (ลาก/คลิกใช้ร่วมกัน) + เช็คแบนชนทั้งเกมนี้และเกมก่อนหน้า
+  function selectHeroViaPointer(hero) {
+    if (selectingPre) {
+      handlePreChoose(selectingPre.team, selectingPre.i, hero);
+      setSelectingPre(null);
+      return;
+    }
+
+    if (currentStep?.type === 'ban') {
+      const t = currentStep.team;
+      const oppTeam = t === 'A' ? 'B' : 'A';
+
+      // ห้ามแบนตัวที่อีกฝั่งเลือก "ในเกมนี้"
+      const oppPickedThisGame = new Set((picks[oppTeam] || []).map(h => h.name));
+      if (oppPickedThisGame.has(hero.name)) {
+        setAlertMsg(`ห้ามแบน "${hero.name}" เพราะฝั่งตรงข้ามเลือกไปแล้วในเกมนี้`);
+        return;
+      }
+
+      // ห้ามแบนตัวที่อีกฝั่ง "เคยเลือกในเกมก่อนหน้า"
+      const oppPrevPicked = new Set(
+        completedGames.flatMap(g => (g.picks?.[oppTeam] || [])).map(h => h.name)
+      );
+      if (oppPrevPicked.has(hero.name)) {
+        setAlertMsg(`ห้ามแบน "${hero.name}" เพราะฝั่งตรงข้ามเคยเลือกไปแล้วในเกมก่อนหน้า`);
+        return;
+      }
+    }
+
+    const localUsedNames = [...bans.A, ...bans.B, ...picks.A, ...picks.B].map(h => h.name);
+    const isFinalBO7 = boType==='BO7' && currentGame===totalGames;
+    const blocked = currentStep?.type==='pick'
+      && globalPicks[currentStep?.team || 'A']?.includes(hero.name)
+      && !isFinalBO7;
+    if (!localUsedNames.includes(hero.name) && !blocked && stepIndex < totalSteps) {
+      handleHeroClick(hero);
+    }
+  }
+
+  // ============ Hero Grid ============
   function renderHeroGrid() {
+    const isSelectingPre = !!selectingPre;
+
     return (
       <div>
+        {/* ====== แสดง suggested ban ====== */}
+        {stepIndex < totalSteps && currentStep.type === 'ban' && (
+          suggestBan.length > 0 && (
+            <div style={{
+              background: '#ea1c24', color: '#fff', padding: 10, marginBottom: 14,
+              borderRadius: 8, fontWeight: 700,
+            }}>
+              <span>⚠️ แนะนำให้ Ban: </span>
+              {suggestBan.map(n => <span key={n} style={{ margin: '0 8px', color: '#fff600' }}>{n}</span>)}
+            </div>
+          )
+        )}
+
         {ROLE_ORDER.map(role => {
-          const heroesOfRole = sortedHeroList.filter(h => h.role === role);
+          const heroesOfRole = sortedHeroList.filter(h => normalizeRole(h.role) === role);
           if (!heroesOfRole.length) return null;
           return (
             <div key={role} style={{ marginBottom: 24 }}>
-              <div style={{
-                marginBottom: 8,
-                fontSize: 16,
-                fontWeight: 700,
-                color: '#fff'
-              }}>
+              <div style={{ marginBottom: 8, fontSize: 16, fontWeight: 700, color: '#fff' }}>
                 {ROLE_ICON[role]} {role}
               </div>
-              <div style={{
-                display: 'grid',
-                gridTemplateColumns: 'repeat(auto-fit,minmax(84px,1fr))',
-                gap: 17,
-                justifyItems: 'center',
-              }}>
+              <div style={{ display: 'flex', flexWrap: 'wrap', gap: 17, justifyContent: 'flex-start' }}>
                 {heroesOfRole.map(hero => {
                   const local    = localUsed.includes(hero.name);
                   const blocked  = highlightType==='pick'
@@ -515,61 +719,123 @@ export default function DraftPage({
 
                   const borderColor = highlightHero
                     ? highlightColor
-                    : (ROLE_BORDER_COLORS[hero.role] || 'transparent');
+                    : (ROLE_BORDER_COLORS[normalizeRole(hero.role)] || 'transparent');
+
+                  const isPreSelecting = isSelectingPre && !disabled;
+
+                  const isSuggestBan = suggestBan.includes(hero.name);
+                  const suggestStyle = isSuggestBan && selectingPre ? {
+                    border: '3.5px solid #fff600',
+                    background: 'radial-gradient(circle, #fff8b3 0%, #7a6422 60%, #23242e 100%)',
+                    boxShadow: '0 0 14px 2px #fff700, 0 2px 7px #ea1c2425',
+                    filter: 'brightness(1.14)',
+                    zIndex: 2
+                  } : {};
+
+                  const pickedBy = pickOwner.get(hero.name);
+                  const bannedBy = banOwner.get(hero.name);
+
+                  const isCurrentEligible = !disabled && highlightType && highlightTeam;
+                  const currentGlow = isCurrentEligible
+                    ? `,0 0 0 2px ${TEAM_COLOR[highlightTeam]} inset, 0 0 16px ${ACTION_COLOR[highlightType]}`
+                    : '';
 
                   return (
                     <motion.div
                       key={hero.name}
+                      ref={el => heroRefs.current[hero.name] = el}
                       whileHover={!disabled ? {
                         scale:1.12,
                         boxShadow:'0 8px 24px #fff60080'
                       } : {}}
-                      onClick={() => !disabled && handleHeroClick(hero)}
-                      onMouseEnter={e => showHeroTooltip(hero.name, e)}
+                      onMouseDown={() => {
+                        if (disabled) return;
+                        setIsDragging(true);
+                        if (!dragConsumed) {
+                          selectHeroViaPointer(hero);
+                          setDragConsumed(true);
+                        }
+                      }}
+                      onMouseEnter={e => {
+                        if (isDragging && !dragConsumed && !disabled) {
+                          selectHeroViaPointer(hero);
+                          setDragConsumed(true);
+                        }
+                        showHeroTooltip(hero.name, e);
+                        setTooltipPos({ x:e.clientX, y:e.clientY });
+                      }}
                       onMouseMove={e => setTooltipPos({ x:e.clientX, y:e.clientY })}
+                      onMouseUp={() => { setIsDragging(false); setDragConsumed(false); }}
                       onMouseLeave={hideTooltip}
+                      onClick={() => {
+                        if (isSelectingPre && selectingPre) {
+                          handlePreChoose(selectingPre.team, selectingPre.i, hero);
+                          setSelectingPre(null);
+                        } else if (!disabled) {
+                          handleHeroClick(hero);
+                        }
+                      }}
                       style={{
-                        width:84,
-                        height:108,
-                        cursor: disabled ? 'not-allowed' : 'pointer',
-                        opacity: disabled ? 0.23 : 1,
-                        position:'relative',
-                        overflow:'hidden',
-                        borderRadius:16,
+                        width:84, height:108,
+                        cursor: disabled && !isPreSelecting ? 'not-allowed' : 'pointer',
+                        opacity: disabled && !isPreSelecting ? 0.23 : 1,
+                        position:'relative', overflow:'hidden', borderRadius:16,
                         background:'#23242e',
-                        boxShadow:'0 4px 30px #000a,0 2px 7px #ea1c2425',
-                        border: `3px solid ${borderColor}`,
+                        boxShadow:`0 4px 30px #000a,0 2px 7px #ea1c2425${currentGlow}`,
+                        border: isPreSelecting
+                          ? '3px solid #FFD700'
+                          : `3px solid ${borderColor}`,
                         transition:'box-shadow 0.2s,transform 0.15s,border 0.14s',
+                        filter: isPreSelecting ? 'brightness(1.2)' : undefined,
+                        ...suggestStyle,
                       }}
                     >
                       <img
                         src={getImage(hero.image)}
                         alt={hero.name}
-                        title={`${hero.name} (${hero.role})`}
+                        title={`${hero.name} (${normalizeRole(hero.role)})`}
+                        draggable={false}
                         style={{
-                          width:'100%',
-                          height:84,
-                          objectFit:'cover',
-                          borderRadius:'16px 16px 0 0',
+                          width:'100%', height:84, objectFit:'cover', borderRadius:'16px 16px 0 0',
                         }}
                       />
                       <div style={{
-                        width:'100%',
-                        height:24,
-                        background:'#191921',
-                        fontSize:12,
-                        borderRadius:'0 0 16px 16px',
-                        textAlign:'center',
-                        overflow:'hidden',
-                        whiteSpace:'nowrap',
-                        textOverflow:'ellipsis',
-                        fontWeight:800,
-                        color:'#fff',
-                        borderTop:'1px solid #262535',
-                        display:'flex',
-                        alignItems:'center',
-                        justifyContent:'center',
+                        width:'100%', height:24, background:'#191921', fontSize:12,
+                        borderRadius:'0 0 16px 16px', textAlign:'center',
+                        overflow:'hidden', whiteSpace:'nowrap', textOverflow:'ellipsis',
+                        fontWeight:800, color:'#fff', borderTop:'1px solid #262535',
+                        display:'flex', alignItems:'center', justifyContent:'center',
                       }}>{hero.name}</div>
+
+                      {/* ป้าย BAN มุมซ้ายบน */}
+                      {bannedBy && (
+                        <div style={{
+                          position:'absolute', top:4, left:4, padding:'2px 6px',
+                          fontSize:10, fontWeight:900, color:'#fff',
+                          background: ACTION_COLOR.ban,
+                          borderRadius:6, boxShadow:'0 2px 8px #0007'
+                        }}>
+                          {TEAM_TAG[bannedBy]} BAN
+                        </div>
+                      )}
+                      {/* ป้าย PICK มุมขวาบน */}
+                      {pickedBy && (
+                        <div style={{
+                          position:'absolute', top:4, right:4, padding:'2px 6px',
+                          fontSize:10, fontWeight:900, color:'#0f1220',
+                          background: ACTION_COLOR.pick,
+                          borderRadius:6, boxShadow:'0 2px 8px #0007'
+                        }}>
+                          {TEAM_TAG[pickedBy]} PICK
+                        </div>
+                      )}
+
+                      {isPreSelecting && (
+                        <span style={{
+                          position: 'absolute', bottom: 9, left: 0, right: 0,
+                          color: '#FFD700', fontWeight: 800, fontSize: 12, textAlign: 'center',
+                        }}>เลือก Pre-choose</span>
+                      )}
                     </motion.div>
                   );
                 })}
@@ -583,26 +849,41 @@ export default function DraftPage({
 
   // ============ Handlers ============
   function handleHeroClick(hero) {
+    if (selectingPre) {
+      handlePreChoose(selectingPre.team, selectingPre.i, hero);
+      setSelectingPre(null);
+      return;
+    }
+
     if (stepIndex >= totalSteps) return;
     const { team, type, count } = currentStep;
     const isFinalBO7 = boType==='BO7' && currentGame===totalGames;
 
-    if (type === 'ban' && completedGames.length > 0) {
-      const oppPicked = new Set(
-        completedGames
-          .flatMap(g => g.picks[team==='A'?'B':'A'])
-          .map(h => h.name)
+    if (type === 'ban') {
+      const oppTeam = team === 'A' ? 'B' : 'A';
+
+      // ห้ามแบนตัวที่อีกฝั่งเลือก "ในเกมนี้"
+      const oppPickedThisGame = new Set((picks[oppTeam] || []).map(h => h.name));
+      if (oppPickedThisGame.has(hero.name)) {
+        setAlertMsg(`ห้ามแบน "${hero.name}" เพราะฝั่งตรงข้ามเลือกไปแล้วในเกมนี้`);
+        return;
+      }
+
+      // ห้ามแบนตัวที่อีกฝั่ง "เคยเลือกในเกมก่อนหน้า"
+      const oppPrevPicked = new Set(
+        completedGames.flatMap(g => (g.picks?.[oppTeam] || [])).map(h => h.name)
       );
-      if (oppPicked.has(hero.name)) {
-        setAlertMsg(`ห้ามแบน "${hero.name}" เพราะฝั่งตรงข้ามเลือกไปแล้ว`);
+      if (oppPrevPicked.has(hero.name)) {
+        setAlertMsg(`ห้ามแบน "${hero.name}" เพราะฝั่งตรงข้ามเคยเลือกไปแล้วในเกมก่อนหน้า`);
         return;
       }
     }
 
+    const localUsedNames = [...bans.A, ...bans.B, ...picks.A, ...picks.B].map(h => h.name);
     const blocked = type==='pick'
       && globalPicks[team].includes(hero.name)
       && !isFinalBO7;
-    if (localUsed.includes(hero.name) || blocked) return;
+    if (localUsedNames.includes(hero.name) || blocked) return;
 
     if (type === 'ban') {
       setBans(p => ({ ...p, [team]: [...p[team], hero] }));
@@ -610,6 +891,11 @@ export default function DraftPage({
       setPicks(p => ({ ...p, [team]: [...p[team], hero] }));
       if (!isFinalBO7) {
         setGlobalPicks(g => ({ ...g, [team]: [...g[team], hero.name] }));
+      }
+      // ถ้ามี pre-choose ช่องนี้ ต้อง clear ออก
+      const pickIdx = picks[team].length;
+      if (preChoose[team][pickIdx]) {
+        handleClearPreChoose(team, pickIdx);
       }
     }
 
@@ -638,11 +924,13 @@ export default function DraftPage({
       }
     }
 
-    setHistory(h => h.slice(0, -1));
-    setStepIndex(lastStep);
-    setSelectionCount(
-      history.filter(a => a.stepIndex === lastStep).length - 1
-    );
+    setHistory(h => {
+      const newH = h.slice(0, -1);
+      const countInThatStep = newH.filter(a => a.stepIndex === lastStep).length;
+      setSelectionCount(countInThatStep % (draftSeq[lastStep]?.count || 1));
+      setStepIndex(lastStep);
+      return newH;
+    });
     setAlertMsg('');
   }
 
@@ -657,6 +945,8 @@ export default function DraftPage({
       setAlertMsg('');
       setSelectedRole('ทั้งหมด');
       setSearchTerm('');
+      setPreChoose({ A: [null, null, null, null, null], B: [null, null, null, null, null] });
+      setSelectingPre(null);
     }
   }
 
@@ -674,29 +964,43 @@ export default function DraftPage({
     setAlertMsg('');
     setSelectedRole('ทั้งหมด');
     setSearchTerm('');
+    setPreChoose({ A: [null, null, null, null, null], B: [null, null, null, null, null] });
+    setSelectingPre(null);
   }
 
   // ============ Record Completed Game ============
   useEffect(() => {
-    if (boType && stepIndex >= totalSteps && completedGames.length < currentGame) {
-      setCompletedGames(prev => [
-        ...prev,
-        { bans: { ...bans }, picks: { ...picks } }
-      ]);
-    }
-  }, [stepIndex]);
+    const finished = stepIndex >= totalSteps;
+    const alreadySaved = completedGames.length >= currentGame;
+    if (!boType || !finished || alreadySaved) return;
+
+    setCompletedGames(prev => {
+      if (prev.length >= currentGame) return prev;
+      return [...prev, { bans: { ...bans }, picks: { ...picks } }];
+    });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [boType, stepIndex, totalSteps, currentGame, bans, picks, completedGames.length]);
+
+  // ============ Reset draft เมื่อสลับ firstPickTeam / teamARole ============
+  useEffect(() => {
+    setStepIndex(0);
+    setSelectionCount(0);
+    setBans({ A: [], B: [] });
+    setPicks({ A: [], B: [] });
+    setHistory([]);
+    setAlertMsg('');
+    setSelectedRole('ทั้งหมด');
+    setSearchTerm('');
+    setPreChoose({ A: [null, null, null, null, null], B: [null, null, null, null, null] });
+    setSelectingPre(null);
+  }, [firstPickTeam, teamARole]);
 
   // ============ Initial / BO Selection ============
   if (!comboStats || !excelData) {
     return (
       <div style={{
-        padding:50,
-        minHeight:'100vh',
-        background:'#181a23',
-        display:'flex',
-        flexDirection:'column',
-        alignItems:'center',
-        justifyContent:'center',
+        padding:50, minHeight:'100vh', background:'#181a23',
+        display:'flex', flexDirection:'column', alignItems:'center', justifyContent:'center',
       }}>
         <h3 style={{ color:'#fff', marginBottom:25 }}>
           กลับไปอัปโหลดไฟล์ Excel <span style={{ color:'#fff600' }}>ComboStats</span>
@@ -704,12 +1008,8 @@ export default function DraftPage({
         <button
           onClick={() => navigate(-1)}
           style={{
-            padding:'7px 24px',
-            borderRadius:18,
-            border:'none',
-            background:'#292a37',
-            color:'#fff',
-            cursor:'pointer',
+            padding:'7px 24px', borderRadius:18, border:'none',
+            background:'#292a37', color:'#fff', cursor:'pointer',
           }}
         >← Back</button>
       </div>
@@ -719,34 +1019,20 @@ export default function DraftPage({
   if (!boType) {
     return (
       <div style={{
-        minHeight:'100vh',
-        background:'#191a23',
-        display:'flex',
-        flexDirection:'column',
-        justifyContent:'center',
-        alignItems:'center',
+        minHeight:'100vh', background:'#191a23',
+        display:'flex', flexDirection:'column', justifyContent:'center', alignItems:'center',
       }}>
-        <h1 style={{
-          color:'#fff',
-          marginBottom:32,
-          letterSpacing:2,
-          fontWeight:800,
-        }}>เลือกรูปแบบ BO</h1>
-
+        <h1 style={{ color:'#fff', marginBottom:32, letterSpacing:2, fontWeight:800 }}>
+          เลือกรูปแบบ BO
+        </h1>
         <div style={{ display:'flex', gap:32 }}>
           {Object.keys(BO_OPTIONS).map(t => (
             <button
               key={t}
               onClick={() => startSeries(t)}
               style={{
-                padding:'22px 56px',
-                fontSize:28,
-                fontWeight:800,
-                borderRadius:18,
-                background:'#fff600',
-                border:'none',
-                color:'#2c2c2c',
-                cursor:'pointer',
+                padding:'22px 56px', fontSize:28, fontWeight:800, borderRadius:18,
+                background:'#fff600', border:'none', color:'#2c2c2c', cursor:'pointer',
                 boxShadow:'0 4px 24px #fff60088',
               }}
             >{t}</button>
@@ -763,70 +1049,35 @@ export default function DraftPage({
       <>
         {/* Control Bar */}
         <div style={{
-          width: '100%',
-          padding: '12px 24px',
-          background: '#23263a',
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'center',
-          gap: '40px',
+          width: '100%', padding: '12px 24px', background: '#23263a',
+          display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '40px',
         }}>
           <div>
             <strong style={{ color:'#fff', marginRight:8 }}>Team A คือ</strong>
             <label style={{ marginRight:12, color:'#fff' }}>
-              <input
-                type="radio"
-                value="red"
-                checked={teamARole==='red'}
-                onChange={() => setTeamARole('red')}
-              /> Red
+              <input type="radio" value="red" checked={teamARole==='red'} onChange={() => setTeamARole('red')} /> Red
             </label>
             <label style={{ color:'#fff' }}>
-              <input
-                type="radio"
-                value="blue"
-                checked={teamARole==='blue'}
-                onChange={() => setTeamARole('blue')}
-              /> Blue
+              <input type="radio" value="blue" checked={teamARole==='blue'} onChange={() => setTeamARole('blue')} /> Blue
             </label>
           </div>
           <div>
             <strong style={{ color:'#fff', marginRight:8 }}>ฝั่งเลือกก่อน</strong>
             <label style={{ marginRight:12, color:'#fff' }}>
-              <input
-                type="radio"
-                value="A"
-                checked={firstPickTeam==='A'}
-                onChange={() => setFirstPickTeam('A')}
-              /> Team A
+              <input type="radio" value="A" checked={firstPickTeam==='A'} onChange={() => setFirstPickTeam('A')} /> Team A
             </label>
             <label style={{ color:'#fff' }}>
-              <input
-                type="radio"
-                value="B"
-                checked={firstPickTeam==='B'}
-                onChange={() => setFirstPickTeam('B')}
-              /> Team B
+              <input type="radio" value="B" checked={firstPickTeam==='B'} onChange={() => setFirstPickTeam('B')} /> Team B
             </label>
           </div>
         </div>
 
-        <div style={{
-          display:'flex',
-          height:'100vh',
-          background:'#161720',
-          position:'relative'
-        }}>
+        <div style={{ display:'flex', height:'100vh', background:'#161720', position:'relative' }}>
           {/* Team A Panel */}
           <div style={{
-            width:170,
-            background:panelColors.A,
-            padding:17,
-            boxShadow:'2px 0 18px #000d',
+            width:170, background:panelColors.A, padding:17, boxShadow:'2px 0 18px #000d',
             borderRadius:'0 28px 28px 0',
-            border: highlightTeam==='A'
-              ? `3px solid ${highlightColor}`
-              : '3px solid transparent',
+            border: `3px solid ${highlightTeam==='A' ? highlightColor : 'transparent'}`
           }}>
             <h4 style={{ color:'#fff', textAlign:'center' }}>Team A</h4>
             <strong style={{ color:'#f9b041' }}>Bans</strong>
@@ -840,13 +1091,7 @@ export default function DraftPage({
           </div>
 
           {/* Hero Pool */}
-          <div style={{
-            flex: 1,
-            position: 'relative',
-            overflowY: 'auto',
-            padding: 40,
-            background: '#23263a'
-          }}>
+          <div style={{ flex: 1, position: 'relative', overflowY: 'auto', padding: 40, background: '#23263a' }}>
             {/* Legend */}
             {renderLegend()}
 
@@ -857,14 +1102,8 @@ export default function DraftPage({
                 value={opponentSheet}
                 onChange={e => setOpponentSheet(e.target.value)}
                 style={{
-                  margin:'0 15px',
-                  padding:'6px 16px',
-                  borderRadius:12,
-                  border:'none',
-                  background:'#23242e',
-                  color:'#fff',
-                  fontWeight:700,
-                  fontSize:16,
+                  margin:'0 15px', padding:'6px 16px', borderRadius:12, border:'none',
+                  background:'#23242e', color:'#fff', fontWeight:700, fontSize:16,
                 }}
               >
                 {opponentSheetList.map(s => (
@@ -874,32 +1113,19 @@ export default function DraftPage({
             </div>
 
             {/* Controls: Back / Title / Undo */}
-            <div style={{
-              display:'flex',
-              alignItems:'center',
-              justifyContent:'space-between',
-              marginBottom:18
-            }}>
+            <div style={{ display:'flex', alignItems:'center', justifyContent:'space-between', marginBottom:18 }}>
               <button onClick={() => navigate(-1)} style={{
-                padding:'7px 24px',
-                borderRadius:18,
-                border:'none',
-                background:'#292a37',
-                color:'#fff',
-                cursor:'pointer',
+                padding:'7px 24px', borderRadius:18, border:'none',
+                background:'#292a37', color:'#fff', cursor:'pointer',
               }}>← Back</button>
               <strong style={{
-                fontSize:21,
-                color:'#fff600',
-                fontWeight:800,
+                fontSize:21, color:'#fff600', fontWeight:800,
                 textShadow:'0 2px 18pxrgba(114, 209, 4, 0.56)',
               }}>
                 {`Game ${currentGame}/${totalGames} • ${currentStep.type === 'ban' ? 'Ban' : 'Pick'} ${stepIndex+1}/${totalSteps}`}
               </strong>
               <button onClick={handleUndo} disabled={!history.length} style={{
-                padding:'7px 22px',
-                borderRadius:17,
-                border:'none',
+                padding:'7px 22px', borderRadius:17, border:'none',
                 background: history.length ? '#fff600' : '#333',
                 color: history.length ? '#23232a' : '#666',
                 cursor: history.length ? 'pointer' : 'not-allowed',
@@ -908,21 +1134,12 @@ export default function DraftPage({
             </div>
 
             {/* Role Filters & Search */}
-            <div style={{
-              display:'flex',
-              gap:10,
-              flexWrap:'wrap',
-              margin:'4px 0 26px'
-            }}>
+            <div style={{ display:'flex', gap:10, flexWrap:'wrap', margin:'4px 0 26px' }}>
               {roleList.map(role => (
                 <button key={role} onClick={() => setSelectedRole(role)} style={{
-                  padding:'8px 23px',
-                  borderRadius:18,
-                  border:'none',
+                  padding:'8px 23px', borderRadius:18, border:'none',
                   background: selectedRole===role?'#ea1c24':'#21212b',
-                  color: selectedRole===role?'#fff':'#bdbdbd',
-                  fontWeight:800,
-                  cursor:'pointer',
+                  color: selectedRole===role?'#fff':'#bdbdbd', fontWeight:800, cursor:'pointer',
                 }}>{ROLE_ICON[role]} {role}</button>
               ))}
               <input
@@ -931,15 +1148,9 @@ export default function DraftPage({
                 value={searchTerm}
                 onChange={e => setSearchTerm(e.target.value)}
                 style={{
-                  marginLeft:12,
-                  padding:'0 16px',
-                  height:38,
-                  borderRadius:17,
-                  border:'none',
-                  background:'#171826',
-                  color:'#fff',
-                  fontWeight:600,
-                  letterSpacing:1,
+                  marginLeft:12, padding:'0 16px', height:38,
+                  borderRadius:17, border:'none', background:'#171826', color:'#fff',
+                  fontWeight:600, letterSpacing:1,
                 }}
               />
             </div>
@@ -947,21 +1158,13 @@ export default function DraftPage({
             {/* Alert */}
             {alertMsg && (
               <div style={{
-                background:'#ea1c24',
-                color:'#fff600',
-                padding:14,
-                borderRadius:10,
-                textAlign:'center',
-                fontWeight:'bold',
-                marginBottom:17,
+                background:'#ea1c24', color:'#fff600', padding:14, borderRadius:10,
+                textAlign:'center', fontWeight:'bold', marginBottom:17,
               }}>
                 {alertMsg}
                 <button onClick={() => setAlertMsg('')} style={{
-                  marginLeft:16,
-                  background:'transparent',
-                  border:'none',
-                  color:'#fff600',
-                  cursor:'pointer',
+                  marginLeft:16, background:'transparent', border:'none',
+                  color:'#fff600', cursor:'pointer',
                 }}>×</button>
               </div>
             )}
@@ -972,14 +1175,8 @@ export default function DraftPage({
                 <strong style={{ color:'#ffd600' }}>History:</strong>
                 {completedGames.map((_, i) => (
                   <button key={i} onClick={() => setViewingHistory(i)} style={{
-                    margin:'0 7px',
-                    padding:'7px 16px',
-                    borderRadius:14,
-                    border:'none',
-                    background:'#ea1c24',
-                    color:'#fff',
-                    fontWeight:800,
-                    cursor:'pointer',
+                    margin:'0 7px', padding:'7px 16px', borderRadius:14, border:'none',
+                    background:'#ea1c24', color:'#fff', fontWeight:800, cursor:'pointer',
                   }}>Game {i+1}</button>
                 ))}
               </div>
@@ -992,14 +1189,8 @@ export default function DraftPage({
             {stepIndex >= totalSteps && currentGame < totalGames && (
               <div style={{ textAlign:'center', marginTop:34 }}>
                 <button onClick={nextGame} style={{
-                  padding:'10px 30px',
-                  borderRadius:17,
-                  border:'none',
-                  background:'#57eae7',
-                  color:'#23232a',
-                  fontWeight:800,
-                  cursor:'pointer',
-                  fontSize:17,
+                  padding:'10px 30px', borderRadius:17, border:'none',
+                  background:'#57eae7', color:'#23232a', fontWeight:800, cursor:'pointer', fontSize:17,
                 }}>Next Game &gt;</button>
               </div>
             )}
@@ -1007,14 +1198,9 @@ export default function DraftPage({
 
           {/* Team B Panel */}
           <div style={{
-            width:170,
-            background:panelColors.B,
-            padding:17,
-            boxShadow:'-2px 0 18px #000d',
+            width:170, background:panelColors.B, padding:17, boxShadow:'-2px 0 18px #000d',
             borderRadius:'28px 0 0 28px',
-            border: highlightTeam==='B'
-              ? `3px solid ${highlightColor}`
-              : '3px solid transparent',
+            border: `3px solid ${highlightTeam==='B' ? highlightColor : 'transparent'}`
           }}>
             <h4 style={{ color:'#fff', textAlign:'center' }}>Team B</h4>
             <strong style={{ color:'#f9b041' }}>Bans</strong>
