@@ -1,5 +1,4 @@
 // src/components/DraftPage.jsx
-// src/components/DraftPage.jsx
 
 import React, { useState, useMemo, useEffect, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
@@ -110,7 +109,7 @@ function getHeroStatsFromGames(heroName, games) {
   if (!heroName) return [];
   const key = heroName.trim().toLowerCase();
   const statsMap = {};
-  const totalGames = games.length;
+  const totalGames = (games && games.length) ? games.length : 1; // กันหาร 0
 
   games.forEach(g => {
     (g.fsPick || []).forEach((h, i) => {
@@ -176,11 +175,17 @@ export default function DraftPage({
 
   // Drag-to-select (mouse + touch)
   const [isDragging, setIsDragging] = useState(false);
-  const [dragConsumed, setDragConsumed] = useState(false);
+  const dragVisitedRef = useRef(new Set());
 
   useEffect(() => {
-    const onUp = () => { setIsDragging(false); setDragConsumed(false); };
-    const onTouchEnd = () => { setIsDragging(false); setDragConsumed(false); };
+    const onUp = () => {
+      setIsDragging(false);
+      dragVisitedRef.current.clear();
+    };
+    const onTouchEnd = () => {
+      setIsDragging(false);
+      dragVisitedRef.current.clear();
+    };
     window.addEventListener('mouseup', onUp);
     window.addEventListener('touchend', onTouchEnd);
     return () => {
@@ -253,6 +258,13 @@ export default function DraftPage({
     });
     return arr;
   }, [filteredHeroList]);
+
+  // แผนที่ชื่อ hero -> object (ใช้ตอน touchmove)
+  const heroMap = useMemo(() => {
+    const m = new Map();
+    heroes.forEach(h => m.set(h.name, h));
+    return m;
+  }, [heroes]);
 
   // ใคร pick/ban อะไรแล้วในเกมนี้ (เพื่อแปะป้ายบนการ์ด)
   const pickOwner = useMemo(() => {
@@ -385,10 +397,10 @@ export default function DraftPage({
   }
 
   // ============ ฟังก์ชันหา suggested ban ==========
-  function getSuggestedBan(preChooseState, bansState, picksState) {
+  function getSuggestedBan(preChooseState, bansState, picksState, heroesList) {
     const used = new Set([...bansState.A, ...bansState.B, ...picksState.A, ...picksState.B].map(h => h?.name));
-    const validHero = new Set(heroes.map(h => h.name));
-    const nameMap = new Map(heroes.map(h => [h.name.toLowerCase(), h.name]));
+    const validHero = new Set(heroesList.map(h => h.name));
+    const nameMap = new Map(heroesList.map(h => [h.name.toLowerCase(), h.name]));
     const out = [];
     Object.values(preChooseState).flat().forEach(hero => {
       if (!hero) return;
@@ -402,7 +414,7 @@ export default function DraftPage({
   }
 
   const suggestBan = useMemo(() => {
-    return getSuggestedBan(preChoose, bans, picks);
+    return getSuggestedBan(preChoose, bans, picks, heroes);
   }, [preChoose, bans, picks, heroes]);
 
   useEffect(() => {
@@ -640,7 +652,7 @@ export default function DraftPage({
     );
   }
 
-  // เลือกผ่าน pointer (ลาก/คลิกใช้ร่วมกัน) + เช็คแบนชนทั้งเกมนี้และเกมก่อนหน้า
+  // เลือกผ่าน pointer (ลาก/คลิ็กใช้ร่วมกัน) + เช็คแบนชนทั้งเกมนี้และเกมก่อนหน้า
   function selectHeroViaPointer(hero) {
     // ❗ อยู่โหมด pre-choose ไม่ให้เลือกจริง (กันไปแบน/พิคโดยไม่ตั้งใจจาก drag)
     if (selectingPre) return;
@@ -679,30 +691,6 @@ export default function DraftPage({
   // ============ Hero Grid ============
   function renderHeroGrid() {
     const isSelectingPre = !!selectingPre;
-
-    // helpers สำหรับ touch
-    const handleTouchStart = (e, hero, disabled) => {
-      if (disabled || isSelectingPre) return;
-      setIsDragging(true);
-      setDragConsumed(false);
-      // กันหน้า scroll ระหว่างลาก
-      if (e.cancelable) e.preventDefault();
-      // เลือกทันทีที่เริ่มแตะ (เหมือน mousedown)
-      if (!dragConsumed) {
-        selectHeroViaPointer(hero);
-        setDragConsumed(true);
-      }
-    };
-
-    const handleTouchMove = (e) => {
-      if (e.cancelable) e.preventDefault();
-      // เราใช้ onTouchStart + onTouchEnd เป็นหลัก
-    };
-
-    const handleTouchEnd = () => {
-      setIsDragging(false);
-      setDragConsumed(false);
-    };
 
     return (
       <div>
@@ -772,34 +760,34 @@ export default function DraftPage({
                     <motion.div
                       key={hero.name}
                       ref={el => heroRefs.current[hero.name] = el}
+                      data-heroname={hero.name}
                       whileHover={!disabled ? {
                         scale:1.12,
                         boxShadow:'0 8px 24px #fff60080'
                       } : {}}
-                      // === Mouse ===
-                      onMouseDown={() => {
-                        if (disabled) return;
-                        if (isSelectingPre) {
-                          // โหมด pre-choose: ไม่เริ่ม drag และไม่ยิงเลือกจาก drag
-                          return;
-                        }
+                      // === Mouse: drag-to-select ===
+                      onMouseDown={(e) => {
+                        if (disabled || isSelectingPre) return;
+                        dragVisitedRef.current.clear();
                         setIsDragging(true);
-                        if (!dragConsumed) {
+                        if (!dragVisitedRef.current.has(hero.name)) {
+                          dragVisitedRef.current.add(hero.name);
                           selectHeroViaPointer(hero);
-                          setDragConsumed(true);
                         }
                       }}
                       onMouseEnter={e => {
-                        if (isDragging && !dragConsumed && !disabled && !isSelectingPre) {
-                          // drag-to-select เฉพาะตอนที่ไม่ได้ pre-choose
-                          selectHeroViaPointer(hero);
-                          setDragConsumed(true);
+                        // ระหว่างลาก: เลือกการ์ดที่เพิ่งลากผ่าน (ครั้งเดียวต่อใบ)
+                        if (isDragging && !disabled && !isSelectingPre) {
+                          if (!dragVisitedRef.current.has(hero.name)) {
+                            dragVisitedRef.current.add(hero.name);
+                            selectHeroViaPointer(hero);
+                          }
                         }
                         showHeroTooltip(hero.name, e);
                         setTooltipPos({ x:e.clientX, y:e.clientY });
                       }}
                       onMouseMove={e => setTooltipPos({ x:e.clientX, y:e.clientY })}
-                      onMouseUp={() => { setIsDragging(false); setDragConsumed(false); }}
+                      onMouseUp={() => { setIsDragging(false); dragVisitedRef.current.clear(); }}
                       onMouseLeave={hideTooltip}
                       onClick={(e) => {
                         if (disabled) return;
@@ -812,10 +800,37 @@ export default function DraftPage({
                         }
                         handleHeroClick(hero);
                       }}
-                      // === Touch (mobile/tablet) ===
-                      onTouchStart={(e) => handleTouchStart(e, hero, disabled)}
-                      onTouchMove={handleTouchMove}
-                      onTouchEnd={handleTouchEnd}
+                      // === Touch (mobile/tablet): drag-to-select ===
+                      onTouchStart={(e) => {
+                        if (disabled || isSelectingPre) return;
+                        if (e.cancelable) e.preventDefault(); // กัน scroll
+                        dragVisitedRef.current.clear();
+                        setIsDragging(true);
+                        if (!dragVisitedRef.current.has(hero.name)) {
+                          dragVisitedRef.current.add(hero.name);
+                          selectHeroViaPointer(hero);
+                        }
+                      }}
+                      onTouchMove={(e) => {
+                        if (e.cancelable) e.preventDefault();
+                        if (!isDragging || disabled || isSelectingPre) return;
+                        const t = e.touches?.[0];
+                        if (!t) return;
+                        const el = document.elementFromPoint(t.clientX, t.clientY);
+                        const card = el && el.closest ? el.closest('[data-heroname]') : null;
+                        const name = card?.dataset?.heroname;
+                        if (name && !dragVisitedRef.current.has(name)) {
+                          const h = heroMap.get(name);
+                          if (h) {
+                            dragVisitedRef.current.add(name);
+                            selectHeroViaPointer(h);
+                          }
+                        }
+                      }}
+                      onTouchEnd={() => {
+                        setIsDragging(false);
+                        dragVisitedRef.current.clear();
+                      }}
                       style={{
                         width:84, height:108,
                         cursor: disabled && !isPreSelecting ? 'not-allowed' : 'pointer',
@@ -1035,6 +1050,13 @@ export default function DraftPage({
     setSelectingPre(null);
   }, [firstPickTeam, teamARole]);
 
+  // ปุ่มลัด: Esc เพื่อออกจากโหมด Pre-choose
+  useEffect(() => {
+    const onKey = (e) => { if (e.key === 'Escape') setSelectingPre(null); };
+    window.addEventListener('keydown', onKey);
+    return () => window.removeEventListener('keydown', onKey);
+  }, []);
+
   // ============ Initial / BO Selection ============
   if (!comboStats || !excelData) {
     return (
@@ -1160,7 +1182,7 @@ export default function DraftPage({
               }}>← Back</button>
               <strong style={{
                 fontSize:21, color:'#fff600', fontWeight:800,
-                textShadow:'0 2px 18pxrgba(114, 209, 4, 0.56)',
+                textShadow:'0 2px 18px rgba(114, 209, 4, 0.56)',
               }}>
                 {`Game ${currentGame}/${totalGames} • ${currentStep.type === 'ban' ? 'Ban' : 'Pick'} ${stepIndex+1}/${totalSteps}`}
               </strong>
@@ -1228,8 +1250,7 @@ export default function DraftPage({
             {/* Next Game Button */}
             {stepIndex >= totalSteps && currentGame < totalGames && (
               <div style={{ textAlign:'center', marginTop:34 }}>
-                <button onClick={nextGame
-} style={{
+                <button onClick={nextGame} style={{
                   padding:'10px 30px', borderRadius:17, border:'none',
                   background:'#57eae7', color:'#23232a', fontWeight:800, cursor:'pointer', fontSize:17,
                 }}>Next Game &gt;</button>
