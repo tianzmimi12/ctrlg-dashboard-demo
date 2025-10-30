@@ -23,6 +23,119 @@
 /* =========================
    CTRL G — THEME TOKENS
    ========================= */
+   /* =========================
+   MOBILE LANDSCAPE OPTIMIZATION
+   ========================= */
+@media (max-width: 1024px) and (orientation: landscape) {
+  .cg-theme .cg-toolbar-3 {
+    padding: 8px 12px;
+    gap: 8px;
+  }
+  
+  .cg-theme .cg-toolbar-3 > .left {
+    gap: 6px;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+  }
+  
+  .cg-theme .cg-toolbar-3 > .right {
+    gap: 6px;
+    flex-wrap: nowrap;
+  }
+  
+  /* ลดขนาดการ์ดฮีโร่ */
+  .cg-theme [data-heroname] {
+    width: 70px !important;
+    height: 94px !important;
+  }
+  
+  .cg-theme [data-heroname] img {
+    height: 66px !important;
+  }
+  
+  .cg-theme [data-heroname] div {
+    font-size: 10px !important;
+    height: 20px !important;
+  }
+  
+  /* ลดขนาดสล็อต */
+  .cg-theme .cg-slot {
+    width: 60px !important;
+    height: 90px !important;
+    margin: 4px !important;
+  }
+  
+  .cg-theme .cg-slot img {
+    width: 56px !important;
+    height: 56px !important;
+  }
+  .mobile-landscape .mobile-draft-container {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  padding: 8px;
+}
+
+.mobile-landscape .mobile-top-bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 8px;
+  background: var(--cg-surface);
+  border-radius: 12px;
+  margin-bottom: 8px;
+}
+
+.mobile-landscape .mobile-teams-container {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 8px;
+}
+
+.mobile-landscape .mobile-team {
+  flex: 1;
+  background: var(--cg-surface-2);
+  padding: 8px;
+  border-radius: 12px;
+}
+
+.mobile-landscape .mobile-hero-selector {
+  flex: 1;
+  overflow-y: auto;
+}
+
+/* ปรับการ์ดฮีโร่ให้เล็กลง */
+.mobile-landscape [data-heroname] {
+  width: 65px !important;
+  height: 85px !important;
+}
+
+.mobile-landscape [data-heroname] img {
+  height: 55px !important;
+}
+  /* ปรับระยะห่างกริด */
+  .cg-theme .hero-grid-container {
+    gap: 10px !important;
+  }
+  
+  /* ปุ่ม角色เล็กลง */
+  .cg-theme .role-filter button {
+    padding: 6px 12px !important;
+    font-size: 12px !important;
+  }
+  
+  /* Timer เล็กลง */
+  .cg-theme .countdown-timer {
+    font-size: 24px !important;
+    height: 45px !important;
+    min-width: 140px !important;
+  }
+  
+  /* ซ่อนบาง element ที่ไม่จำเป็น */
+  .cg-theme .mini-strip {
+    display: none !important;
+  }
+}
 .cg-theme{
   --cg-font-head: "Kanit", system-ui, -apple-system, "Segoe UI", Roboto, "Noto Sans Thai", sans-serif;
   --cg-font-sans: "Prompt", system-ui, -apple-system, "Segoe UI", Roboto, "Noto Sans Thai", sans-serif;
@@ -3435,7 +3548,56 @@ if (!boType) {
       </div>
     );
   }
-
+// ใน DraftPage component
+if (isMobileLandscape) {
+  return (
+    <div className="cg-theme cg-insane mobile-landscape">
+      <style>{THEME_CSS}</style>
+      
+      {/* Simplified Mobile Layout */}
+      <div className="mobile-draft-container">
+        {/* Top Bar */}
+        <div className="mobile-top-bar">
+          <div className="mobile-timer">
+            <TurnTimer /* props */ />
+          </div>
+          <div className="mobile-actions">
+            <button onClick={handleUndo}>↩️</button>
+            <button onClick={() => setDraftMode('free')}>🔄</button>
+          </div>
+        </div>
+        
+        {/* Teams Side by Side */}
+        <div className="mobile-teams-container">
+          <div className="mobile-team">
+            <div className="team-header">ทีม A</div>
+            <div className="team-picks">
+              {renderSlots(picks.A, 5, 'A', 'pick')}
+            </div>
+            <div className="team-bans">
+              {renderSlots(bans.A, 4, 'A', 'ban')}
+            </div>
+          </div>
+          
+          <div className="mobile-team">
+            <div className="team-header">ทีม B</div>
+            <div className="team-picks">
+              {renderSlots(picks.B, 5, 'B', 'pick')}
+            </div>
+            <div className="team-bans">
+              {renderSlots(bans.B, 4, 'B', 'ban')}
+            </div>
+          </div>
+        </div>
+        
+        {/* Hero Selection */}
+        <div className="mobile-hero-selector">
+          {renderHeroGrid(opTeamForPanel)}
+        </div>
+      </div>
+    </div>
+  );
+}
   // Referee/Host: เลือก BO (เหมือนเดิม)
   return (
     <div className="cg-theme" style={{ minHeight: '100vh', background: 'var(--cg-bg)' }}>
@@ -4239,6 +4401,44 @@ const turnColorVar = (highlightType==='ban') ? 'var(--cg-danger)' : 'var(--cg-in
            </div>
    
            <div style={{ display:'grid', gridTemplateColumns:'280px 1fr', gap:16 }}>
+            {/* Main layout - ปรับสำหรับแนวนอน */}
+<div style={{ 
+  display:'flex', 
+  height:'100vh', 
+  background:'var(--cg-bg)', 
+  position:'relative',
+  flexDirection: window.innerWidth <= 1024 && window.innerHeight < window.innerWidth ? 'column' : 'row'
+}}>
+  
+  {/* Side Panels - ซ่อนหรือลดขนาดในแนวนอน */}
+  <div style={{
+    width: window.innerWidth <= 1024 && window.innerHeight < window.innerWidth ? '140px' : '170px',
+    display: window.innerWidth <= 768 && window.innerHeight < window.innerWidth ? 'none' : 'block'
+  }}>
+    {/* Left Panel Content */}
+  </div>
+
+  {/* Center Content - ขยายเต็มในแนวนอน */}
+  <div style={{ 
+    flex: 1, 
+    position:'relative', 
+    overflowY:'auto', 
+    padding: window.innerWidth <= 1024 && window.innerHeight < window.innerWidth ? '20px' : '40px'
+  }}>
+    
+    {/* Hero Grids - เปลี่ยนเป็นแถวเดียวในแนวนอน */}
+    <div style={{ 
+      display: window.innerWidth <= 1024 && window.innerHeight < window.innerWidth ? 'flex' : 'grid',
+      gridTemplateColumns: window.innerWidth <= 1024 && window.innerHeight < window.innerWidth ? '1fr' : '1fr 1fr',
+      gap: window.innerWidth <= 1024 && window.innerHeight < window.innerWidth ? '16px' : '24px',
+      flexDirection: 'column'
+    }}>
+      {renderHeroGrid(LEFT_TEAM_ID)}
+      {renderHeroGrid(RIGHT_TEAM_ID)}
+    </div>
+  </div>
+
+</div>
              {/* Left: list */}
              <div style={{ background:'var(--cg-surface)', borderRadius:14, padding:12, border:'1px solid var(--cg-border)' }}>
                {list.map((snap, i)=>(
@@ -4330,6 +4530,58 @@ const turnColorVar = (highlightType==='ban') ? 'var(--cg-danger)' : 'var(--cg-in
        </div>
      );
    }
+   // เพิ่ม Hook ใหม่
+function useOrientation() {
+  const [isLandscape, setIsLandscape] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const checkOrientation = () => {
+      const width = window.innerWidth;
+      const height = window.innerHeight;
+      setIsLandscape(width > height);
+      setIsMobile(width <= 1024);
+    };
+
+    checkOrientation();
+    window.addEventListener('resize', checkOrientation);
+    window.addEventListener('orientationchange', checkOrientation);
+    
+    return () => {
+      window.removeEventListener('resize', checkOrientation);
+      window.removeEventListener('orientationchange', checkOrientation);
+    };
+  }, []);
+
+  return { isLandscape, isMobile, isMobileLandscape: isMobile && isLandscape };
+}
+
+// ใช้ใน component
+export default function DraftPage({ ...props }) {
+  const { isMobileLandscape, isLandscape } = useOrientation();
+  
+  // ใน renderHeroGrid ปรับขนาด
+  function renderHeroGrid(viewTeam) {
+    return (
+      <div className={`hero-grid-container ${isMobileLandscape ? 'mobile-landscape' : ''}`}>
+        <div style={{ 
+          marginBottom: isMobileLandscape ? 6 : 10,
+          fontSize: isMobileLandscape ? 14 : 15 
+        }}>
+          ฮีโร่ฝั่ง {teamLabel(viewTeam)}
+        </div>
+        
+        <div style={{ 
+          display: 'flex', 
+          flexWrap: 'wrap', 
+          gap: isMobileLandscape ? 8 : 17 
+        }}>
+          {/* Hero cards */}
+        </div>
+      </div>
+    );
+  }
+}
    function getToolbarBottom(){
       try{
         const tb = document.querySelector(
