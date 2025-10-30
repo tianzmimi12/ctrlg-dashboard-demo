@@ -130,7 +130,7 @@ function HostSetup({ roomCode, onInit }) {
           <ul className="legend">
             <li><span className="dot neon" /> เกมต่อซีรีส์</li>
             <li><span className="dot purp" /> เวลา/สถานะซิงก์ผ่านกรรมการ</li>
-            <li><span className="dot purp" /> Recommen</li>
+            <li><span className="dot purp" /> Recomment with PC</li>
 
           </ul>
         </div>
