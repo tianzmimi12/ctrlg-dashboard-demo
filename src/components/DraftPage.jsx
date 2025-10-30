@@ -1287,7 +1287,7 @@ function spawnForcedPickFX(hero, team, count = 1) {
     if (count > 1) {
       warningFX.innerHTML = `⏰ FORCED ${count} PICKS!<br>${hero.name} + ${count-1} more`;
     } else {
-      warningFX.innerHTML = `⏰ FORCED PICK! ${hero.name}`;
+      warningFX.innerHTML = `⏰ FORCED PICK!!! ${hero.name}`;
     }
     
     warningFX.style.cssText = `
