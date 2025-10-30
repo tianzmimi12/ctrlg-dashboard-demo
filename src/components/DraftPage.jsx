@@ -1,4 +1,3 @@
-
 /* ================================================
    DRAFTPAGE — CTRL G THEME (KEEP LOGIC UNCHANGED)
    ================================================ */
@@ -24,6 +23,119 @@
 /* =========================
    CTRL G — THEME TOKENS
    ========================= */
+   /* =========================
+   MOBILE LANDSCAPE OPTIMIZATION
+   ========================= */
+@media (max-width: 1024px) and (orientation: landscape) {
+  .cg-theme .cg-toolbar-3 {
+    padding: 8px 12px;
+    gap: 8px;
+  }
+  
+  .cg-theme .cg-toolbar-3 > .left {
+    gap: 6px;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+  }
+  
+  .cg-theme .cg-toolbar-3 > .right {
+    gap: 6px;
+    flex-wrap: nowrap;
+  }
+  
+  /* ลดขนาดการ์ดฮีโร่ */
+  .cg-theme [data-heroname] {
+    width: 70px !important;
+    height: 94px !important;
+  }
+  
+  .cg-theme [data-heroname] img {
+    height: 66px !important;
+  }
+  
+  .cg-theme [data-heroname] div {
+    font-size: 10px !important;
+    height: 20px !important;
+  }
+  
+  /* ลดขนาดสล็อต */
+  .cg-theme .cg-slot {
+    width: 60px !important;
+    height: 90px !important;
+    margin: 4px !important;
+  }
+  
+  .cg-theme .cg-slot img {
+    width: 56px !important;
+    height: 56px !important;
+  }
+  .mobile-landscape .mobile-draft-container {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  padding: 8px;
+}
+
+.mobile-landscape .mobile-top-bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 8px;
+  background: var(--cg-surface);
+  border-radius: 12px;
+  margin-bottom: 8px;
+}
+
+.mobile-landscape .mobile-teams-container {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 8px;
+}
+
+.mobile-landscape .mobile-team {
+  flex: 1;
+  background: var(--cg-surface-2);
+  padding: 8px;
+  border-radius: 12px;
+}
+
+.mobile-landscape .mobile-hero-selector {
+  flex: 1;
+  overflow-y: auto;
+}
+
+/* ปรับการ์ดฮีโร่ให้เล็กลง */
+.mobile-landscape [data-heroname] {
+  width: 65px !important;
+  height: 85px !important;
+}
+
+.mobile-landscape [data-heroname] img {
+  height: 55px !important;
+}
+  /* ปรับระยะห่างกริด */
+  .cg-theme .hero-grid-container {
+    gap: 10px !important;
+  }
+  
+  /* ปุ่ม角色เล็กลง */
+  .cg-theme .role-filter button {
+    padding: 6px 12px !important;
+    font-size: 12px !important;
+  }
+  
+  /* Timer เล็กลง */
+  .cg-theme .countdown-timer {
+    font-size: 24px !important;
+    height: 45px !important;
+    min-width: 140px !important;
+  }
+  
+  /* ซ่อนบาง element ที่ไม่จำเป็น */
+  .cg-theme .mini-strip {
+    display: none !important;
+  }
+}
 .cg-theme{
   --cg-font-head: "Kanit", system-ui, -apple-system, "Segoe UI", Roboto, "Noto Sans Thai", sans-serif;
   --cg-font-sans: "Prompt", system-ui, -apple-system, "Segoe UI", Roboto, "Noto Sans Thai", sans-serif;
@@ -1427,18 +1539,20 @@ useEffect(()=>{
       5) คอมโพเนนต์หลัก
       ========================================================= */
       // [MOD] ใน signature ของ DraftPage:
-export default function DraftPage({
-  games, heroes = heroList, onAction,
-  startBoType, waitForHost = false, readOnly = false,
-  externalFeed,
-  lockedTeam = null,
-  enableConfirm = true,   // [NEW] เปิด/ปิดโหมดกดยืนยัน (แนะนำเปิด)
-  roomCode = 'default',         // ห้องสำหรับ bus (ข้ามแท็บ)
-  autoWire = true,            // ให้ DraftPage autowire bus เองถ้าไม่ได้ส่ง onAction/externalFeed มา
-}) {
-
-     const navigate = useNavigate();
-     const heroRefs = useRef({});
+      export default function DraftPage({
+        games, heroes = heroList, onAction,
+        startBoType, waitForHost = false, readOnly = false,
+        externalFeed,
+        lockedTeam = null,
+        enableConfirm = true,
+        roomCode = 'default',
+        autoWire = true,
+      }) {
+        // เพิ่มตรงนี้ - หลัง useNavigate() และก่อน heroRefs
+        const { isMobileLandscape, isLandscape } = useOrientation();
+        
+        const navigate = useNavigate();
+        const heroRefs = useRef({});
    
      /* --- A) PRE-CHOOSE --- */
      const [preChoose,setPreChoose] = useState({ A:[null,null,null,null,null], B:[null,null,null,null,null] });
@@ -2756,11 +2870,16 @@ if (isPendingHere && canSee) {
    
      /* ---------- Grid ของฮีโร่สองฝั่ง ---------- */
      function renderHeroGrid(viewTeam){
-       return (
-         <div>
-           <div style={{ marginBottom: 10, color:'var(--cg-text)', fontWeight:900 }}>
-             ฮีโร่ฝั่ง {teamLabel(viewTeam)}
-           </div>
+      return (
+        <div className={`hero-grid-container ${isMobileLandscape ? 'mobile-landscape' : ''}`}>
+          <div style={{ 
+            marginBottom: isMobileLandscape ? 6 : 10, 
+            color:'var(--cg-text)', 
+            fontWeight:900,
+            fontSize: isMobileLandscape ? 14 : 15 
+          }}>
+            ฮีโร่ฝั่ง {teamLabel(viewTeam)}
+          </div>
            {ROLE_ORDER.map(role=>{
              const heroesOfRole = filteredHeroList2.filter(h=>normalizeRole(h.role)===role);
              if (!heroesOfRole.length) return null;
@@ -3436,7 +3555,56 @@ if (!boType) {
       </div>
     );
   }
-
+// ใน DraftPage component
+if (isMobileLandscape) {
+  return (
+    <div className="cg-theme cg-insane mobile-landscape">
+      <style>{THEME_CSS}</style>
+      
+      {/* Simplified Mobile Layout */}
+      <div className="mobile-draft-container">
+        {/* Top Bar */}
+        <div className="mobile-top-bar">
+          <div className="mobile-timer">
+            <TurnTimer /* props */ />
+          </div>
+          <div className="mobile-actions">
+            <button onClick={handleUndo}>↩️</button>
+            <button onClick={() => setDraftMode('free')}>🔄</button>
+          </div>
+        </div>
+        
+        {/* Teams Side by Side */}
+        <div className="mobile-teams-container">
+          <div className="mobile-team">
+            <div className="team-header">ทีม A</div>
+            <div className="team-picks">
+              {renderSlots(picks.A, 5, 'A', 'pick')}
+            </div>
+            <div className="team-bans">
+              {renderSlots(bans.A, 4, 'A', 'ban')}
+            </div>
+          </div>
+          
+          <div className="mobile-team">
+            <div className="team-header">ทีม B</div>
+            <div className="team-picks">
+              {renderSlots(picks.B, 5, 'B', 'pick')}
+            </div>
+            <div className="team-bans">
+              {renderSlots(bans.B, 4, 'B', 'ban')}
+            </div>
+          </div>
+        </div>
+        
+        {/* Hero Selection */}
+        <div className="mobile-hero-selector">
+          {renderHeroGrid(opTeamForPanel)}
+        </div>
+      </div>
+    </div>
+  );
+}
   // Referee/Host: เลือก BO (เหมือนเดิม)
   return (
     <div className="cg-theme" style={{ minHeight: '100vh', background: 'var(--cg-bg)' }}>
@@ -4208,115 +4376,149 @@ const turnColorVar = (highlightType==='ban') ? 'var(--cg-danger)' : 'var(--cg-in
    
    /* ---------- History View (คงลอจิกเดิม ปรับสกิน) ---------- */
    function HistoryView({ list, onBack, onInspect, onLoad }) {
-     const [selected, setSelected] = React.useState(null);
-   
-     if (!list || list.length===0) {
-       return (
-         <div className="cg-theme cg-insane">
-           <style>{THEME_CSS}</style>
-           <div style={{ padding:40, color:'var(--cg-text)', background:'var(--cg-bg)', minHeight:'100vh' }}>
-             <button onClick={onBack} className="btn-like" style={{
-               background:'var(--cg-warning)', color:'#23232a'
-             }}>← กลับ</button>
-             <div style={{ marginTop:16, opacity:.8 }}>ยังไม่มีสแนปช็อตที่บันทึก</div>
-           </div>
-         </div>
-       );
-     }
-   
-     const data = selected || null;
-   
-     return (
-       <div className="cg-theme cg-insane">
-         <style>{THEME_CSS}</style>
-         <div style={{
-           minHeight:'100vh', background:'var(--cg-bg)', padding:30, color:'var(--cg-text)'
-         }}>
-           <div style={{ display:'flex', alignItems:'center', gap:12, marginBottom:16 }}>
-             <button onClick={onBack} className="btn-like" style={{
-               background:'var(--cg-warning)', color:'#23232a'
-             }}>← กลับ</button>
-             <div style={{ fontWeight:900, letterSpacing:1 }}>History</div>
-           </div>
-   
-           <div style={{ display:'grid', gridTemplateColumns:'280px 1fr', gap:16 }}>
-             {/* Left: list */}
-             <div style={{ background:'var(--cg-surface)', borderRadius:14, padding:12, border:'1px solid var(--cg-border)' }}>
-               {list.map((snap, i)=>(
-                 <div key={i}
-                   onClick={()=>{ setSelected(snap); onInspect?.(snap); }}
-                   style={{
-                     padding:'10px 12px', borderRadius:10, cursor:'pointer',
-                     background: (data?.time===snap.time) ? 'rgba(255,255,255,.08)' : 'transparent',
-                     border: '1px solid rgba(255,255,255,.12)', marginBottom:8
-                   }}
-                 >
-                   <div style={{ fontWeight:900 }}>
-                     Game {snap.gameNo} <span style={{ opacity:.7, fontSize:12 }}>({new Date(snap.time).toLocaleString()})</span>
-                   </div>
-                   <div style={{ fontSize:12, opacity:.85 }}>
-                     Opp: {snap.meta?.opponent || '-'} • BO: {snap.meta?.boType || '-'} • FP: {snap.meta?.firstPickTeam || '-'}
-                   </div>
-                 </div>
-               ))}
-             </div>
-   
-             {/* Right: detail */}
-             <div style={{ background:'var(--cg-surface)', borderRadius:14, padding:16, minHeight:280, border:'1px solid var(--cg-border)' }}>
-               {data ? (
-                 <>
-                   <div style={{ display:'flex', alignItems:'center', gap:10, marginBottom:10 }}>
-                     <div style={{ fontWeight:900, fontSize:18 }}>
-                       Game {data.gameNo}
-                     </div>
-                     <div style={{ opacity:.8, fontSize:12 }}>{new Date(data.time).toLocaleString()}</div>
-                     <div style={{ marginLeft:'auto', display:'flex', gap:8 }}>
-                       <button onClick={()=>onLoad?.(data)} className="btn-like" style={{
-                         background:'var(--cg-info)', color:'#0f1220'
-                       }}>Load to board</button>
-                       <button onClick={()=>{
-                         const txt = JSON.stringify(data, null, 2);
-                         navigator.clipboard?.writeText(txt);
-                       }} className="btn-like" style={{
-                         background:'rgba(255,255,255,.06)', color:'var(--cg-text)',
-                         border:'1px solid rgba(255,255,255,.16)'
-                       }}>Copy JSON</button>
-                     </div>
-                   </div>
-   
-                   <div style={{ display:'grid', gridTemplateColumns:'1fr 1fr', gap:16 }}>
-                     {['A','B'].map(team=>(
-                       <div key={team} style={{ background:'var(--cg-surface-2)', borderRadius:12, padding:12, border:'1px solid var(--cg-border)' }}>
-                         <div style={{ fontWeight:900, marginBottom:6 }}>
-                           Team {team}
-                         </div>
-   
-                         <div style={{ fontSize:12, opacity:.85, marginBottom:6, color:'var(--cg-warning)' }}>Bans</div>
-                         <div style={{ display:'flex', flexWrap:'wrap', gap:8, marginBottom:8 }}>
-                           {(data.bans?.[team]||[]).map((h,i)=>(
-                             <HistoryBubble key={team+'-b-'+i} hero={h}/>
-                           ))}
-                         </div>
-   
-                         <div style={{ fontSize:12, opacity:.85, marginBottom:6, color:'var(--cg-info)' }}>Picks</div>
-                         <div style={{ display:'flex', flexWrap:'wrap', gap:8 }}>
-                           {(data.picks?.[team]||[]).map((h,i)=>(
-                             <HistoryBubble key={team+'-p-'+i} hero={h}/>
-                           ))}
-                         </div>
-                       </div>
-                     ))}
-                   </div>
-                 </>
-               ) : (
-                 <div style={{ opacity:.8 }}>เลือกเกมจากด้านซ้ายเพื่อดูรายละเอียด</div>
-               )}
-             </div>
-           </div>
-         </div>
-       </div>
-     );
-   }
+    const [selected, setSelected] = React.useState(null);
+  
+    if (!list || list.length===0) {
+      return (
+        <div className="cg-theme cg-insane">
+          <style>{THEME_CSS}</style>
+          <div style={{ padding:40, color:'var(--cg-text)', background:'var(--cg-bg)', minHeight:'100vh' }}>
+            <button onClick={onBack} className="btn-like" style={{
+              background:'var(--cg-warning)', color:'#23232a'
+            }}>← กลับ</button>
+            <div style={{ marginTop:16, opacity:.8 }}>ยังไม่มีสแนปช็อตที่บันทึก</div>
+          </div>
+        </div>
+      );
+    }
+  
+    const data = selected || null;
+  
+    return (
+      <div className="cg-theme cg-insane">
+        <style>{THEME_CSS}</style>
+        <div style={{
+          minHeight:'100vh', background:'var(--cg-bg)', padding:30, color:'var(--cg-text)'
+        }}>
+          <div style={{ display:'flex', alignItems:'center', gap:12, marginBottom:16 }}>
+            <button onClick={onBack} className="btn-like" style={{
+              background:'var(--cg-warning)', color:'#23232a'
+            }}>← กลับ</button>
+            <div style={{ fontWeight:900, letterSpacing:1 }}>History</div>
+          </div>
+  
+          <div style={{ display:'grid', gridTemplateColumns:'280px 1fr', gap:16 }}>
+            {/* Left: list */}
+            <div style={{ background:'var(--cg-surface)', borderRadius:14, padding:12, border:'1px solid var(--cg-border)' }}>
+              {list.map((snap, i)=>(
+                <div key={i}
+                  onClick={()=>{ setSelected(snap); onInspect?.(snap); }}
+                  style={{
+                    padding:'10px 12px', borderRadius:10, cursor:'pointer',
+                    background: (data?.time===snap.time) ? 'rgba(255,255,255,.08)' : 'transparent',
+                    border: '1px solid rgba(255,255,255,.12)', marginBottom:8
+                  }}
+                >
+                  <div style={{ fontWeight:900 }}>
+                    Game {snap.gameNo} <span style={{ opacity:.7, fontSize:12 }}>({new Date(snap.time).toLocaleString()})</span>
+                  </div>
+                  <div style={{ fontSize:12, opacity:.85 }}>
+                    Opp: {snap.meta?.opponent || '-'} • BO: {snap.meta?.boType || '-'} • FP: {snap.meta?.firstPickTeam || '-'}
+                  </div>
+                </div>
+              ))}
+            </div>
+  
+            {/* Right: detail */}
+            <div style={{ background:'var(--cg-surface)', borderRadius:14, padding:16, minHeight:280, border:'1px solid var(--cg-border)' }}>
+              {data ? (
+                <>
+                  <div style={{ display:'flex', alignItems:'center', gap:10, marginBottom:10 }}>
+                    <div style={{ fontWeight:900, fontSize:18 }}>
+                      Game {data.gameNo}
+                    </div>
+                    <div style={{ opacity:.8, fontSize:12 }}>{new Date(data.time).toLocaleString()}</div>
+                    <div style={{ marginLeft:'auto', display:'flex', gap:8 }}>
+                      <button onClick={()=>onLoad?.(data)} className="btn-like" style={{
+                        background:'var(--cg-info)', color:'#0f1220'
+                      }}>Load to board</button>
+                      <button onClick={()=>{
+                        const txt = JSON.stringify(data, null, 2);
+                        navigator.clipboard?.writeText(txt);
+                      }} className="btn-like" style={{
+                        background:'rgba(255,255,255,.06)', color:'var(--cg-text)',
+                        border:'1px solid rgba(255,255,255,.16)'
+                      }}>Copy JSON</button>
+                    </div>
+                  </div>
+  
+                  <div style={{ display:'grid', gridTemplateColumns:'1fr 1fr', gap:16 }}>
+                    {['A','B'].map(team=>(
+                      <div key={team} style={{ background:'var(--cg-surface-2)', borderRadius:12, padding:12, border:'1px solid var(--cg-border)' }}>
+                        <div style={{ fontWeight:900, marginBottom:6 }}>
+                          Team {team}
+                        </div>
+  
+                        <div style={{ fontSize:12, opacity:.85, marginBottom:6, color:'var(--cg-warning)' }}>Bans</div>
+                        <div style={{ display:'flex', flexWrap:'wrap', gap:8, marginBottom:8 }}>
+                          {(data.bans?.[team]||[]).map((h,i)=>(
+                            <HistoryBubble key={team+'-b-'+i} hero={h}/>
+                          ))}
+                        </div>
+  
+                        <div style={{ fontSize:12, opacity:.85, marginBottom:6, color:'var(--cg-info)' }}>Picks</div>
+                        <div style={{ display:'flex', flexWrap:'wrap', gap:8 }}>
+                          {(data.picks?.[team]||[]).map((h,i)=>(
+                            <HistoryBubble key={team+'-p-'+i} hero={h}/>
+                          ))}
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+  
+                  {/* Hero Grids - แสดงข้อความแทน */}
+<div style={{ 
+  display: 'grid',
+  gridTemplateColumns: '1fr 1fr',
+  gap: '24px',
+  marginTop: '20px'
+}}>
+  <div style={{
+    background: 'var(--cg-surface-2)',
+    padding: '20px',
+    borderRadius: '12px',
+    textAlign: 'center',
+    border: '1px solid var(--cg-border)'
+  }}>
+    <h3 style={{ color: 'var(--cg-text)', marginBottom: '10px' }}>ทีมซ้าย (A)</h3>
+    <div style={{ color: 'var(--cg-muted)', fontSize: '14px' }}>
+      กริดเลือกฮีโร่ไม่พร้อมใช้งานในโหมดดูประวัติ
+    </div>
+  </div>
+  
+  <div style={{
+    background: 'var(--cg-surface-2)',
+    padding: '20px',
+    borderRadius: '12px',
+    textAlign: 'center',
+    border: '1px solid var(--cg-border)'
+  }}>
+    <h3 style={{ color: 'var(--cg-text)', marginBottom: '10px' }}>ทีมขวา (B)</h3>
+    <div style={{ color: 'var(--cg-muted)', fontSize: '14px' }}>
+      กริดเลือกฮีโร่ไม่พร้อมใช้งานในโหมดดูประวัติ
+    </div>
+  </div>
+</div>
+                </>
+              ) : (
+                <div style={{ opacity:.8 }}>เลือกเกมจากด้านซ้ายเพื่อดูรายละเอียด</div>
+              )}
+            </div>
+          </div>
+        </div>
+      </div>
+    );
+  }
    
    function HistoryBubble({ hero }) {
      if (!hero) return null;
@@ -4331,6 +4533,33 @@ const turnColorVar = (highlightType==='ban') ? 'var(--cg-danger)' : 'var(--cg-in
        </div>
      );
    }
+   // เพิ่ม Hook ใหม่
+function useOrientation() {
+  const [isLandscape, setIsLandscape] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const checkOrientation = () => {
+      const width = window.innerWidth;
+      const height = window.innerHeight;
+      setIsLandscape(width > height);
+      setIsMobile(width <= 1024);
+    };
+
+    checkOrientation();
+    window.addEventListener('resize', checkOrientation);
+    window.addEventListener('orientationchange', checkOrientation);
+    
+    return () => {
+      window.removeEventListener('resize', checkOrientation);
+      window.removeEventListener('orientationchange', checkOrientation);
+    };
+  }, []);
+
+  return { isLandscape, isMobile, isMobileLandscape: isMobile && isLandscape };
+}
+
+// ใช้ใน component
    function getToolbarBottom(){
       try{
         const tb = document.querySelector(
