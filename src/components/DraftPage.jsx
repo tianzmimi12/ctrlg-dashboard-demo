@@ -24,6 +24,157 @@
    CTRL G — THEME TOKENS
    ========================= */
    /* =========================
+   MOBILE LANDSCAPE ENHANCEMENT
+   ========================= */
+@media (max-width: 1024px) and (orientation: landscape) {
+  .cg-theme.mobile-landscape {
+    padding: 4px !important;
+  }
+  
+  .mobile-landscape .mobile-draft-container {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    gap: 6px;
+    padding: 4px;
+  }
+  
+  .mobile-landscape .mobile-top-bar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 6px 8px;
+    background: var(--cg-surface);
+    border-radius: 8px;
+    margin-bottom: 4px;
+    min-height: 44px;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+  
+  .mobile-landscape .mobile-teams-container {
+    display: flex;
+    gap: 6px;
+    margin-bottom: 6px;
+    height: 140px;
+  }
+  
+  .mobile-landscape .mobile-team {
+    flex: 1;
+    background: var(--cg-surface-2);
+    padding: 6px;
+    border-radius: 8px;
+    min-height: 130px;
+    overflow: hidden;
+  }
+  
+  .mobile-landscape .mobile-hero-selector {
+    flex: 1;
+    overflow-y: auto;
+    max-height: calc(100vh - 200px);
+  }
+  
+  /* ปรับขนาดการ์ดฮีโร่ให้เล็กลงแต่ยังใช้งานได้ */
+  .mobile-landscape [data-heroname] {
+    width: 60px !important;
+    height: 80px !important;
+    margin: 2px !important;
+  }
+  
+  .mobile-landscape [data-heroname] img {
+    height: 48px !important;
+    border-radius: 8px 8px 0 0 !important;
+  }
+  
+  .mobile-landscape [data-heroname] div {
+    font-size: 9px !important;
+    height: 18px !important;
+    line-height: 18px !important;
+  }
+  
+  /* ปรับขนาดสล็อต */
+  .mobile-landscape .cg-slot {
+    width: 50px !important;
+    height: 70px !important;
+    margin: 2px !important;
+    border-radius: 8px !important;
+  }
+  
+  .mobile-landscape .cg-slot img {
+    width: 46px !important;
+    height: 46px !important;
+    border-radius: 6px !important;
+  }
+  
+  /* ปรับระยะห่างกริด */
+  .mobile-landscape .hero-grid-container {
+    gap: 6px !important;
+    padding: 4px !important;
+  }
+  
+  /* ปุ่มบทบาทเล็กลง */
+  .mobile-landscape .role-filter {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px;
+    margin-bottom: 6px;
+  }
+  
+  .mobile-landscape .role-filter button {
+    padding: 4px 8px !important;
+    font-size: 10px !important;
+    border-radius: 12px !important;
+    min-width: 50px;
+  }
+  
+  /* Timer เล็กลง */
+  .mobile-landscape .countdown-timer {
+    font-size: 16px !important;
+    height: 36px !important;
+    min-width: 100px !important;
+    padding: 0 12px !important;
+  }
+  
+  /* ปรับหัวข้อทีม */
+  .mobile-landscape .team-header {
+    font-size: 11px !important;
+    font-weight: 700;
+    text-align: center;
+    margin-bottom: 4px;
+    color: var(--cg-text);
+  }
+  
+  /* ปรับการแสดงผล picks/bans */
+  .mobile-landscape .team-picks,
+  .mobile-landscape .team-bans {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 2px;
+  }
+  
+  /* ซ่อนบาง element ที่ไม่จำเป็น */
+  .mobile-landscape .mini-strip {
+    display: none !important;
+  }
+  
+  .mobile-landscape .cg-timer-row {
+    padding: 6px 0 !important;
+  }
+  
+  /* ปรับปุ่ม action */
+  .mobile-landscape .mobile-actions {
+    display: flex;
+    gap: 4px;
+  }
+  
+  .mobile-landscape .mobile-actions button {
+    padding: 6px 10px !important;
+    font-size: 12px !important;
+    min-width: 44px;
+  }
+}
+   /* =========================
    MOBILE LANDSCAPE OPTIMIZATION
    ========================= */
 @media (max-width: 1024px) and (orientation: landscape) {
@@ -1287,7 +1438,7 @@ function spawnForcedPickFX(hero, team, count = 1) {
     if (count > 1) {
       warningFX.innerHTML = `⏰ FORCED ${count} PICKS!<br>${hero.name} + ${count-1} more`;
     } else {
-      warningFX.innerHTML = `⏰ FORCED PICK!!! ${hero.name}`;
+      warningFX.innerHTML = `⏰ FORCED PICK! ${hero.name}`;
     }
     
     warningFX.style.cssText = `
@@ -2566,6 +2717,10 @@ if (draftMode === 'sequence') {
          // ✅ แสดงช่อง EMPTY สำหรับ BAN ที่ข้าม
     const isEmptyBan = arr[i]?.name?.startsWith?.('EMPTY_BAN');
     const isEmptyPick = arr[i]?.name?.startsWith?.('EMPTY_PICK');
+    const isMobile = isMobileLandscape;
+  const slotWidth = isMobile ? 50 : 76;
+  const slotHeight = isMobile ? 70 : 120;
+  const imgSize = isMobile ? 46 : 72;
     
     if (isEmptyBan || isEmptyPick) {
       return (
@@ -2884,29 +3039,40 @@ if (isPendingHere && canSee) {
              const heroesOfRole = filteredHeroList2.filter(h=>normalizeRole(h.role)===role);
              if (!heroesOfRole.length) return null;
              return (
-               <div key={`${viewTeam}-${role}`} style={{ marginBottom: 20 }}>
-                 <div style={{ marginBottom:6, fontSize: 15, fontWeight:700, color:'var(--cg-text)' }}>
+               <div key={`${viewTeam}-${role}`} style={{ marginBottom: isMobileLandscape ? 12 : 20 }}>
+                 <div style={{ 
+                   marginBottom: isMobileLandscape ? 4 : 6, 
+                   fontSize: isMobileLandscape ? 12 : 15, 
+                   fontWeight:700, 
+                   color:'var(--cg-text)' 
+                 }}>
                    {ROLE_ICON[role]} {role}
                  </div>
-                 <div style={{ display:'flex', flexWrap:'wrap', gap:17 }}>
+                 <div style={{ 
+                   display:'flex', 
+                   flexWrap:'wrap', 
+                   gap: isMobileLandscape ? 8 : 17,
+                   justifyContent: isMobileLandscape ? 'center' : 'flex-start'
+                 }}>
                    {heroesOfRole.map(hero=>{
                      const local = localUsed.includes(hero.name);
                      const isFinalBO7 = draftMode==='sequence' && (boType==='BO7' && currentGame===BO_OPTIONS.BO7);
                      const blockedSeq = draftMode==='sequence' && (highlightType==='pick'
                        && globalPicks[highlightTeam]?.includes(hero.name)
                        && !isFinalBO7);
-   
-                        const blockedByTeamLock = !!(lockedTeam && viewTeam !== lockedTeam);
-                        const disabled = blockedByTeamLock
-                          || local
-                          || blockedSeq
-                          || (stepIndex>=totalSteps && draftMode==='sequence');                     const nowPickedBy = pickOwner.get(hero.name);
+    
+                     const blockedByTeamLock = !!(lockedTeam && viewTeam !== lockedTeam);
+                     const disabled = blockedByTeamLock
+                       || local
+                       || blockedSeq
+                       || (stepIndex>=totalSteps && draftMode==='sequence');
+                     const nowPickedBy = pickOwner.get(hero.name);
                      const nowBannedBy = banOwner.get(hero.name);
                      const isUsed = !!(nowPickedBy || nowBannedBy);
-   
+    
                      const isOursSide = (viewTeam === ourTeam);
                      const showPrev = isOursSide ? prevPickedByRole.ours : prevPickedByRole.opps;
-   
+    
                      return (
                        <motion.div key={`${viewTeam}-${hero.name}`}
                        ref={el => {
@@ -2921,7 +3087,10 @@ if (isPendingHere && canSee) {
                            try { e.dataTransfer.setData('text/plain', hero.name); e.dataTransfer.effectAllowed='copy'; } catch(_){}
                          }}
                          onDragEnd={()=>{ setDragHero(null); resetHoverDrag(); }}
-                         whileHover={!disabled?{ scale:1.12, boxShadow:'0 8px 24px rgba(57,255,20,.5)' }:{}}
+                         whileHover={!disabled?{ 
+                           scale: isMobileLandscape ? 1.08 : 1.12, 
+                           boxShadow:'0 8px 24px rgba(57,255,20,.5)' 
+                         }:{}}
                          onMouseDown={e=>{
                            if (disabled) return;
                            dragVisitedRef.current.clear();
@@ -2965,57 +3134,112 @@ if (isPendingHere && canSee) {
                            }
                          }}
                          style={{
-                           width:84, height:108,
+                           width: isMobileLandscape ? 60 : 84,
+                           height: isMobileLandscape ? 80 : 108,
                            cursor: disabled ? 'not-allowed' : 'pointer',
                            opacity: disabled && !isUsed ? 0.45 : 1,
-                           position:'relative', overflow:'hidden', borderRadius:16,
+                           position:'relative', 
+                           overflow:'hidden', 
+                           borderRadius: isMobileLandscape ? 12 : 16,
                            background:'var(--cg-surface)',
                            boxShadow:`0 4px 30px #000a,0 2px 7px #00000025`,
                            border: `3px solid ${ROLE_BORDER_COLORS[normalizeRole(hero.role)]||'transparent'}`,
                            transition:'box-shadow .2s,transform .15s,border .14s',
                          }}
                        >
-                         <img src={getImage(hero.image)} alt={hero.name}
-                              draggable={false}
-                              style={{ width:'100%', height:84, objectFit:'cover', borderRadius:'16px 16px 0 0' }}/>
+                         <img 
+                           src={getImage(hero.image)} 
+                           alt={hero.name}
+                           draggable={false}
+                           style={{ 
+                             width:'100%', 
+                             height: isMobileLandscape ? 48 : 84, 
+                             objectFit:'cover', 
+                             borderRadius: isMobileLandscape ? '12px 12px 0 0' : '16px 16px 0 0' 
+                           }}
+                         />
                          <div style={{
-                           width:'100%', height:24, background:'var(--cg-bg-2)', fontSize:12,
-                           borderRadius:'0 0 16px 16px', textAlign:'center', overflow:'hidden',
-                           whiteSpace:'nowrap', textOverflow:'ellipsis', fontWeight:800, color:'var(--cg-text)',
-                           borderTop:`1px solid var(--cg-border)`, display:'flex', alignItems:'center', justifyContent:'center'
-                         }}>{hero.name}</div>
-   
+                           width:'100%', 
+                           height: isMobileLandscape ? 20 : 24, 
+                           background:'var(--cg-bg-2)', 
+                           fontSize: isMobileLandscape ? 10 : 12,
+                           borderRadius: isMobileLandscape ? '0 0 12px 12px' : '0 0 16px 16px', 
+                           textAlign:'center', 
+                           overflow:'hidden',
+                           whiteSpace:'nowrap', 
+                           textOverflow:'ellipsis', 
+                           fontWeight:800, 
+                           color:'var(--cg-text)',
+                           borderTop:`1px solid var(--cg-border)`, 
+                           display:'flex', 
+                           alignItems:'center', 
+                           justifyContent:'center',
+                           lineHeight: isMobileLandscape ? '20px' : '24px'
+                         }}>
+                           {hero.name}
+                         </div>
+    
                          {nowBannedBy && (
-                           <div style={{ position:'absolute', top:4, left:4, padding:'2px 8px',
-                             fontSize:11, fontWeight:900, color:'#fff', background:ACTION_COLOR.ban,
-                             borderRadius:6, boxShadow:'0 2px 8px #0007', letterSpacing:.5 }}>
+                           <div style={{ 
+                             position:'absolute', 
+                             top:2, 
+                             left:2, 
+                             padding:'1px 6px',
+                             fontSize: isMobileLandscape ? 8 : 11, 
+                             fontWeight:900, 
+                             color:'#fff', 
+                             background:ACTION_COLOR.ban,
+                             borderRadius:4, 
+                             boxShadow:'0 2px 8px #0007', 
+                             letterSpacing:.5 
+                           }}>
                              {TEAM_TAG[nowBannedBy]} BAN
                            </div>
                          )}
                          {nowPickedBy && (
-                           <div style={{ position:'absolute', top:4, right:4, padding:'2px 8px',
-                             fontSize:11, fontWeight:900, color:'#0f1220', background:ACTION_COLOR.pick,
-                             borderRadius:6, boxShadow:'0 2px 8px #0007', letterSpacing:.5 }}>
+                           <div style={{ 
+                             position:'absolute', 
+                             top:2, 
+                             right:2, 
+                             padding:'1px 6px',
+                             fontSize: isMobileLandscape ? 8 : 11, 
+                             fontWeight:900, 
+                             color:'#0f1220', 
+                             background:ACTION_COLOR.pick,
+                             borderRadius:4, 
+                             boxShadow:'0 2px 8px #0007', 
+                             letterSpacing:.5 
+                           }}>
                              {TEAM_TAG[nowPickedBy]} PICK
                            </div>
                          )}
-   
+    
                          {showPrev.has(hero.name) && !nowPickedBy && !nowBannedBy && (
-                           <div style={{ position:'absolute', left:4, bottom:4, pointerEvents:'none' }}>
+                           <div style={{ 
+                             position:'absolute', 
+                             left:2, 
+                             bottom:2, 
+                             pointerEvents:'none' 
+                           }}>
                              <div style={{
-                               padding:'1px 6px', fontSize:10, fontWeight:900, color:'#0f1220',
+                               padding:'1px 4px', 
+                               fontSize: isMobileLandscape ? 8 : 10, 
+                               fontWeight:900, 
+                               color:'#0f1220',
                                background: isOursSide ? TEAM_COLOR[ourTeam] : TEAM_COLOR[ourTeam==='A'?'B':'A'],
-                               borderRadius:6, boxShadow:'0 2px 6px #0007', letterSpacing:.4
+                               borderRadius:4, 
+                               boxShadow:'0 2px 6px #0007', 
+                               letterSpacing:.4
                              }}>
                                PREV
                              </div>
                            </div>
                          )}
-   
+    
                          {(nowPickedBy || nowBannedBy) && (
                            <UsedOverlay />
                          )}
-   
+    
                          {!nowPickedBy && !nowBannedBy && showPrev.has(hero.name) && (
                            <UsedOverlay />
                          )}
@@ -3028,7 +3252,7 @@ if (isPendingHere && canSee) {
            })}
          </div>
        );
-     }
+    }
    
      // [MOD: 5.2] — handleHeroClick: เมื่อ enableConfirm=true จะเข้า pending ก่อน
 function handleHeroClick(hero){
@@ -3556,6 +3780,7 @@ if (!boType) {
     );
   }
 // ใน DraftPage component
+// ใน DraftPage component - แทนที่ส่วน mobile landscape เดิม
 if (isMobileLandscape) {
   return (
     <div className="cg-theme cg-insane mobile-landscape">
@@ -3563,19 +3788,47 @@ if (isMobileLandscape) {
       
       {/* Simplified Mobile Layout */}
       <div className="mobile-draft-container">
-        {/* Top Bar */}
+        {/* Top Bar - แสดง timer และ actions */}
         <div className="mobile-top-bar">
           <div className="mobile-timer">
-            <TurnTimer /* props */ />
+            <div className="countdown-timer">
+              <span className="ico">⏱️</span>
+              <span className="t">{String(Math.floor(turnSecondsLeft/60)).padStart(2,'0')}:{String(turnSecondsLeft%60).padStart(2,'0')}</span>
+            </div>
           </div>
           <div className="mobile-actions">
-            <button onClick={handleUndo}>↩️</button>
-            <button onClick={() => setDraftMode('free')}>🔄</button>
+            <button 
+              onClick={handleUndo}
+              style={{
+                padding: '6px 10px',
+                borderRadius: '8px',
+                background: 'var(--cg-warning)',
+                border: 'none',
+                color: '#23232a',
+                fontWeight: '700'
+              }}
+            >
+              ↩️
+            </button>
+            <button 
+              onClick={() => setDraftMode(mode => mode === 'free' ? 'sequence' : 'free')}
+              style={{
+                padding: '6px 10px',
+                borderRadius: '8px',
+                background: 'var(--cg-info)',
+                border: 'none',
+                color: '#0f1220',
+                fontWeight: '700'
+              }}
+            >
+              🔄
+            </button>
           </div>
         </div>
         
-        {/* Teams Side by Side */}
+        {/* Teams Side by Side - แสดงทั้งสองทีม */}
         <div className="mobile-teams-container">
+          {/* Team A */}
           <div className="mobile-team">
             <div className="team-header">ทีม A</div>
             <div className="team-picks">
@@ -3586,6 +3839,7 @@ if (isMobileLandscape) {
             </div>
           </div>
           
+          {/* Team B */}
           <div className="mobile-team">
             <div className="team-header">ทีม B</div>
             <div className="team-picks">
@@ -3597,7 +3851,35 @@ if (isMobileLandscape) {
           </div>
         </div>
         
-        {/* Hero Selection */}
+        {/* Role Filter - แสดงปุ่มบทบาท */}
+        <div className="role-filter" style={{
+          display: 'flex',
+          flexWrap: 'wrap',
+          gap: '4px',
+          justifyContent: 'center',
+          padding: '4px'
+        }}>
+          {['ทั้งหมด', 'Carry', 'Assasin', 'Mage', 'Fighter', 'Tank', 'Support'].map(role => (
+            <button
+              key={role}
+              onClick={() => setSelectedRole(role)}
+              style={{
+                padding: '4px 8px',
+                borderRadius: '12px',
+                border: 'none',
+                background: selectedRole === role ? 'var(--cg-primary)' : 'var(--cg-bg-2)',
+                color: selectedRole === role ? '#fff' : 'var(--cg-muted)',
+                fontWeight: '700',
+                fontSize: '10px',
+                minWidth: '50px'
+              }}
+            >
+              {ROLE_ICON[role]} {role}
+            </button>
+          ))}
+        </div>
+        
+        {/* Hero Selection - กริดเลือกฮีโร่ */}
         <div className="mobile-hero-selector">
           {renderHeroGrid(opTeamForPanel)}
         </div>
